@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->text('image');
             $table->text('image_uz')->nullable();
+            $table->enum('enable', [true, false])->default(true);
             $table->timestamps();
         });
     }

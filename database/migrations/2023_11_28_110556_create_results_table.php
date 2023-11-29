@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('count');
             $table->string('name');
             $table->string('name_uz')->nullable();
+            $table->enum('enable', [true, false])->default(true);
             $table->timestamps();
         });
     }

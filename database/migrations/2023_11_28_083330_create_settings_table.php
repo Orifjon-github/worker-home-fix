@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('key');
             $table->text('value');
             $table->text('value_uz')->nullable();
+            $table->enum('enable', [true, false])->default(true);
             $table->timestamps();
         });
     }

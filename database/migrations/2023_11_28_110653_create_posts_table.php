@@ -18,6 +18,7 @@ return new class extends Migration
             $table->text('image')->nullable();
             $table->text('description');
             $table->text('description_uz')->nullable();
+            $table->enum('enable', [true, false])->default(true);
             $table->timestamps();
         });
     }

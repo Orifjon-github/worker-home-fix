@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('place')->nullable();
             $table->string('number');
+            $table->enum('enable', [true, false])->default(true);
             $table->timestamps();
         });
     }

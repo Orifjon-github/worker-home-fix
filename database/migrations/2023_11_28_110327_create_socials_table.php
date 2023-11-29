@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->text('link');
             $table->text('icon')->nullable();
+            $table->enum('enable', [true, false])->default(true);
             $table->timestamps();
         });
     }
