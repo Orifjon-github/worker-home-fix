@@ -14,21 +14,12 @@ class SettingSeeder extends Seeder
     public function run(): void
     {
         Setting::create([
-            'key' => 'phone',
-            'value' => '+998908319755'
+            'key' => 'email',
+            'value' => 'ipar@info.com'
         ]);
         Setting::create([
-            'key' => 'socials',
-            'value' => '[
-    {
-        "name": "Instagram",
-        "link": "www.instagram.com"
-    },
-    {
-        "name": "Telegram",
-        "link": "eee"
-    }
-]'
+            'key' => 'logo',
+            'value' => '/storage/logo/logo.png'
         ]);
     }
 }

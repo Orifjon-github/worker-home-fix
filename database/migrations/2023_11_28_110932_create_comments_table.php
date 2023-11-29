@@ -15,8 +15,11 @@ return new class extends Migration
             $table->id();
             $table->string('author');
             $table->string('title')->nullable();
+            $table->string('title_uz')->nullable();
             $table->text('description')->nullable();
+            $table->text('description_uz')->nullable();
             $table->text('video')->nullable();
+            $table->text('video_uz')->nullable();
             $table->timestamps();
         });
     }
