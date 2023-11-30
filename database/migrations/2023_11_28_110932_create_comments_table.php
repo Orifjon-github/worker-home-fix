@@ -16,12 +16,9 @@ return new class extends Migration
             $table->string('author');
             $table->string('phone')->nullable();
             $table->foreignId('product_id')->constrained()->onDelete('cascade');
-            $table->string('title')->nullable();
-            $table->string('title_uz')->nullable();
             $table->text('description')->nullable();
             $table->text('description_uz')->nullable();
             $table->text('video')->nullable();
-            $table->text('video_uz')->nullable();
             $table->enum('enable', [1, 0])->default(1);
             $table->timestamps();
         });
