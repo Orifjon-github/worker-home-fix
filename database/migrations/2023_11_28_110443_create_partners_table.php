@@ -19,7 +19,7 @@ return new class extends Migration
             $table->text('link_uz')->nullable();
             $table->text('icon');
             $table->text('icon_uz')->nullable();
-            $table->enum('enable', [true, false])->default(true);
+            $table->enum('enable', [1, 0])->default(1);
             $table->timestamps();
         });
     }

@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
             $table->string('author');
+            $table->string('phone')->nullable();
             $table->foreignId('product_id')->constrained()->onDelete('cascade');
             $table->string('title')->nullable();
             $table->string('title_uz')->nullable();
@@ -21,7 +22,7 @@ return new class extends Migration
             $table->text('description_uz')->nullable();
             $table->text('video')->nullable();
             $table->text('video_uz')->nullable();
-            $table->enum('enable', [true, false])->default(true);
+            $table->enum('enable', [1, 0])->default(1);
             $table->timestamps();
         });
     }

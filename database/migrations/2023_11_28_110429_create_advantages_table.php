@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('title_uz')->nullable();
             $table->text('description')->nullable();
             $table->text('description_uz')->nullable();
-            $table->enum('enable', [true, false])->default(true);
+            $table->enum('enable', [1, 0])->default(1);
             $table->timestamps();
         });
     }

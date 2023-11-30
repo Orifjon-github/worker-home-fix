@@ -19,3 +19,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('settings', [\App\Http\Controllers\SettingController::class, 'index']);
+Route::get('consultation', [\App\Http\Controllers\SettingController::class, 'consultation']);
+Route::get('about', [\App\Http\Controllers\SettingController::class, 'about']);
+Route::get('carousels', [\App\Http\Controllers\HomeController::class, 'index']);
+Route::get('products', [\App\Http\Controllers\ProductController::class, 'index']);
+Route::get('products/detail/{id}', [\App\Http\Controllers\ProductController::class, 'detail']);
+Route::get('partners', [\App\Http\Controllers\PartnerController::class, 'index']);
+Route::get('faqs', [\App\Http\Controllers\FaqController::class, 'index']);
+Route::get('posts', [\App\Http\Controllers\PostController::class, 'index']);
+Route::get('testimonials', [\App\Http\Controllers\TestimonialController::class, 'index']);

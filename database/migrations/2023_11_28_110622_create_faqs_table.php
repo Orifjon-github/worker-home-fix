@@ -17,7 +17,7 @@ return new class extends Migration
             $table->text('question_uz')->nullable();
             $table->text('answer');
             $table->text('answer_uz')->nullable();
-            $table->enum('enable', [true, false])->default(true);
+            $table->enum('enable', [1, 0])->default(1);
             $table->timestamps();
         });
     }
