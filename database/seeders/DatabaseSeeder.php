@@ -18,12 +18,12 @@ class DatabaseSeeder extends Seeder
         $this->call([
             SettingSeeder::class,
             AdvantageSeeder::class,
-            CommentSeeder::class,
             SocialSeeder::class,
             FaqSeeder::class,
             PartnerSeeder::class,
             PostSeeder::class,
             ProductSeeder::class,
+            CommentSeeder::class,
             ResultSeeder::class,
             SertificateSeeder::class,
             TestimonialSeeder::class,

@@ -14,7 +14,20 @@ class FaqSeeder extends Seeder
     public function run(): void
     {
         Faq::create([
-
+            'question' => 'Какова цена?',
+            'answer' => 'Самые дешевые и доступные цены!'
+        ]);
+        Faq::create([
+            'question' => 'Какова цена?',
+            'answer' => 'Самые дешевые и доступные цены!'
+        ]);
+        Faq::create([
+            'question' => 'Какова цена?',
+            'answer' => 'Самые дешевые и доступные цены!'
+        ]);
+        Faq::create([
+            'question' => 'Какова цена?',
+            'answer' => 'Самые дешевые и доступные цены!'
         ]);
     }
 }

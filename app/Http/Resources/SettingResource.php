@@ -17,7 +17,7 @@ class SettingResource extends JsonResource
     {
         $language = App::getLocale();
         return [
-            $this->key => $language == 'ru' ? $this->value : $this->value_uz,
+            $this->key => $language == 'ru' ? $this->value : ($this->value_uz ?? $this->value),
             'enable' => $this->enable
         ];
     }

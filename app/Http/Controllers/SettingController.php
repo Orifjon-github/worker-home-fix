@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\Responses\SuccessResponse;
+use App\Http\Resources\AdvantageResource;
+use App\Http\Resources\CapabilitiesResource;
 use App\Http\Resources\HomeResource;
 use App\Http\Resources\SettingResource;
 use App\Models\AboutImage;
@@ -24,7 +26,7 @@ class SettingController extends Controller
 {
     public function index(): SuccessResponse
     {
-        $settings = SettingResource::collection(Setting::whereIn('key', ['email', 'address', 'iframe'])->get());
+        $settings = Setting::whereIn('key', ['email', 'address', 'iframe'])->get();
 
         $socials = Social::all();
 
@@ -35,11 +37,11 @@ class SettingController extends Controller
         $phones = Phone::all();
 
         return new SuccessResponse([
-            'settings' => $settings,
+            'settings' => SettingResource::collection($settings),
             'phones' => $phones,
             'socials' => $socials,
-            'advantages' => $advantages,
-            'capabilities' => $capabilities
+            'advantages' => AdvantageResource::collection($advantages),
+            'capabilities' => CapabilitiesResource::collection($capabilities)
         ]);
     }
 

@@ -6,8 +6,9 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\App;
 
-class ProductResource extends JsonResource
+class AdvantageResource extends JsonResource
 {
+
     /**
      * Transform the resource into an array.
      *
@@ -17,10 +18,9 @@ class ProductResource extends JsonResource
     {
         $language = App::getLocale();
         return [
-            'name' => $language == 'ru' ? $this->name : ($this->name_uz ?? $this->name),
+            'title' => $language == 'ru' ? $this->title : ($this->title_uz ?? $this->title),
             'description' => $language == 'ru' ? $this->description : ($this->description_uz ?? $this->description),
-            'image' => $this->image,
-            'enable' => $this->enable
+            'icon' => $this->icon
         ];
     }
 }
