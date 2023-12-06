@@ -17,7 +17,8 @@ class CommentSeeder extends Seeder
             'author' => 'Orifjon',
             'phone' => '998908319755',
             'product_id' => 1,
-            'description' => 'Best quality Product. Perfect!!',
+            'description' => 'Продукт лучшего качества. Идеальный!!',
+            'description_uz' => 'Best quality Product. Perfect!!',
             'video' => 'video/path1'
         ]);
         Comment::create([

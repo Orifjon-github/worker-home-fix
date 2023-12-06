@@ -13,7 +13,7 @@ class ProductController extends Controller
 {
     public function index(): SuccessResponse
     {
-        $products = Product::all();
+        $products = Product::where('enable', '1')->get();
 
         return new SuccessResponse(ProductResource::collection($products));
     }

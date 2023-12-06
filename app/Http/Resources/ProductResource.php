@@ -17,10 +17,10 @@ class ProductResource extends JsonResource
     {
         $language = App::getLocale();
         return [
+            'id' => $this->id,
             'name' => $language == 'ru' ? $this->name : ($this->name_uz ?? $this->name),
             'description' => $language == 'ru' ? $this->description : ($this->description_uz ?? $this->description),
-            'image' => $this->image,
-            'enable' => $this->enable
+            'image' => $this->image
         ];
     }
 }

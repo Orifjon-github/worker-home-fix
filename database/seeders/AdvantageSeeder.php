@@ -14,17 +14,20 @@ class AdvantageSeeder extends Seeder
     public function run(): void
     {
         Advantage::create([
-            'title' => "Ko'p yillik tajriba",
+            'title' => "Многолетний опыт",
+            'title_uz' => "Ko'p yillik tajriba",
             'description' => 'Lorem ipsum dolor as set',
             'icon' => '/storage/advantages/experience.png'
         ]);
         Advantage::create([
-            'title' => "Tezkor yetkazib berish",
+            'title' => "Быстрая доставка",
+            'title_uz' => "Tezkor yetkazib berish",
             'description' => 'Lorem ipsum dolor as set',
             'icon' => '/storage/advantages/fast-delivery.png'
         ]);
         Advantage::create([
-            'title' => "Tabiiy mahsulot",
+            'title' => "Натуральный продукт",
+            'title_uz' => "Tabiiy mahsulot",
             'description' => 'Lorem ipsum dolor as set',
             'icon' => '/storage/advantages/natural.png'
         ]);

@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class FaqController extends Controller
 {
     public function index() {
-        $faqs = Faq::all();
+        $faqs = Faq::where('enable', '1')->get();
 
         return new SuccessResponse($faqs);
     }

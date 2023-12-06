@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class TestimonialController extends Controller
 {
     public function index() {
-        $testimonials = Testimonial::all();
+        $testimonials = Testimonial::where('enable', '1');
 
         return new SuccessResponse($testimonials);
     }

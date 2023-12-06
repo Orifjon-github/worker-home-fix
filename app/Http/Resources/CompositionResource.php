@@ -17,8 +17,8 @@ class CompositionResource extends JsonResource
     {
         $language = App::getLocale();
         return [
-            'name' => $language == 'ru' ? $this->name : ($this->name_uz ?? $this->name),
-            'enable' => $this->enable ?? 0
+            'id' => $this->id,
+            'name' => $language == 'ru' ? $this->name : ($this->name_uz ?? $this->name)
         ];
     }
 }

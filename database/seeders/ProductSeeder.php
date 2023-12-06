@@ -16,7 +16,8 @@ class ProductSeeder extends Seeder
         Product::create([
             'name' => 'Suncella',
             'image' => 'product/image1.png',
-            'description' => 'Этот продукт очень полезен для вас и содержит очень натуральные травы.Этот продукт очень полезен для вас и содержит очень натуральные травы.'
+            'description' => 'Этот продукт очень полезен для вас и содержит очень натуральные травы.Этот продукт очень полезен для вас и содержит очень натуральные травы.',
+            'description_uz' => 'Ushbu mahsulot siz uchun juda yaxshi va juda tabiiy o`simliklarni o`z ichiga oladi.Bu mahsulot siz uchun juda yaxshi va juda tabiiy o`tlarni o`z ichiga oladi.'
         ]);
     }
 }

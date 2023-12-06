@@ -11,8 +11,8 @@ class HomeController extends Controller
 {
     public function index(): SuccessResponse
     {
-        $carousels = HomeResource::collection(Home::all());
+        $carousels = Home::where('enable', '1')->get();
 
-        return new SuccessResponse($carousels);
+        return new SuccessResponse(HomeResource::collection($carousels));
     }
 }

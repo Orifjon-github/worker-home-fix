@@ -29,9 +29,10 @@ class DatabaseSeeder extends Seeder
             TestimonialSeeder::class,
             PhoneSeeder::class,
             HomeSeeder::class,
-            CommentSeeder::class,
             AboutImageSeeder::class,
-            CapabilitySeeder::class
+            CapabilitySeeder::class,
+            ProductCompositionSeeder::class,
+            ProductImagesSeeder::class
         ]);
     }
 }

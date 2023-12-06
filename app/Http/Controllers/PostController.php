@@ -10,7 +10,7 @@ class PostController extends Controller
 {
     public function index(): SuccessResponse
     {
-        $posts = Post::all();
+        $posts = Post::where('enable', '1')->get();
 
         return new SuccessResponse($posts);
     }

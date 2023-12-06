@@ -26,15 +26,15 @@ class SettingController extends Controller
 {
     public function index(): SuccessResponse
     {
-        $settings = Setting::whereIn('key', ['email', 'address', 'iframe'])->get();
+        $settings = Setting::where('enable', '1')->whereIn('key', ['email', 'address', 'iframe', 'logo'])->get();
 
-        $socials = Social::all();
+        $socials = Social::where('enable', '1')->get();
 
-        $advantages = Advantage::all();
+        $advantages = Advantage::where('enable', '1')->get();
 
-        $capabilities = Capability::all();
+        $capabilities = Capability::where('enable', '1')->get();
 
-        $phones = Phone::all();
+        $phones = Phone::where('enable', '1')->get();
 
         return new SuccessResponse([
             'settings' => SettingResource::collection($settings),
@@ -54,9 +54,9 @@ class SettingController extends Controller
     public function about(): SuccessResponse
     {
         $settings = SettingResource::collection(Setting::whereIn('key', ['about_image', 'about_description', 'result_video', 'delivery_text'])->get());
-        $images = AboutImage::all();
-        $results = Result::all();
-        $certificates = Sertificate::all();
+        $images = AboutImage::where('enable', '1')->get();
+        $results = Result::where('enable', '1')->get();
+        $certificates = Sertificate::where('enable', '1')->get();
         return new SuccessResponse([
             'about' => $settings,
             'about_images' => $images,
