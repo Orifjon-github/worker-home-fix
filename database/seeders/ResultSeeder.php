@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Result;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -12,6 +13,21 @@ class ResultSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        Result::create([
+           'name' => 'Mijozlar',
+           'count' => '1000+'
+        ]);
+        Result::create([
+            'name' => 'Mijozlar',
+            'count' => '1000+'
+        ]);
+        Result::create([
+            'name' => 'Mijozlar',
+            'count' => '1000+'
+        ]);
+        Result::create([
+            'name' => 'Mijozlar',
+            'count' => '1000+'
+        ]);
     }
 }

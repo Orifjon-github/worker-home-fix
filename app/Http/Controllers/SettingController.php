@@ -6,6 +6,8 @@ use App\Helpers\Responses\SuccessResponse;
 use App\Http\Resources\AdvantageResource;
 use App\Http\Resources\CapabilitiesResource;
 use App\Http\Resources\HomeResource;
+use App\Http\Resources\ResultResource;
+use App\Http\Resources\SertificateResource;
 use App\Http\Resources\SettingResource;
 use App\Models\AboutImage;
 use App\Models\Advantage;
@@ -50,7 +52,7 @@ class SettingController extends Controller
     public function consultation(): SuccessResponse
     {
         $settings = Setting::whereIn('key', ['consultation_name', 'consultation_job', 'consultation_description', 'consultation_image'])->get();
-        return new SuccessResponse(new SettingResource($settings));
+        return new SuccessResponse(["settings" => new SettingResource($settings)]);
     }
 
     public function about(): SuccessResponse
@@ -62,8 +64,8 @@ class SettingController extends Controller
         return new SuccessResponse([
             'about' => new SettingResource($settings),
             'about_images' => $images,
-            'results' => $results,
-            'certificates' => $certificates
+            'results' => ResultResource::collection($results),
+            'certificates' => SertificateResource::collection($certificates)
         ]);
     }
 }
