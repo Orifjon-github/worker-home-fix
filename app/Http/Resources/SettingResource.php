@@ -16,8 +16,14 @@ class SettingResource extends JsonResource
     public function toArray(Request $request): array
     {
         $language = App::getLocale();
-        return [
-            $this->key => $language == 'ru' ? $this->value : ($this->value_uz ?? $this->value)
-        ];
+
+        // Assuming $this->resource is a collection of Setting models
+        $settings = $this->resource->mapWithKeys(function ($setting) use ($language) {
+            return [
+                $setting->key => $language == 'ru' ? $setting->value : ($setting->value_uz ?? $setting->value),
+            ];
+        });
+
+        return $settings->all();
     }
 }

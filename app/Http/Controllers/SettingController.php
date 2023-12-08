@@ -28,6 +28,8 @@ class SettingController extends Controller
     {
         $settings = Setting::where('enable', '1')->whereIn('key', ['email', 'address', 'iframe', 'logo'])->get();
 
+//        dd($settings);
+
         $socials = Social::where('enable', '1')->get();
 
         $advantages = Advantage::where('enable', '1')->get();
@@ -37,7 +39,7 @@ class SettingController extends Controller
         $phones = Phone::where('enable', '1')->get();
 
         return new SuccessResponse([
-            'settings' => SettingResource::collection($settings),
+            'settings' => new SettingResource($settings),
             'phones' => $phones,
             'socials' => $socials,
             'advantages' => AdvantageResource::collection($advantages),
