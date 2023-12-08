@@ -42,5 +42,37 @@ class SettingSeeder extends Seeder
             'key' => 'background_image_partner',
             'value' => 'path/image-background-partner.png'
         ]);
+        Setting::create([
+            'key' => 'about_image',
+            'value' => 'path/image.png'
+        ]);
+        Setting::create([
+            'key' => 'about_description',
+            'value' => 'Example Description'
+        ]);
+        Setting::create([
+            'key' => 'result_video',
+            'value' => '/path/video'
+        ]);
+        Setting::create([
+            'key' => 'delivery_text',
+            'value' => 'Example Description Text'
+        ]);
+        Setting::create([
+            'key' => 'consultation_image',
+            'value' => 'image/path'
+        ]);
+        Setting::create([
+            'key' => 'consultation_description',
+            'value' => 'Example Description Text'
+        ]);
+        Setting::create([
+            'key' => 'consultation_job',
+            'value' => 'Specialist'
+        ]);
+        Setting::create([
+            'key' => 'consultation_name',
+            'value' => 'John Smith'
+        ]);
     }
 }

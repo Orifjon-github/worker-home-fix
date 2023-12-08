@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Post;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -12,6 +13,55 @@ class PostSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        Post::create([
+           'title' => 'Example Blog RU',
+           'title_uz' => 'Example Blog UZ',
+           'description' => 'Example Description RU',
+           'description_uz' => 'Example Description UZ',
+            'image' => 'path/image.png'
+        ]);
+        Post::create([
+            'title' => 'Example Blog RU',
+            'title_uz' => 'Example Blog UZ',
+            'description' => 'Example Description RU',
+            'description_uz' => 'Example Description UZ',
+            'image' => 'path/image.png'
+        ]);
+        Post::create([
+            'title' => 'Example Blog RU',
+            'title_uz' => 'Example Blog UZ',
+            'description' => 'Example Description RU',
+            'description_uz' => 'Example Description UZ',
+            'image' => 'path/image.png'
+        ]);
+        Post::create([
+            'title' => 'Example Blog RU',
+            'title_uz' => 'Example Blog UZ',
+            'description' => 'Example Description RU',
+            'description_uz' => 'Example Description UZ',
+            'image' => 'path/image.png'
+        ]);
+        Post::create([
+            'title' => 'Example Blog RU',
+            'title_uz' => 'Example Blog UZ',
+            'description' => 'Example Description RU',
+            'description_uz' => 'Example Description UZ',
+            'image' => 'path/image.png'
+        ]);
+        Post::create([
+            'title' => 'Example Blog RU',
+            'title_uz' => 'Example Blog UZ',
+            'description' => 'Example Description RU',
+            'description_uz' => 'Example Description UZ',
+            'image' => 'path/image.png'
+        ]);
+        Post::create([
+            'title' => 'Example Blog RU',
+            'title_uz' => 'Example Blog UZ',
+            'description' => 'Example Description RU',
+            'description_uz' => 'Example Description UZ',
+            'image' => 'path/image.png'
+        ]);
+
     }
 }

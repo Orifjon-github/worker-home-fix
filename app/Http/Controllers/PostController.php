@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\Responses\SuccessResponse;
+use App\Http\Resources\PostResource;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
@@ -12,6 +13,6 @@ class PostController extends Controller
     {
         $posts = Post::where('enable', '1')->get();
 
-        return new SuccessResponse($posts);
+        return new SuccessResponse(PostResource::collection($posts));
     }
 }

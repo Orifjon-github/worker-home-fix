@@ -12,12 +12,12 @@ use Illuminate\Http\Request;
 class PartnerController extends Controller
 {
     public function index() {
-        $settings = SettingResource::collection(Setting::whereIn('key', ['terms_partner_1', 'terms_partner_2', 'background_image_partner'])->get());
+        $settings = Setting::whereIn('key', ['terms_partner_1', 'terms_partner_2', 'background_image_partner'])->get();
 
         $partners = Partner::where('enable', '1')->get();
 
         return new SuccessResponse([
-            'settings' => $settings,
+            'settings' => new SettingResource($settings),
             'partners' => PartnerResource::collection($partners)
         ]);
     }
