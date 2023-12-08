@@ -49,18 +49,18 @@ class SettingController extends Controller
 
     public function consultation(): SuccessResponse
     {
-        $settings = SettingResource::collection(Setting::whereIn('key', ['consultation_name', 'consultation_job', 'consultation_description', 'consultation_image'])->get());
-        return new SuccessResponse($settings);
+        $settings = Setting::whereIn('key', ['consultation_name', 'consultation_job', 'consultation_description', 'consultation_image'])->get();
+        return new SuccessResponse(new SettingResource($settings));
     }
 
     public function about(): SuccessResponse
     {
-        $settings = SettingResource::collection(Setting::whereIn('key', ['about_image', 'about_description', 'result_video', 'delivery_text'])->get());
+        $settings = Setting::whereIn('key', ['about_image', 'about_description', 'result_video', 'delivery_text'])->get();
         $images = AboutImage::where('enable', '1')->get();
         $results = Result::where('enable', '1')->get();
         $certificates = Sertificate::where('enable', '1')->get();
         return new SuccessResponse([
-            'about' => $settings,
+            'about' => new SettingResource($settings),
             'about_images' => $images,
             'results' => $results,
             'certificates' => $certificates

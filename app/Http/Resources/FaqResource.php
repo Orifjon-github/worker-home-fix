@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\App;
 
-class HomeResource extends JsonResource
+class FaqResource extends JsonResource
 {
 
     /**
@@ -18,9 +18,8 @@ class HomeResource extends JsonResource
     {
         $language = App::getLocale();
         return [
-            'title' => $language == 'ru' ? $this->title : ($this->title_uz ?? $this->title),
-            'description' => $language == 'ru' ? $this->description : ($this->description_uz ?? $this->description),
-            'image' => $language == 'ru' ? $this->image : ($this->image_uz ?? $this->image)
+            'question' => $language == 'ru' ? $this->question : ($this->question_uz ?? $this->question),
+            'answer' => $language == 'ru' ? $this->answer : ($this->answer_uz ?? $this->answer)
         ];
     }
 }
