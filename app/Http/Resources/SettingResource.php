@@ -16,11 +16,13 @@ class SettingResource extends JsonResource
     public function toArray(Request $request): array
     {
         $language = App::getLocale();
-
+        $baseUrl = 'https://admin.ipar.uz/';
         // Assuming $this->resource is a collection of Setting models
-        $settings = $this->resource->mapWithKeys(function ($setting) use ($language) {
+        $settings = $this->resource->mapWithKeys(function ($setting) use ($baseUrl, $language) {
+            $is_file = str_starts_with($setting->value, 'uploads/');
+            $value = $language == 'ru' ? $setting->value : ($setting->value_uz ?? $setting->value);
             return [
-                $setting->key => $language == 'ru' ? $setting->value : ($setting->value_uz ?? $setting->value),
+                $setting->key => $is_file ? $baseUrl . $value : $value,
             ];
         });
 
