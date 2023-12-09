@@ -18,6 +18,7 @@ class CapabilitiesResource extends JsonResource
     {
         $language = App::getLocale();
         return [
+            'id' => $this->id,
             'title' => $language == 'ru' ? $this->title : ($this->title_uz ?? $this->title),
             'image' =>$this->image
         ];
