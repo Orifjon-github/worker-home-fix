@@ -22,6 +22,7 @@ Route::get('carousels', [\App\Http\Controllers\HomeController::class, 'index']);
 Route::get('settings', [\App\Http\Controllers\SettingController::class, 'index']);
 Route::get('products', [\App\Http\Controllers\ProductController::class, 'index']);
 Route::get('products/detail/{id}', [\App\Http\Controllers\ProductController::class, 'detail']);
+Route::post('products/comment/create', [\App\Http\Controllers\ProductController::class, 'createComment']);
 Route::get('partners', [\App\Http\Controllers\PartnerController::class, 'index']);
 Route::get('faqs', [\App\Http\Controllers\FaqController::class, 'index']);
 Route::get('posts', [\App\Http\Controllers\PostController::class, 'index']);
