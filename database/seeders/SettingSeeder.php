@@ -74,5 +74,29 @@ class SettingSeeder extends Seeder
             'key' => 'consultation_name',
             'value' => 'John Smith'
         ]);
+        Setting::create([
+            'key' => 'productBg',
+            'value' => 'image/path'
+        ]);
+        Setting::create([
+            'key' => 'contactBg',
+            'value' => 'image/path'
+        ]);
+        Setting::create([
+            'key' => 'aboutBg',
+            'value' => 'image/path'
+        ]);
+        Setting::create([
+            'key' => 'blogBg',
+            'value' => 'image/path'
+        ]);
+        Setting::create([
+            'key' => 'cartBg',
+            'value' => 'image/path'
+        ]);
+        Setting::create([
+            'key' => 'favoritesBg',
+            'value' => 'image/path'
+        ]);
     }
 }
