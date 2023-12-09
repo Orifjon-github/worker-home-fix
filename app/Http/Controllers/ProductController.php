@@ -34,7 +34,7 @@ class ProductController extends Controller
         $validator = Validator::make($request->all(), [
             'author' => 'required|max:255',
             'product_id' => 'required',
-            'video' => 'nullable|file|mimes:mp4,webm,ogg,avi,mov',
+            'video' => 'nullable|file|mimes:mp4,webm,ogg,avi,mov|max:102400', // max 100MB
         ]);
 
         if ($validator->fails()) {
