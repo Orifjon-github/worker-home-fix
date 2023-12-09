@@ -28,9 +28,7 @@ class SettingController extends Controller
 {
     public function index(): SuccessResponse
     {
-        $settings = Setting::where('enable', '1')->whereIn('key', ['email', 'address', 'iframe', 'logo'])->get();
-
-//        dd($settings);
+        $settings = Setting::where('enable', '1')->whereIn('key', ['email', 'address', 'iframe', 'logo', 'productBg', 'contactBg', 'blogBg', 'aboutBg', 'cartBg', 'favoritesBg'])->get();
 
         $socials = Social::where('enable', '1')->get();
 
