@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\App;
 
-class PartnerResource extends JsonResource
+class PostDetailResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -18,9 +18,10 @@ class PartnerResource extends JsonResource
         $language = App::getLocale();
         return [
             'id' => $this->id,
-            'name' => $language == 'ru' ? $this->name : ($this->name ?? $this->name),
-            'link' => $language == 'ru' ? $this->link : ($this->link ?? $this->link),
-            'icon' => env('IMAGES_BASE_URL') . ($language == 'ru' ? $this->icon : ($this->icon ?? $this->icon))
+            'title' => $language == 'ru' ? $this->title : ($this->title_uz ?? $this->title),
+            'description' => $language == 'ru' ? $this->description : $this->description_uz,
+            'image' => env('IMAGES_BASE_URL') . $this->image,
+            'images' => $this->images ?? [],
         ];
     }
 }

@@ -20,7 +20,7 @@ class CapabilitiesResource extends JsonResource
         return [
             'id' => $this->id,
             'title' => $language == 'ru' ? $this->title : ($this->title_uz ?? $this->title),
-            'image' =>$this->image
+            'image' => env('IMAGES_BASE_URL') . $this->image
         ];
     }
 }

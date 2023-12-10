@@ -32,7 +32,8 @@ class DatabaseSeeder extends Seeder
             AboutImageSeeder::class,
             CapabilitySeeder::class,
             ProductCompositionSeeder::class,
-            ProductImagesSeeder::class
+            ProductImagesSeeder::class,
+            PostImageSeeder::class
         ]);
     }
 }

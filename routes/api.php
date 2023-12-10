@@ -26,6 +26,8 @@ Route::post('products/comment/create', [\App\Http\Controllers\ProductController:
 Route::get('partners', [\App\Http\Controllers\PartnerController::class, 'index']);
 Route::get('faqs', [\App\Http\Controllers\FaqController::class, 'index']);
 Route::get('posts', [\App\Http\Controllers\PostController::class, 'index']);
+Route::get('posts/detail/{id}', [\App\Http\Controllers\PostController::class, 'detail']);
 Route::get('consultation', [\App\Http\Controllers\SettingController::class, 'consultation']);
+Route::post('application/create', [\App\Http\Controllers\SettingController::class, 'createApplication']);
 Route::get('testimonials', [\App\Http\Controllers\TestimonialController::class, 'index']);
 Route::get('about', [\App\Http\Controllers\SettingController::class, 'about']);

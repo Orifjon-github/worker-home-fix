@@ -21,7 +21,7 @@ class AdvantageResource extends JsonResource
             'id' => $this->id,
             'title' => $language == 'ru' ? $this->title : ($this->title_uz ?? $this->title),
             'description' => $language == 'ru' ? $this->description : ($this->description_uz ?? $this->description),
-            'icon' => $this->icon
+            'icon' => env('IMAGES_BASE_URL') . $this->icon
         ];
     }
 }

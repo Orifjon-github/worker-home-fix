@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\Responses\ErrorResponse;
 use App\Helpers\Responses\SuccessResponse;
 use App\Http\Resources\AdvantageResource;
 use App\Http\Resources\CapabilitiesResource;
@@ -11,6 +12,7 @@ use App\Http\Resources\SertificateResource;
 use App\Http\Resources\SettingResource;
 use App\Models\AboutImage;
 use App\Models\Advantage;
+use App\Models\Application;
 use App\Models\Capability;
 use App\Models\Faq;
 use App\Models\Home;
@@ -23,6 +25,7 @@ use App\Models\Social;
 use App\Models\Testimonial;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Validator;
 
 class SettingController extends Controller
 {
@@ -65,5 +68,25 @@ class SettingController extends Controller
             'results' => ResultResource::collection($results),
             'certificates' => SertificateResource::collection($certificates)
         ]);
+    }
+
+    public function createApplication(Request $request) {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|max:255',
+            'phone' => 'required',
+            'description' => 'required', // max 100MB
+        ]);
+
+        if ($validator->fails()) {
+            return new ErrorResponse($validator->errors()->first());
+        }
+
+        $application = Application::create($request->all());
+
+        if ($application) {
+            return new SuccessResponse([], 'Ваша заявка успешно отправлена');
+        }
+
+        return new ErrorResponse('Временная ошибка, попробуйте еще раз');
     }
 }

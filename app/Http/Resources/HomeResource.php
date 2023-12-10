@@ -17,12 +17,11 @@ class HomeResource extends JsonResource
     public function toArray(Request $request): array
     {
         $language = App::getLocale();
-        $baseUrl = 'https://admin.ipar.uz/';
         return [
             'id' => $this->id,
             'title' => $language == 'ru' ? $this->title : ($this->title_uz ?? $this->title),
             'description' => $language == 'ru' ? $this->description : ($this->description_uz ?? $this->description),
-            'image' => $baseUrl . ($language == 'ru' ? $this->image : ($this->image_uz ?? $this->image))
+            'image' => env('IMAGES_BASE_URL') . ($language == 'ru' ? $this->image : ($this->image_uz ?? $this->image))
         ];
     }
 }
