@@ -21,6 +21,8 @@ class ProductDetailResource extends JsonResource
             'name' => $language == 'ru' ? $this->name : ($this->name_uz ?? $this->name),
             'description' => $language == 'ru' ? $this->description : $this->description_uz,
             'image' => $this->image ?? "",
+            'count' => $this->count ?? 1,
+            'totalCount' => $this->totalCount ?? 1,
             'compositions' => CompositionResource::collection($this->compositions) ?? [],
             'images' => $this->images ?? [],
             'comments' => CommentResourceResource::collection($this->comments) ?? []

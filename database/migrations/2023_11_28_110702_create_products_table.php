@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('image');
             $table->text('description');
             $table->text('description_uz')->nullable();
+            $table->integer('count')->default(1);
+            $table->integer('totalCount')->default(1);
             $table->enum('enable', [1, 0])->default(1);
             $table->timestamps();
         });
