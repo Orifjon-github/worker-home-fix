@@ -27,6 +27,7 @@ use App\Models\Testimonial;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class SettingController extends Controller
 {
@@ -73,6 +74,7 @@ class SettingController extends Controller
 
     public function createApplication(Request $request) {
         $validator = Validator::make($request->all(), [
+            'type' => ['required', Rule::in(['consultation', 'partner'])],
             'name' => 'required|max:255',
             'phone' => 'required',
             'description' => 'required', // max 100MB

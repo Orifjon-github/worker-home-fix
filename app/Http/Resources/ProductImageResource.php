@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\App;
 
-class PostDetailResource extends JsonResource
+class ProductImageResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -18,10 +18,7 @@ class PostDetailResource extends JsonResource
         $language = App::getLocale();
         return [
             'id' => $this->id,
-            'title' => $language == 'ru' ? $this->title : ($this->title_uz ?? $this->title),
-            'description' => $language == 'ru' ? $this->description : $this->description_uz,
-            'image' => env('IMAGES_BASE_URL') . $this->image,
-            'images' => PostImageResource::collection($this->images) ?? [],
+            'image' => env('IMAGES_BASE_URL') . $this->image
         ];
     }
 }

@@ -24,7 +24,7 @@ class ProductDetailResource extends JsonResource
             'count' => $this->count ?? 1,
             'totalCount' => $this->totalCount ?? 1,
             'compositions' => CompositionResource::collection($this->compositions) ?? [],
-            'images' => $this->images ?? [],
+            'images' => ProductImageResource::collection($this->images) ?? [],
             'comments' => CommentResourceResource::collection($this->comments) ?? []
         ];
     }
