@@ -10,6 +10,7 @@ use App\Http\Resources\HomeResource;
 use App\Http\Resources\ResultResource;
 use App\Http\Resources\SertificateResource;
 use App\Http\Resources\SettingResource;
+use App\Http\Resources\SocialResource;
 use App\Models\AboutImage;
 use App\Models\Advantage;
 use App\Models\Application;
@@ -44,7 +45,7 @@ class SettingController extends Controller
         return new SuccessResponse([
             'settings' => new SettingResource($settings),
             'phones' => $phones,
-            'socials' => $socials,
+            'socials' => SocialResource::collection($socials),
             'advantages' => AdvantageResource::collection($advantages),
             'capabilities' => CapabilitiesResource::collection($capabilities)
         ]);
