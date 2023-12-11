@@ -98,5 +98,9 @@ class SettingSeeder extends Seeder
             'key' => 'favoritesBg',
             'value' => 'image/path'
         ]);
+        Setting::create([
+            'key' => 'about_video',
+            'value' => 'uploads/path.mp4'
+        ]);
     }
 }
