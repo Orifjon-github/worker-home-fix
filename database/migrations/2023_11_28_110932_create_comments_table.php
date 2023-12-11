@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('product_id')->constrained()->onDelete('cascade');
             $table->text('description')->nullable();
             $table->text('description_uz')->nullable();
+            $table->text('image')->nullable();
             $table->text('video')->nullable();
             $table->enum('enable', [1, 0])->default(1);
             $table->timestamps();
