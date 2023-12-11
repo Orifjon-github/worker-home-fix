@@ -20,6 +20,7 @@ class CommentResourceResource extends JsonResource
             'id' => $this->id,
             'author' => $this->author,
             'phone' => $this->phone,
+            'image' => $this->image,
             'video' => $this->video,
             'description' => $language == 'ru' ? $this->description : ($this->description_uz ?? $this->description)
         ];

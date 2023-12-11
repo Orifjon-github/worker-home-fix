@@ -20,6 +20,7 @@ class PostResource extends JsonResource
         return [
             'id' => $this->id,
             'title' => $language == 'ru' ? $this->title : ($this->title_uz ?? $this->title),
+            'short_description' => $language == 'ru' ? $this->short_description : ($this->short_description_uz ?? $this->short_description),
             'description' => $language == 'ru' ? $this->description : ($this->description_uz ?? $this->description),
             'image' => env('IMAGES_BASE_URL') . $this->image
         ];
