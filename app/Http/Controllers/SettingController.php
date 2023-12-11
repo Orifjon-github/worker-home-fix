@@ -60,7 +60,7 @@ class SettingController extends Controller
 
     public function about(): SuccessResponse
     {
-        $settings = Setting::whereIn('key', ['about_image', 'about_video', 'about_description', 'result_video', 'delivery_text'])->get();
+        $settings = Setting::whereIn('key', ['about_image', 'about_video', 'about_description', 'result_video', 'delivery_text', 'result_image'])->get();
         $images = AboutImage::where('enable', '1')->get();
         $results = Result::where('enable', '1')->get();
         $certificates = Sertificate::where('enable', '1')->get();
