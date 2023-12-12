@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Helpers\Responses\ErrorResponse;
 use App\Helpers\Responses\SuccessResponse;
+use App\Http\Resources\AboutImageResource;
 use App\Http\Resources\AdvantageResource;
 use App\Http\Resources\CapabilitiesResource;
 use App\Http\Resources\ResultResource;
@@ -60,7 +61,7 @@ class SettingController extends Controller
         $certificates = Sertificate::where('enable', '1')->get();
         return new SuccessResponse([
             'about' => new SettingResource($settings),
-            'about_images' => $images,
+            'about_images' => AboutImageResource::collection($images),
             'results' => ResultResource::collection($results),
             'certificates' => SertificateResource::collection($certificates)
         ]);
