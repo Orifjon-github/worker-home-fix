@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('phone');
             $table->string('email')->nullable();
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->enum('type', ['consultation', 'partner', 'order'])->default('consultation');
             $table->timestamps();
         });

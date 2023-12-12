@@ -71,8 +71,7 @@ class SettingController extends Controller
         $validator = Validator::make($request->all(), [
             'type' => ['required', Rule::in(['consultation', 'partner', 'order'])],
             'name' => 'required|max:255',
-            'phone' => 'required',
-            'description' => 'required', // max 100MB
+            'phone' => 'required'
         ]);
 
         if ($validator->fails()) {
