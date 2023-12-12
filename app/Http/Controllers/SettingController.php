@@ -6,7 +6,6 @@ use App\Helpers\Responses\ErrorResponse;
 use App\Helpers\Responses\SuccessResponse;
 use App\Http\Resources\AdvantageResource;
 use App\Http\Resources\CapabilitiesResource;
-use App\Http\Resources\HomeResource;
 use App\Http\Resources\ResultResource;
 use App\Http\Resources\SertificateResource;
 use App\Http\Resources\SettingResource;
@@ -15,17 +14,12 @@ use App\Models\AboutImage;
 use App\Models\Advantage;
 use App\Models\Application;
 use App\Models\Capability;
-use App\Models\Faq;
-use App\Models\Home;
-use App\Models\Partner;
 use App\Models\Phone;
 use App\Models\Result;
 use App\Models\Sertificate;
 use App\Models\Setting;
 use App\Models\Social;
-use App\Models\Testimonial;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 
@@ -72,9 +66,10 @@ class SettingController extends Controller
         ]);
     }
 
-    public function createApplication(Request $request) {
+    public function createApplication(Request $request)
+    {
         $validator = Validator::make($request->all(), [
-            'type' => ['required', Rule::in(['consultation', 'partner'])],
+            'type' => ['required', Rule::in(['consultation', 'partner', 'order'])],
             'name' => 'required|max:255',
             'phone' => 'required',
             'description' => 'required', // max 100MB
@@ -83,8 +78,13 @@ class SettingController extends Controller
         if ($validator->fails()) {
             return new ErrorResponse($validator->errors()->first());
         }
+        $create = $request->all();
+        if ($request->type == 'order') {
+            $create['description'] = serialize($create['description']);
+        }
 
-        $application = Application::create($request->all());
+        $application = Application::create($create);
+
 
         if ($application) {
             return new SuccessResponse([], 'Ваша заявка успешно отправлена');

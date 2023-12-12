@@ -17,6 +17,7 @@ class PostSeeder extends Seeder
            'title' => 'Example Blog RU',
            'title_uz' => 'Example Blog UZ',
            'description' => 'Example Description RU',
+           'short_description' => 'Example Short Description RU',
            'description_uz' => 'Example Description UZ',
             'image' => 'path/image.png'
         ]);
@@ -24,6 +25,7 @@ class PostSeeder extends Seeder
             'title' => 'Example Blog RU',
             'title_uz' => 'Example Blog UZ',
             'description' => 'Example Description RU',
+            'short_description' => 'Example Short Description RU',
             'description_uz' => 'Example Description UZ',
             'image' => 'path/image.png'
         ]);
@@ -31,6 +33,7 @@ class PostSeeder extends Seeder
             'title' => 'Example Blog RU',
             'title_uz' => 'Example Blog UZ',
             'description' => 'Example Description RU',
+            'short_description' => 'Example Short Description RU',
             'description_uz' => 'Example Description UZ',
             'image' => 'path/image.png'
         ]);
@@ -38,6 +41,7 @@ class PostSeeder extends Seeder
             'title' => 'Example Blog RU',
             'title_uz' => 'Example Blog UZ',
             'description' => 'Example Description RU',
+            'short_description' => 'Example Short Description RU',
             'description_uz' => 'Example Description UZ',
             'image' => 'path/image.png'
         ]);
@@ -45,6 +49,7 @@ class PostSeeder extends Seeder
             'title' => 'Example Blog RU',
             'title_uz' => 'Example Blog UZ',
             'description' => 'Example Description RU',
+            'short_description' => 'Example Short Description RU',
             'description_uz' => 'Example Description UZ',
             'image' => 'path/image.png'
         ]);
@@ -52,6 +57,7 @@ class PostSeeder extends Seeder
             'title' => 'Example Blog RU',
             'title_uz' => 'Example Blog UZ',
             'description' => 'Example Description RU',
+            'short_description' => 'Example Short Description RU',
             'description_uz' => 'Example Description UZ',
             'image' => 'path/image.png'
         ]);
@@ -59,6 +65,7 @@ class PostSeeder extends Seeder
             'title' => 'Example Blog RU',
             'title_uz' => 'Example Blog UZ',
             'description' => 'Example Description RU',
+            'short_description' => 'Example Short Description RU',
             'description_uz' => 'Example Description UZ',
             'image' => 'path/image.png'
         ]);
