@@ -35,6 +35,7 @@ class ProductController extends Controller
             'author' => 'required|max:255',
             'product_id' => 'required',
             'video' => 'nullable|file|mimes:mp4,webm,ogg,avi,mov|max:102400', // max 100MB
+            'image' => 'nullable|file|mimes:jpeg,jpg,png,gif,bmp,svg,webp,ico,tiff,heif|max:5120', // max 5MB
         ]);
 
         if ($validator->fails()) {
@@ -50,6 +51,11 @@ class ProductController extends Controller
             $video = $request->file('video');
             $videoPath = $video->store('videos', 'public');
             $comment->video = env('APP_URL') . '/storage/' . $videoPath;
+        }
+        if ($request->hasFile('image')) {
+            $video = $request->file('image');
+            $videoPath = $video->store('images', 'public');
+            $comment->image = env('APP_URL') . '/storage/' . $videoPath;
         }
 
 
