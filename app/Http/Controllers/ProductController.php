@@ -47,7 +47,7 @@ class ProductController extends Controller
         $comment->product_id = $request->product_id;
         $comment->description = $request->description ?? null;
         $comment->description_uz = $request->description_uz ?? null;
-        $comment->enable = 0;
+        $comment->enable = '0';
         if ($request->hasFile('video')) {
             $video = $request->file('video');
             $videoPath = $video->store('videos', 'public');
