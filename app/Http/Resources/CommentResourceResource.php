@@ -20,8 +20,8 @@ class CommentResourceResource extends JsonResource
             'id' => $this->id,
             'author' => $this->author,
             'phone' => $this->phone,
-            'image' => $this->image,
-            'video' => $this->video,
+            'image' => str_starts_with($this->image, 'uploads/') ? env('IMAGES_BASE_URL') . $this->image : $this->image,
+            'video' => str_starts_with($this->video, 'uploads/') ? env('IMAGES_BASE_URL') . $this->video : $this->video,
             'description' => $language == 'ru' ? $this->description : ($this->description_uz ?? $this->description)
         ];
     }
