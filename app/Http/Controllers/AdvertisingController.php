@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 class AdvertisingController extends Controller
 {
     public function index() {
-        $advertising = Advertising::all()->latest()->first();
+        $advertising = Advertising::first();
         return new SuccessResponse(AdvertisingResource::make($advertising));
     }
 }
