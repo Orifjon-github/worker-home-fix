@@ -20,6 +20,7 @@ class AdvertisingResource extends JsonResource
             'id' => $this->id,
             'title' => $language == 'ru' ? $this->title : ($this->title_uz ?? $this->title),
             'description' => $language == 'ru' ? $this->description : ($this->description_uz ?? $this->description),
+            'libk' => $language == 'ru' ? $this->link : ($this->link_uz ?? $this->description),
             'image' => env('IMAGES_BASE_URL') . ($language == 'ru' ? $this->image : ($this->image_uz ?? $this->image)),
             'enable' => (bool)$this->enable
         ];

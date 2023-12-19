@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('title_uz')->nullable();
             $table->text('description');
             $table->text('description_uz')->nullable();
+            $table->text('link')->nullable();
+            $table->text('link_uz')->nullable();
             $table->text('image')->nullable();
             $table->text('image_uz')->nullable();
             $table->enum('enable', [0 , 1])->default(1);
