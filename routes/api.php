@@ -31,3 +31,4 @@ Route::get('consultation', [\App\Http\Controllers\SettingController::class, 'con
 Route::post('application/create', [\App\Http\Controllers\SettingController::class, 'createApplication']);
 Route::get('testimonials', [\App\Http\Controllers\TestimonialController::class, 'index']);
 Route::get('about', [\App\Http\Controllers\SettingController::class, 'about']);
+Route::get('advertising', [\App\Http\Controllers\AdvertisingController::class, 'index']);
