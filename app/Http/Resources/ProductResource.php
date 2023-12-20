@@ -19,6 +19,7 @@ class ProductResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $language == 'ru' ? $this->name : ($this->name_uz ?? $this->name),
+            'short_description' => $language == 'ru' ? $this->short_description : ($this->short_description_uz ?? $this->short_description),
             'description' => $language == 'ru' ? $this->description : ($this->description_uz ?? $this->description),
             'image' => env('IMAGES_BASE_URL') . $this->image,
             'count' => $this->count,
