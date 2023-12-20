@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('title')->nullable();
             $table->string('title_uz')->nullable();
+            $table->string('title_en')->nullable();
             $table->text('image');
             $table->enum('enable', [1, 0])->default(1);
             $table->timestamps();

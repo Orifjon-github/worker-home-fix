@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('partners', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->nullable();
-            $table->string('name_uz')->nullable();
             $table->text('link')->nullable();
             $table->text('link_uz')->nullable();
+            $table->text('link_en')->nullable();
             $table->text('icon');
             $table->text('icon_uz')->nullable();
+            $table->text('icon_en')->nullable();
             $table->enum('enable', [1, 0])->default(1);
             $table->timestamps();
         });

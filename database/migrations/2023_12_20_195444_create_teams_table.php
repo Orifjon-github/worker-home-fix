@@ -11,12 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('sertificates', function (Blueprint $table) {
+        Schema::create('teams', function (Blueprint $table) {
             $table->id();
-            $table->text('image');
-            $table->text('image_uz')->nullable();
-            $table->text('image_en')->nullable();
-            $table->enum('enable', [1, 0])->default(1);
+            $table->string('name');
+            $table->string('job')->nullable();
+            $table->string('job_uz')->nullable();
+            $table->string('job_en')->nullable();
+            $table->text('image')->nullable();
             $table->timestamps();
         });
     }
@@ -26,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('sertificates');
+        Schema::dropIfExists('teams');
     }
 };

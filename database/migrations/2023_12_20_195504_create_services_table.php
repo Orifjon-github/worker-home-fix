@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('sertificates', function (Blueprint $table) {
+        Schema::create('services', function (Blueprint $table) {
             $table->id();
-            $table->text('image');
-            $table->text('image_uz')->nullable();
-            $table->text('image_en')->nullable();
-            $table->enum('enable', [1, 0])->default(1);
+            $table->text('title');
+            $table->text('title_uz')->nullable();
+            $table->text('title_en')->nullable();
+            $table->text('image')->nullable();
             $table->timestamps();
         });
     }
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('sertificates');
+        Schema::dropIfExists('services');
     }
 };

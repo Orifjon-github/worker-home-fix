@@ -11,12 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('sertificates', function (Blueprint $table) {
+        Schema::create('galleries', function (Blueprint $table) {
             $table->id();
             $table->text('image');
-            $table->text('image_uz')->nullable();
-            $table->text('image_en')->nullable();
-            $table->enum('enable', [1, 0])->default(1);
             $table->timestamps();
         });
     }
@@ -26,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('sertificates');
+        Schema::dropIfExists('galleries');
     }
 };

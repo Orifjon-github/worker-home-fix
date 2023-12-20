@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('socials', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name')->nullable();
             $table->text('link');
             $table->text('icon')->nullable();
             $table->enum('enable', [1, 0])->default(1);

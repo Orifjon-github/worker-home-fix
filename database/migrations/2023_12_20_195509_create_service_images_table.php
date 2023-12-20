@@ -11,12 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('sertificates', function (Blueprint $table) {
+        Schema::create('service_images', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('service_id')->constrained()->onDelete('cascade');
             $table->text('image');
-            $table->text('image_uz')->nullable();
-            $table->text('image_en')->nullable();
-            $table->enum('enable', [1, 0])->default(1);
             $table->timestamps();
         });
     }
@@ -26,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('sertificates');
+        Schema::dropIfExists('service_images');
     }
 };
