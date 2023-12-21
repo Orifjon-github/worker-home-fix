@@ -14,20 +14,18 @@ class HomeSeeder extends Seeder
     public function run(): void
     {
         Home::create([
-            'title' => 'Научное наследие традиционной уйгурской медицины с новыми достижениями',
-            'title_uz' => "Yangi yutuqlar bilan an`anaviy uyg`ur tabobatining ilmiy merosi",
-            'description' => 'Представитель международной ассоциации «IPAR», действующей по всему Узбекистану, биотехнологически развивающейся многопрофильной компании, соединяющей наследие традиционной уйгурской медицины с новыми достижениями науки.',
-            'description_uz' => "O`zbekiston bo`ylab faoliyat yurituvchi “IPAR” xalqaro assotsiatsiyasi vakili, anʼanaviy uyg`ur tibbiyoti merosini yangi ilmiy yutuqlar bilan uyg`unlashtirgan biotexnologik jihatdan rivojlanayotgan diversifikatsiyalangan kompaniya.",
-            'image' => '/storage/carousels/home1.png',
-            'image_uz' => '/storage/carousels/home1_uz.png'
+            'title' => 'Example Title Ru 1',
+            'title_uz' => "Example Title Uz 1",
+            'title_en' => "Example Title En 1",
+            'image' => 'uploads/example.png',
+            'image_uz' => 'uploads/example.png'
         ]);
         Home::create([
-            'title' => 'Научное наследие традиционной уйгурской медицины с новыми достижениями',
-            'title_uz' => "Yangi yutuqlar bilan an`anaviy uyg`ur tabobatining ilmiy merosi",
-            'description' => 'Представитель международной ассоциации «IPAR», действующей по всему Узбекистану, биотехнологически развивающейся многопрофильной компании, соединяющей наследие традиционной уйгурской медицины с новыми достижениями науки.',
-            'description_uz' => "O`zbekiston bo`ylab faoliyat yurituvchi “IPAR” xalqaro assotsiatsiyasi vakili, anʼanaviy uyg`ur tibbiyoti merosini yangi ilmiy yutuqlar bilan uyg`unlashtirgan biotexnologik jihatdan rivojlanayotgan diversifikatsiyalangan kompaniya.",
-            'image' => '/storage/carousels/home2.png',
-            'image_uz' => '/storage/carousels/home2_uz.png'
+            'title' => 'Example Title Ru 2',
+            'title_uz' => "Example Title Uz 2",
+            'title_en' => "Example Title En 2",
+            'image' => 'uploads/example.png',
+            'image_uz' => 'uploads/example.png'
         ]);
     }
 }

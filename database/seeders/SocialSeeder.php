@@ -16,12 +16,12 @@ class SocialSeeder extends Seeder
         Social::create([
             'name' => 'Instagram',
             'link' => 'https://instagram.com',
-            'icon' => '/storage/socials/instagram.png'
+            'icon' => 'uploads/instagram.png'
         ]);
         Social::create([
             'name' => 'Telegram',
             'link' => 'https://t.me',
-            'icon' => '/storage/socials/telegram.png'
+            'icon' => 'uploads/telegram.png'
         ]);
     }
 }

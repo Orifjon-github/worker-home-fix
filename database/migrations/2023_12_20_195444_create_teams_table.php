@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('job_uz')->nullable();
             $table->string('job_en')->nullable();
             $table->text('image')->nullable();
+            $table->enum('enable', [1, 0])->default(1);
             $table->timestamps();
         });
     }

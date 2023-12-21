@@ -23,6 +23,7 @@ return new class extends Migration
             $table->text('description');
             $table->text('description_uz')->nullable();
             $table->text('description_en')->nullable();
+            $table->enum('enable', [1, 0])->default(1);
             $table->timestamps();
         });
     }

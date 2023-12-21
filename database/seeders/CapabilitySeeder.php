@@ -14,24 +14,19 @@ class CapabilitySeeder extends Seeder
     public function run(): void
     {
         Capability::create([
-            'title' => 'Халяль',
-            'title_uz' => 'Halol',
-            'image' => 'image/path1'
+            'title' => "Многолетний опыт",
+            'title_uz' => "Ko'p yillik tajriba",
+            'image' => 'uploads/example.png'
         ]);
         Capability::create([
-            'title' => 'Натуральный продукт',
-            'title_uz' => 'Tabiiy mahsulot',
-            'image' => 'image/path2'
+            'title' => "Быстрая доставка",
+            'title_uz' => "Tezkor yetkazib berish",
+            'image' => 'uploads/example.png'
         ]);
         Capability::create([
-            'title' => 'Дает энергию',
-            'title_uz' => 'Energiya beradi',
-            'image' => 'image/path3'
-        ]);
-        Capability::create([
-            'title' => 'Полезно для организма',
-            'title_uz' => 'Tana uchun foydali',
-            'image' => 'image/path4'
+            'title' => "Натуральный продукт",
+            'title_uz' => "Tabiiy mahsulot",
+            'image' => 'uploads/example.png'
         ]);
     }
 }

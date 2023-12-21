@@ -11,19 +11,5 @@ use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
-    public function index(): SuccessResponse
-    {
-        $posts = Post::where('enable', '1')->get();
 
-        return new SuccessResponse(PostResource::collection($posts));
-    }
-
-    public function detail($id): ErrorResponse|SuccessResponse
-    {
-        $post = Post::find($id) ?? null;
-        if ($post) {
-            return new SuccessResponse(PostDetailResource::make($post));
-        }
-        return new ErrorResponse('Blog not found');
-    }
 }

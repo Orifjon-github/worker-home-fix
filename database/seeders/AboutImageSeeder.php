@@ -14,19 +14,19 @@ class AboutImageSeeder extends Seeder
     public function run(): void
     {
         AboutImage::create([
-           'image' => '/storage/about/image1.png'
+           'image' => 'uploads/example.png'
         ]);
         AboutImage::create([
-            'image' => '/storage/about/image2.png'
+            'image' => 'uploads/example.png'
         ]);
         AboutImage::create([
-            'image' => '/storage/about/image3.png'
+            'image' => 'uploads/example.png'
         ]);
         AboutImage::create([
-            'image' => '/storage/about/image4.png'
+            'image' => 'uploads/example.png'
         ]);
         AboutImage::create([
-            'image' => '/storage/about/image5.png'
+            'image' => 'uploads/example.png'
         ]);
     }
 }

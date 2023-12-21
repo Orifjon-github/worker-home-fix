@@ -17,7 +17,7 @@ class PartnerSeeder extends Seeder
            'name' => 'NBU',
            'link' => 'https://nbu.uz/ru',
            'link_uz' => 'https://nbu.uz/uz',
-            'icon' => 'path/nbu.png'
+            'icon' => 'uploads/nbu.png'
         ]);
     }
 }

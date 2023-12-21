@@ -10,7 +10,7 @@ class Locale
     public function handle(Request $request, Closure $next)
     {
         $lang = $request->header('Accept-Language');
-        if (in_array($lang, ['ru', 'uz'])) App::setLocale($lang);
+        if (in_array($lang, ['ru', 'uz', 'en'])) App::setLocale($lang);
 
         return $next($request);
     }

@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('history_id')->constrained()->onDelete('cascade');
             $table->text('image');
+            $table->enum('enable', [1, 0])->default(1);
             $table->timestamps();
         });
     }

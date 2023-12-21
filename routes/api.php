@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\MainController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,22 +13,24 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
-
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::controller(MainController::class)->group(function () {
+    Route::get('settings', 'index');
+    Route::get('partners', 'partner');
+    Route::get('banners', 'banner');
+    Route::get('about', 'about');
+    Route::get('services', 'service');
+    Route::get('projects', 'project');
+    Route::get('posts','post');
+    Route::get('posts/detail/{id}', 'postDetail');
+    Route::get('gallery', 'gallery');
+    Route::post('application/create', 'createApplication');
 });
 
-Route::get('carousels', [\App\Http\Controllers\HomeController::class, 'index']);
-Route::get('settings', [\App\Http\Controllers\SettingController::class, 'index']);
-Route::get('products', [\App\Http\Controllers\ProductController::class, 'index']);
-Route::get('products/detail/{id}', [\App\Http\Controllers\ProductController::class, 'detail']);
-Route::post('products/comment/create', [\App\Http\Controllers\ProductController::class, 'createComment']);
-Route::get('partners', [\App\Http\Controllers\PartnerController::class, 'index']);
-Route::get('faqs', [\App\Http\Controllers\FaqController::class, 'index']);
-Route::get('posts', [\App\Http\Controllers\PostController::class, 'index']);
-Route::get('posts/detail/{id}', [\App\Http\Controllers\PostController::class, 'detail']);
-Route::get('consultation', [\App\Http\Controllers\SettingController::class, 'consultation']);
-Route::post('application/create', [\App\Http\Controllers\SettingController::class, 'createApplication']);
-Route::get('testimonials', [\App\Http\Controllers\TestimonialController::class, 'index']);
-Route::get('about', [\App\Http\Controllers\SettingController::class, 'about']);
-Route::get('advertising', [\App\Http\Controllers\AdvertisingController::class, 'index']);
+
+//Route::get('consultation', [\App\Http\Controllers\MainController::class, 'consultation']);
+//Route::get('products', [\App\Http\Controllers\ProductController::class, 'index']);
+//Route::get('products/detail/{id}', [\App\Http\Controllers\ProductController::class, 'detail']);
+//Route::post('products/comment/create', [\App\Http\Controllers\ProductController::class, 'createComment']);
+//Route::get('faqs', [\App\Http\Controllers\FaqController::class, 'index']);
+//Route::get('testimonials', [\App\Http\Controllers\TestimonialController::class, 'index']);
+//Route::get('advertising', [\App\Http\Controllers\AdvertisingController::class, 'index']);

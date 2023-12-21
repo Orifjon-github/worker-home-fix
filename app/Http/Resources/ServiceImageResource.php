@@ -4,9 +4,8 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
-use Illuminate\Support\Facades\App;
 
-class AboutImageResource extends JsonResource
+class ServiceImageResource extends JsonResource
 {
     /**
      * Transform the resource into an array.

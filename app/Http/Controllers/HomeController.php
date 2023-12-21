@@ -9,10 +9,5 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    public function index(): SuccessResponse
-    {
-        $carousels = Home::where('enable', '1')->get();
 
-        return new SuccessResponse(HomeResource::collection($carousels));
-    }
 }

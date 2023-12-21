@@ -17,23 +17,31 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             SettingSeeder::class,
-            AdvantageSeeder::class,
+//            AdvantageSeeder::class,
             SocialSeeder::class,
-            FaqSeeder::class,
+//            FaqSeeder::class,
             PartnerSeeder::class,
             PostSeeder::class,
             ProductSeeder::class,
-            CommentSeeder::class,
-            ResultSeeder::class,
+//            CommentSeeder::class,
+//            ResultSeeder::class,
             SertificateSeeder::class,
-            TestimonialSeeder::class,
+//            TestimonialSeeder::class,
             PhoneSeeder::class,
             HomeSeeder::class,
             AboutImageSeeder::class,
             CapabilitySeeder::class,
-            ProductCompositionSeeder::class,
-            ProductImagesSeeder::class,
-            PostImageSeeder::class
+//            ProductCompositionSeeder::class,
+//            ProductImagesSeeder::class,
+            PostImageSeeder::class,
+            HistorySeeder::class,
+            HistoryImageSeeder::class,
+            TeamSeeder::class,
+            ServiceSeeder::class,
+            ServiceImageSeeder::class,
+            ProjectSeeder::class,
+            ProjectImageSeeder::class,
+            GallerySeeder::class
         ]);
     }
 }
