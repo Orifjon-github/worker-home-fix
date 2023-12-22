@@ -147,7 +147,7 @@ class MainController extends Controller
     public function createApplication(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'type' => ['required', Rule::in(['consultation', 'partner', 'order'])],
+            'type' => ['required', Rule::in(['consultation', 'partner', 'contact', 'fast-contact'])],
             'name' => 'required|max:255',
             'phone' => 'required'
         ]);
@@ -156,9 +156,10 @@ class MainController extends Controller
             return new ErrorResponse($validator->errors()->first());
         }
         $create = $request->all();
-        if ($request->type == 'order') {
-            $create['description'] = serialize($create['description']);
-        }
+
+//        if ($request->type == 'order') {
+//            $create['description'] = serialize($create['description']);
+//        }
 
         $application = Application::create($create);
 
