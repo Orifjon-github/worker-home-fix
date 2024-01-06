@@ -19,7 +19,7 @@ class SertificateResource extends JsonResource
         $language = App::getLocale();
         return [
             'id' => $this->id,
-            'image' => env('IMAGES_BASE_URL') . ($language == 'ru' ? $this->image : ($this->image_uz ?? $this->image))
+            'image' => env('IMAGES_BASE_URL') . (($language == "ru") ? $this->image : (${"this->image_".$language} ?? $this->image))
         ];
     }
 }

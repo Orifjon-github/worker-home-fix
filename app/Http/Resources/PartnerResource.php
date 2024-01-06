@@ -20,7 +20,7 @@ class PartnerResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name, //($language == "ru") ? $this->name : (($language == "uz") ? ($this->name_uz ?? $this->name) : ($this->name_en ?? $this->name)),
             'link' => ($language == "ru") ? $this->link : (($language == "uz") ? ($this->link_uz ?? $this->link) : ($this->link_en ?? $this->link)),
-            'icon' => env('IMAGES_BASE_URL') . ($language == "ru") ? $this->icon : (($language == "uz") ? ($this->icon_uz ?? $this->icon) : ($this->icon_en ?? $this->icon)),
+            'icon' => env('IMAGES_BASE_URL') . (($language == "ru") ? $this->icon : (${"this->icon_".$language} ?? $this->icon)),
         ];
     }
 }
