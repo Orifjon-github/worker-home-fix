@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\App;
 
-class ProjectResource extends JsonResource
+class ProjectDetailResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -21,7 +21,8 @@ class ProjectResource extends JsonResource
             'title' => ($language == "ru") ? $this->title : (($language == "uz") ? ($this->title_uz ?? $this->title) : ($this->title_en ?? $this->title)),
             'short_description' => ($language == "ru") ? $this->short_description : (($language == "uz") ? ($this->short_description_uz ?? $this->short_description) : ($this->short_description_en ?? $this->short_description)),
             'description' => ($language == "ru") ? $this->description : (($language == "uz") ? ($this->description_uz ?? $this->description) : ($this->description_en ?? $this->description)),
-            'image' => env('IMAGES_BASE_URL') .$this->image
+            'image' => env('IMAGES_BASE_URL') .$this->image,
+            'images' => PostImageResource::collection($this->images) ?? [],
         ];
     }
 }

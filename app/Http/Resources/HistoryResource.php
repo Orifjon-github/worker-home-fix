@@ -21,7 +21,7 @@ class HistoryResource extends JsonResource
             'years' => $this->years,
             'title' => ($language == "ru") ? $this->title : (($language == "uz") ? ($this->title_uz ?? $this->title) : ($this->title_en ?? $this->title)),
             'description' => ($language == "ru") ? $this->description : (($language == "uz") ? ($this->description_uz ?? $this->description) : ($this->description_en ?? $this->description)),
-            'images' => HistoryImageResource::collection($this->images)
+
         ];
     }
 }

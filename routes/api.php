@@ -22,6 +22,9 @@ Route::controller(MainController::class)->group(function () {
     Route::get('projects', 'project');
     Route::get('posts','post');
     Route::get('posts/detail/{id}', 'postDetail');
+    Route::get('projects/detail/{id}', 'projectDetail');
+    Route::get('services/detail/{id}', 'serviceDetail');
+    Route::get('histories/detail/{id}', 'historyDetail');
     Route::get('gallery', 'gallery');
     Route::post('application/create', 'createApplication');
 });

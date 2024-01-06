@@ -19,8 +19,7 @@ class ServiceResource extends JsonResource
         return [
             'id' => $this->id,
             'title' => ($language == "ru") ? $this->title : (($language == "uz") ? ($this->title_uz ?? $this->title) : ($this->title_en ?? $this->title)),
-            'image' => env('IMAGES_BASE_URL') .$this->image,
-            'images' => ServiceImageResource::collection($this->images)
+            'image' => env('IMAGES_BASE_URL') .$this->image
         ];
     }
 }

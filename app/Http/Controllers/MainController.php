@@ -8,15 +8,18 @@ use App\Http\Resources\AboutImageResource;
 use App\Http\Resources\AdvantageResource;
 use App\Http\Resources\CapabilitiesResource;
 use App\Http\Resources\GalleryResource;
+use App\Http\Resources\HistoryDetailResource;
 use App\Http\Resources\HistoryResource;
 use App\Http\Resources\HomeResource;
 use App\Http\Resources\PartnerResource;
 use App\Http\Resources\PostDetailResource;
+use App\Http\Resources\ProjectDetailResource;
 use App\Http\Resources\PostResource;
 use App\Http\Resources\ProductResource;
 use App\Http\Resources\ProjectResource;
 use App\Http\Resources\ResultResource;
 use App\Http\Resources\SertificateResource;
+use App\Http\Resources\ServiceDetailResource;
 use App\Http\Resources\ServiceResource;
 use App\Http\Resources\SettingResource;
 use App\Http\Resources\SocialResource;
@@ -111,6 +114,33 @@ class MainController extends Controller
             return new SuccessResponse(PostDetailResource::make($post));
         }
         return new ErrorResponse('Post not found');
+    }
+
+    public function projectDetail($id): ErrorResponse|SuccessResponse
+    {
+        $post = Project::find($id) ?? null;
+        if ($post) {
+            return new SuccessResponse(ProjectDetailResource::make($post));
+        }
+        return new ErrorResponse('Project not found');
+    }
+
+    public function serviceDetail($id): ErrorResponse|SuccessResponse
+    {
+        $post = Service::find($id) ?? null;
+        if ($post) {
+            return new SuccessResponse(ServiceDetailResource::make($post));
+        }
+        return new ErrorResponse('Service not found');
+    }
+
+    public function historyDetail($id): ErrorResponse|SuccessResponse
+    {
+        $post = History::find($id) ?? null;
+        if ($post) {
+            return new SuccessResponse(HistoryDetailResource::make($post));
+        }
+        return new ErrorResponse('History not found');
     }
 
     public function gallery(): SuccessResponse
