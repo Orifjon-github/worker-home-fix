@@ -20,8 +20,7 @@ class HomeResource extends JsonResource
         return [
             'id' => $this->id,
             'title' => ($language == "ru") ? $this->title : (($language == "uz") ? ($this->title_uz ?? $this->title) : ($this->title_en ?? $this->title)),
-//            'description' => ($language == "ru") ? $this->description_en : (($language == "uz") ? ($this->name_uz ?? $this->description) : ($this->description_en ?? $this->description)),
-            'image' => env('IMAGES_BASE_URL') . ($language == "ru") ? $this->image : (($language == "uz") ? ($this->image_uz ?? $this->image) : ($this->image_en ?? $this->image)),
+            'image' => env('IMAGES_BASE_URL') . ($language == "ru") ? $this->image : (${"this->image_".$language} ?? $this->image),
         ];
     }
 }
