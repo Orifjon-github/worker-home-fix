@@ -23,8 +23,8 @@ class SettingResource extends JsonResource
 
             $value = match ($language) {
                 'ru' => $setting->value,
-                'uz' => $setting->value_uz ?? $setting->value,
-                'en' => $setting->value_en ?? $setting->value,
+                'uz' => ($setting->value_uz && $setting->value_uz != "") ? $setting->value_uz : $setting->value,
+                'en' => ($setting->value_en && $setting->value_en != "") ? $setting->value_en : $setting->value,
             };
 
             return [
