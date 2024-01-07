@@ -17,10 +17,23 @@ class HomeResource extends JsonResource
     public function toArray(Request $request): array
     {
         $language = App::getLocale();
+        switch ($language) {
+            case 'ru':
+                $image = $this->image;
+                $title = $this->title;
+                break;
+            case 'uz':
+                $image = $this->image_uz ?? $this->image;
+                $title = $this->title_uz ?? $this->title;
+                break;
+            case 'en':
+                $image = $this->image_en ?? $this->image;
+                $title = $this->title_en ?? $this->title;
+        }
         return [
             'id' => $this->id,
-            'title' => ($language == "ru") ? $this->title : (($language == "uz") ? ($this->title_uz ?? $this->title) : ($this->title_en ?? $this->title)),
-            'image' => env('IMAGES_BASE_URL') . (($language == "ru") ? $this->image : (${"this->image_".$language} ?? $this->image))
+            'title' => $title,
+            'image' => env('IMAGES_BASE_URL') . $image,
         ];
     }
 }
