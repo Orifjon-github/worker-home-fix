@@ -19,7 +19,7 @@ class SettingResource extends JsonResource
         // Assuming $this->resource is a collection of Setting models
         $settings = $this->resource->mapWithKeys(function ($setting) use ($language) {
             $is_file = str_starts_with($setting->value, 'uploads/');
-            $value = ($language == "ru") ? $setting->value : (($language == "uz") ? ($setting->value_uz ?? $setting->value) : ($setting->value_en ?? $setting->value));
+            $value = ($language == "ru") ? $setting->value : (${"setting->value_".$language} ?? $setting->value);
             return [
                 $setting->key => $is_file ? env('IMAGES_BASE_URL') . $value : $value,
             ];
