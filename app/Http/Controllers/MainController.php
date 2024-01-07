@@ -49,7 +49,7 @@ class MainController extends Controller
 {
     public function index(): SuccessResponse
     {
-        $settings = Setting::where('enable', '1')->whereIn('key', ['email', 'address', 'iframe', 'logo', 'galleryBg', 'contactBg', 'blogBg', 'aboutBg', 'advantageBg', 'consultation_image'])->get();
+        $settings = Setting::where('enable', '1')->whereIn('key', ['email', 'address', 'iframe', 'logo', 'galleryBg', 'contactBg', 'blogBg', 'aboutBg', 'advantageBg','consultationBg', 'consultation_image'])->get();
 
         $socials = Social::where('enable', '1')->get();
 
