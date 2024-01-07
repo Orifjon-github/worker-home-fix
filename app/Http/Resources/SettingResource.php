@@ -16,19 +16,14 @@ class SettingResource extends JsonResource
     public function toArray(Request $request): array
     {
         $language = App::getLocale();
-        switch ($language) {
-            case 'ru':
-                $value = $this->value;
-                break;
-            case 'uz':
-                $value = $this->value_uz ?? $this->value;
-                break;
-            case 'en':
-                $value = $this->value_en ?? $this->value;
-        }
         // Assuming $this->resource is a collection of Setting models
-        $settings = $this->resource->mapWithKeys(function ($setting) use ($value) {
+        $settings = $this->resource->mapWithKeys(function ($setting) use ($language) {
             $is_file = str_starts_with($setting->value, 'uploads/');
+            $value = match ($language) {
+                'ru' => $this->value,
+                'uz' => $this->value_uz ?? $this->value,
+                'en' => $this->value_en ?? $this->value,
+            };
               return [
                 $setting->key => $is_file ? env('IMAGES_BASE_URL') . $value : $value,
             ];
