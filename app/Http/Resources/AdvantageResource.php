@@ -23,7 +23,7 @@ class AdvantageResource extends JsonResource
             'id' => $this->id,
             'title' => $title,
             'description' => $description,
-            'icon' => env('IMAGES_BASE_URL') . $this->iconf
+            'icon' => env('IMAGES_BASE_URL') . $this->icon
         ];
     }
 }
