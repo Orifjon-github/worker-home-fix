@@ -44,7 +44,7 @@ class SettingSeeder extends Seeder
             'value' => 'uploads/example.png'
         ]);
         Setting::create([
-            'key' => 'about_uploads',
+            'key' => 'about_image',
             'value' => 'uploads/example.png'
         ]);
         Setting::create([
@@ -72,7 +72,7 @@ class SettingSeeder extends Seeder
 //            'value' => 'Example Description Text'
 //        ]);
         Setting::create([
-            'key' => 'consultation_uploads',
+            'key' => 'consultation_image',
             'value' => 'uploads/example.png'
         ]);
 //        Setting::create([

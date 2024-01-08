@@ -17,11 +17,13 @@ class AdvantageResource extends JsonResource
     public function toArray(Request $request): array
     {
         $language = App::getLocale();
+        $title = match ($language) {'ru' => $this->title, 'uz' => $this->title_uz ?? $this->title, 'en' => $this->title_en ?? $this->title};
+        $description = match ($language) {'ru' => $this->description, 'uz' => $this->description_uz ?? $this->description, 'en' => $this->description_en ?? $this->description};
         return [
             'id' => $this->id,
-            'title' => $language == 'ru' ? $this->title : ($this->title_uz ?? $this->title),
-            'description' => $language == 'ru' ? $this->description : ($this->description_uz ?? $this->description),
-            'icon' => env('IMAGES_BASE_URL') . $this->icon
+            'title' => $title,
+            'description' => $description,
+            'icon' => env('IMAGES_BASE_URL') . $this->iconf
         ];
     }
 }
