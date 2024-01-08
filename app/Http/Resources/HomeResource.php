@@ -17,19 +17,8 @@ class HomeResource extends JsonResource
     public function toArray(Request $request): array
     {
         $language = App::getLocale();
-        switch ($language) {
-            case 'ru':
-                $image = $this->image;
-                $title = $this->title;
-                break;
-            case 'uz':
-                $image = $this->image_uz ?? $this->image;
-                $title = $this->title_uz ?? $this->title;
-                break;
-            case 'en':
-                $image = $this->image_en ?? $this->image;
-                $title = $this->title_en ?? $this->title;
-        }
+        $title = match ($language) {'ru' => $this->title, 'uz' => $this->title_uz ?? $this->title, 'en' => $this->title_en ?? $this->title};
+        $image = match ($language) {'ru' => $this->image, 'uz' => $this->image_uz ?? $this->image, 'en' => $this->image_en ?? $this->image};
         return [
             'id' => $this->id,
             'title' => $title,

@@ -16,9 +16,12 @@ class ServiceDetailResource extends JsonResource
     public function toArray(Request $request): array
     {
         $language = App::getLocale();
+        $title = match ($language) {'ru' => $this->title, 'uz' => $this->title_uz ?? $this->title, 'en' => $this->title_en ?? $this->title};
+        $description = match ($language) {'ru' => $this->description, 'uz' => $this->description_uz ?? $this->description, 'en' => $this->description_en ?? $this->description};
         return [
             'id' => $this->id,
-            'title' => ($language == "ru") ? $this->title : (($language == "uz") ? ($this->title_uz ?? $this->title) : ($this->title_en ?? $this->title)),
+            'title' => $title,
+            'description' => $description,
             'image' => env('IMAGES_BASE_URL') .$this->image,
             'images' => PostImageResource::collection($this->images) ?? [],
         ];
