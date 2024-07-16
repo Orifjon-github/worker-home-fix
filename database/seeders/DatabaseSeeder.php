@@ -16,32 +16,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call([
-            SettingSeeder::class,
-//            AdvantageSeeder::class,
-            SocialSeeder::class,
-//            FaqSeeder::class,
-            PartnerSeeder::class,
-            PostSeeder::class,
-            ProductSeeder::class,
-//            CommentSeeder::class,
-//            ResultSeeder::class,
-            SertificateSeeder::class,
-//            TestimonialSeeder::class,
-            PhoneSeeder::class,
-            HomeSeeder::class,
-            AboutImageSeeder::class,
-            CapabilitySeeder::class,
-//            ProductCompositionSeeder::class,
-//            ProductImagesSeeder::class,
-            PostImageSeeder::class,
-            HistorySeeder::class,
-            HistoryImageSeeder::class,
-            TeamSeeder::class,
-            ServiceSeeder::class,
-            ServiceImageSeeder::class,
-            ProjectSeeder::class,
-            ProjectImageSeeder::class,
-            GallerySeeder::class
+            SettingSeeder::class
         ]);
     }
 }

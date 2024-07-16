@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('settings', function (Blueprint $table) {
             $table->id();
+            $table->enum('type', ['text', 'image', 'html'])->default('text');
             $table->string('key');
             $table->text('value');
-            $table->text('value_uz')->nullable();
+            $table->text('value_ru')->nullable();
             $table->text('value_en')->nullable();
             $table->enum('enable', [1, 0])->default(1);
             $table->timestamps();
