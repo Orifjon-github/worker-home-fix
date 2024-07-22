@@ -11,17 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('homes', function (Blueprint $table) {
+        Schema::create('works', function (Blueprint $table) {
             $table->id();
             $table->text('title');
-            $table->text('title_uz')->nullable();
+            $table->text('title_ru')->nullable();
             $table->text('title_en')->nullable();
             $table->text('description')->nullable();
-            $table->text('description_uz')->nullable();
+            $table->text('description_ru')->nullable();
             $table->text('description_en')->nullable();
             $table->text('image')->nullable();
-            $table->text('image_uz')->nullable();
-            $table->text('image_en')->nullable();
             $table->enum('enable', [1, 0])->default(1);
             $table->timestamps();
         });
@@ -32,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('homes');
+        Schema::dropIfExists('works');
     }
 };

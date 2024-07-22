@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MainController;
+use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,19 +18,37 @@ use Illuminate\Support\Facades\Route;
 */
 Route::controller(MainController::class)->group(function () {
     Route::get('settings', 'index');
-    Route::get('partners', 'partner');
     Route::get('banners', 'banner');
-    Route::get('about', 'about');
+    Route::get('works', 'work');
+    Route::get('advantages', 'advantage');
+    Route::get('faqs', 'faq');
+    Route::get('partners', 'partner');
     Route::get('services', 'service');
-    Route::get('projects', 'project');
-    Route::get('posts','post');
-    Route::get('posts/detail/{id}', 'postDetail');
-    Route::get('projects/detail/{id}', 'projectDetail');
-    Route::get('services/detail/{id}', 'serviceDetail');
-    Route::get('histories/detail/{id}', 'historyDetail');
-    Route::get('gallery', 'gallery');
-    Route::post('application/create', 'createApplication');
+    Route::get('services/{id}', 'serviceDetail');
+    Route::get('testimonials','testimonial');
+    Route::get('plans','plan');
+    Route::get('seo','seo');
 });
+
+Route::prefix('/user')
+    ->group(function () {
+        Route::post('/register', [AuthController::class, 'register']);
+        Route::post('/login', [AuthController::class, 'login']);
+        Route::middleware(['auth:sanctum'])->group(function () {
+            Route::post('/logout', [AuthController::class, 'logout']);
+            Route::post('/delete', [AuthController::class, 'delete']);
+            Route::prefix('/profile')->group(function () {
+                Route::get('/info', [ProfileController::class, 'profileInfo']);
+                Route::post('/update', [ProfileController::class, 'profileUpdate']);
+                Route::post('/change-password', [ProfileController::class, 'changePassword']);
+            });
+            Route::prefix('/notifications')
+                ->group(function () {
+                    Route::get('/', [NotificationController::class, 'index']);
+                    Route::get('/{id}', [NotificationController::class, 'detail']);
+                });
+        });
+    });
 
 
 //Route::get('consultation', [\App\Http\Controllers\MainController::class, 'consultation']);

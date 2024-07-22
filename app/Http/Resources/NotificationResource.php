@@ -10,8 +10,10 @@ use Illuminate\Http\Resources\Json\JsonResource;
  * @property mixed $id
  * @property mixed $advantages
  * @property mixed $image
+ * @property mixed $is_view
+ * @property mixed $type
  */
-class ServiceResource extends JsonResource
+class NotificationResource extends JsonResource
 {
    use Helpers;
     public function toArray(Request $request): array
@@ -19,7 +21,10 @@ class ServiceResource extends JsonResource
         return [
             'id' => $this->id,
             'title' => $this->getValue($this),
-            'image' => env('IMAGES_BASE_URL') .$this->image,
+            'short_description' => $this->getValue($this, 'short_description'),
+            'image' => env('IMAGES_BASE_URL') . $this->getValue($this, 'image'),
+            'type' => $this->type,
+            'is_view' => $this->type == 'global' || $this->is_view
         ];
     }
 }

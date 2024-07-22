@@ -2,13 +2,18 @@
 
 namespace App\Http\Resources;
 
+use App\Helpers\Helpers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\App;
 
+/**
+ * @property mixed $icon
+ * @property mixed $id
+ */
 class AdvantageResource extends JsonResource
 {
-
+    use Helpers;
     /**
      * Transform the resource into an array.
      *
@@ -16,13 +21,10 @@ class AdvantageResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        $language = App::getLocale();
-        $title = match ($language) {'ru' => $this->title, 'uz' => $this->title_uz ?? $this->title, 'en' => $this->title_en ?? $this->title};
-        $description = match ($language) {'ru' => $this->description, 'uz' => $this->description_uz ?? $this->description, 'en' => $this->description_en ?? $this->description};
         return [
             'id' => $this->id,
-            'title' => $title,
-            'description' => $description,
+            'title' => $this->getValue($this),
+            'description' => $this->getValue($this, 'description'),
             'icon' => env('IMAGES_BASE_URL') . $this->icon
         ];
     }

@@ -7,24 +7,25 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
+ * @property mixed $id
  * @property mixed $advantages
  * @property mixed $image
- * @property mixed $id
- * @property mixed $video_bg
+ * @property mixed $is_view
+ * @property mixed $type
  */
-class ServiceDetailResource extends JsonResource
+class NotificationDetailResource extends JsonResource
 {
-    use Helpers;
+   use Helpers;
     public function toArray(Request $request): array
     {
         return [
             'id' => $this->id,
             'title' => $this->getValue($this),
+            'short_description' => $this->getValue($this, 'short_description'),
             'description' => $this->getValue($this, 'description'),
-            'image' => env('IMAGES_BASE_URL') .$this->image,
-            'video_url' => $this->getValue($this, 'video_url'),
-            'video_bg' => env('IMAGES_BASE_URL') .$this->video_bg,
-            'advantages' => ServiceAdvantageResource::collection($this->advantages)
+            'image' => env('IMAGES_BASE_URL') . $this->getValue($this, 'image'),
+            'type' => $this->type,
+            'is_view' => $this->type == 'global' || $this->is_view
         ];
     }
 }

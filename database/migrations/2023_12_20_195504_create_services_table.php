@@ -14,11 +14,15 @@ return new class extends Migration
         Schema::create('services', function (Blueprint $table) {
             $table->id();
             $table->text('title');
-            $table->text('title_uz')->nullable();
+            $table->text('title_ru')->nullable();
             $table->text('title_en')->nullable();
             $table->text('description')->nullable();
-            $table->text('description_uz')->nullable();
+            $table->text('description_ru')->nullable();
             $table->text('description_en')->nullable();
+            $table->text('video_url');
+            $table->text('video_url_ru')->nullable();
+            $table->text('video_url_en')->nullable();
+            $table->text('video_bg')->nullable();
             $table->text('image')->nullable();
             $table->enum('enable', [1, 0])->default(1);
             $table->timestamps();

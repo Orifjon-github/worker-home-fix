@@ -22,8 +22,8 @@ class SettingResource extends JsonResource
             $is_file = str_starts_with($setting->value, 'uploads/');
 
             $value = match ($language) {
-                'ru' => $setting->value,
-                'uz' => ($setting->value_uz && $setting->value_uz != "") ? $setting->value_uz : $setting->value,
+                'uz' => $setting->value,
+                'ru' => ($setting->value_ru && $setting->value_ru != "") ? $setting->value_ru : $setting->value,
                 'en' => ($setting->value_en && $setting->value_en != "") ? $setting->value_en : $setting->value,
             };
 

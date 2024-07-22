@@ -11,16 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('advantages', function (Blueprint $table) {
+        Schema::create('seos', function (Blueprint $table) {
             $table->id();
-            $table->text('icon')->nullable();
-            $table->string('title');
+            $table->string('type')->nullable();
+            $table->string('parent_id')->nullable();
+            $table->string('title')->nullable();
             $table->string('title_ru')->nullable();
             $table->string('title_en')->nullable();
             $table->text('description')->nullable();
             $table->text('description_ru')->nullable();
             $table->text('description_en')->nullable();
-            $table->enum('enable', [1, 0])->default(1);
+            $table->string('keyword')->nullable();
+            $table->string('keyword_ru')->nullable();
+            $table->string('keyword_en')->nullable();
             $table->timestamps();
         });
     }
@@ -30,6 +33,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('advantages');
+        Schema::dropIfExists('seos');
     }
 };

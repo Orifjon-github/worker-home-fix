@@ -2,16 +2,17 @@
 
 namespace App\Http\Resources;
 
-use App\Helpers\Helpers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
  * @property mixed $id
+ * @property mixed $image
+ * @property mixed $email
+ * @property mixed $phone
  */
-class FaqResource extends JsonResource
+class UserResource extends JsonResource
 {
-    use Helpers;
     /**
      * Transform the resource into an array.
      *
@@ -21,8 +22,9 @@ class FaqResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'question' => $this->getValue($this, 'question'),
-            'answer' => $this->getValue($this, 'answer')
+            'phone' => $this->phone,
+            'email' => $this->email,
+            'image' => $this->image,
         ];
     }
 }

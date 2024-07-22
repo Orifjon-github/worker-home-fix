@@ -13,8 +13,13 @@ return new class extends Migration
     {
         Schema::create('testimonials', function (Blueprint $table) {
             $table->id();
-            $table->text('image');
-            $table->text('image_uz')->nullable();
+            $table->text('name');
+            $table->text('description');
+            $table->text('description_ru')->nullable();
+            $table->text('description_en')->nullable();
+            $table->text('image')->nullable();
+            $table->text('video_url')->nullable();
+            $table->enum('rate', [1, 2, 3, 4, 5])->default(5);
             $table->enum('enable', [1, 0])->default(1);
             $table->timestamps();
         });

@@ -6,9 +6,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * @method static where(string $string, string $string1)
+ * @method static where(string $string, int $int)
+ * @method static find($id)
  */
-class Social extends Model
+class Notification extends Model
 {
     use HasFactory;
 }

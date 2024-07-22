@@ -9,20 +9,14 @@ use Illuminate\Http\Resources\Json\JsonResource;
 /**
  * @property mixed $id
  */
-class FaqResource extends JsonResource
+class ServiceAdvantageResource extends JsonResource
 {
     use Helpers;
-    /**
-     * Transform the resource into an array.
-     *
-     * @return array<string, mixed>
-     */
     public function toArray(Request $request): array
     {
         return [
             'id' => $this->id,
-            'question' => $this->getValue($this, 'question'),
-            'answer' => $this->getValue($this, 'answer')
+            'title' => $this->getValue($this)
         ];
     }
 }
