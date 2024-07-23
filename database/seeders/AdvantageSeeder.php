@@ -14,22 +14,24 @@ class AdvantageSeeder extends Seeder
     public function run(): void
     {
         Advantage::create([
-            'title' => "Многолетний опыт",
-            'title_uz' => "Ko'p yillik tajriba",
-            'description' => 'Lorem ipsum dolor as set',
-            'icon' => '/storage/advantages/experience.png'
+            'title' => "Professional employee",
+            'description' => 'We strictly adhere to international food safety standards, ensuring you have products you can trust.',
+            'icon' => 'uploads/experience.png'
         ]);
         Advantage::create([
-            'title' => "Быстрая доставка",
-            'title_uz' => "Tezkor yetkazib berish",
-            'description' => 'Lorem ipsum dolor as set',
-            'icon' => '/storage/advantages/fast-delivery.png'
+            'title' => "Commitment",
+            'description' => 'We strictly adhere to international food safety standards, ensuring you have products you can trust.',
+            'icon' => 'uploads/fast-delivery.png'
         ]);
         Advantage::create([
-            'title' => "Натуральный продукт",
-            'title_uz' => "Tabiiy mahsulot",
-            'description' => 'Lorem ipsum dolor as set',
-            'icon' => '/storage/advantages/natural.png'
+            'title' => 'Verified',
+            'description' => 'We strictly adhere to international food safety standards, ensuring you have products you can trust.',
+            'icon' => 'uploads/natural.png'
+        ]);
+        Advantage::create([
+            'title' => '24/7 support',
+            'description' => 'We strictly adhere to international food safety standards, ensuring you have products you can trust.',
+            'icon' => 'uploads/natural.png'
         ]);
     }
 }

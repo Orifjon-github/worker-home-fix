@@ -14,20 +14,20 @@ class ResultSeeder extends Seeder
     public function run(): void
     {
         Result::create([
-           'name' => 'Mijozlar',
-           'count' => '1000+'
+           'name' => 'Partners',
+           'count' => '20+'
         ]);
         Result::create([
-            'name' => 'Mijozlar',
-            'count' => '1000+'
+            'name' => 'Happy Clients',
+            'count' => '100'
         ]);
         Result::create([
-            'name' => 'Mijozlar',
-            'count' => '1000+'
+            'name' => 'Professional Employees',
+            'count' => '10+'
         ]);
         Result::create([
-            'name' => 'Mijozlar',
-            'count' => '1000+'
+            'name' => 'Services',
+            'count' => '100+'
         ]);
     }
 }

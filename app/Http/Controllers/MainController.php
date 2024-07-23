@@ -7,6 +7,7 @@ use App\Http\Resources\AdvantageResource;
 use App\Http\Resources\BannerResource;
 use App\Http\Resources\FaqResource;
 use App\Http\Resources\PartnerResource;
+use App\Http\Resources\PlanResource;
 use App\Http\Resources\ResultResource;
 use App\Http\Resources\ServiceDetailResource;
 use App\Http\Resources\ServiceResource;
@@ -18,6 +19,7 @@ use App\Models\Advantage;
 use App\Models\Banner;
 use App\Models\Faq;
 use App\Models\Partner;
+use App\Models\Plan;
 use App\Models\Result;
 use App\Models\Service;
 use App\Models\Setting;
@@ -105,5 +107,13 @@ class MainController extends Controller
     {
         $settings = Setting::where('enable', '1')->where('key', 'like', 'seo_%')->get();
         return $this->success(SettingResource::make($settings));
+    }
+
+    public function plan(): JsonResponse
+    {
+        $individuals = Plan::where('enable', '1')->where('type', 'individual')->get();
+        $corporates = Plan::where('enable', '1')->where('type', 'corporate')->get();
+
+        return $this->success(['individual' => PlanResource::collection($individuals), 'corporate' => PlanResource::collection($corporates)]);
     }
 }

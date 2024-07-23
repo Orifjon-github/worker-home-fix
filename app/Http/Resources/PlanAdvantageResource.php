@@ -8,9 +8,8 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
  * @property mixed $id
- * @property mixed $count
  */
-class ResultResource extends JsonResource
+class PlanAdvantageResource extends JsonResource
 {
     use Helpers;
     /**
@@ -22,8 +21,7 @@ class ResultResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'name' => $this->getValue($this, 'name'),
-            'count' => $this->count
+            'title' => $this->getValue($this)
         ];
     }
 }

@@ -2,17 +2,17 @@
 
 namespace App\Http\Resources;
 
-use App\Helpers\Helpers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
  * @property mixed $id
- * @property mixed $count
+ * @property mixed $duration
+ * @property mixed $amount
+ * @property mixed $advantages
  */
-class ResultResource extends JsonResource
+class PlanResource extends JsonResource
 {
-    use Helpers;
     /**
      * Transform the resource into an array.
      *
@@ -22,8 +22,9 @@ class ResultResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'name' => $this->getValue($this, 'name'),
-            'count' => $this->count
+            'duration' => $this->duration,
+            'amount' => $this->amount,
+            'advantages' => PlanAdvantageResource::collection($this->advantages)
         ];
     }
 }

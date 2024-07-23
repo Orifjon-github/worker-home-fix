@@ -11,13 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('results', function (Blueprint $table) {
+        Schema::create('plans', function (Blueprint $table) {
             $table->id();
-            $table->string('count');
-            $table->string('name');
-            $table->string('name_ru')->nullable();
-            $table->string('name_en')->nullable();
-            $table->enum('enable', [1, 0])->default(1);
+            $table->enum('type', ['individual', 'corporate'])->default('individual');
+            $table->enum('duration', ['one time', '1', '3', '6', '12'])->default('one time');
+            $table->integer('amount');
+            $table->enum('enable', [0, 1])->default(1);
             $table->timestamps();
         });
     }
@@ -27,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('results');
+        Schema::dropIfExists('plans');
     }
 };

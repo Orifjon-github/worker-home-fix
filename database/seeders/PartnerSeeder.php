@@ -13,11 +13,12 @@ class PartnerSeeder extends Seeder
      */
     public function run(): void
     {
-        Partner::create([
-           'name' => 'NBU',
-           'link' => 'https://nbu.uz/ru',
-           'link_uz' => 'https://nbu.uz/uz',
-            'icon' => 'uploads/nbu.png'
-        ]);
+        for ($i=0; $i < 6; $i++) {
+            Partner::create([
+                'name' => 'Newsweek',
+                'link' => 'https://www.newsweek.com/',
+                'icon' => 'uploads/newsweek.png'
+            ]);
+        }
     }
 }

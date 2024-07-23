@@ -10,9 +10,9 @@ class BannerSeeder extends Seeder
     public function run(): void
     {
         Banner::create([
-           'title' => 'Title Uz',
-           'title_ru' => 'Title Ru',
-           'description' => 'Test Description'
+           'title' => 'Finally, one handyman to knock off your to-do list.',
+           'description' => 'Become a member and skip the hassle of home upkeep and maintenance. See what we can do for you with a free, no-obligation home walk-thru.',
+            'image' => 'uploads/banner.png'
         ]);
     }
 }
