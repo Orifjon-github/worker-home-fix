@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use App\Helpers\Helpers;
+use App\Models\Seo;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -17,6 +18,7 @@ class ServiceDetailResource extends JsonResource
     use Helpers;
     public function toArray(Request $request): array
     {
+        $seo = Seo::where('type', 'service')->where('parent_id', $this->id)->get();
         return [
             'id' => $this->id,
             'title' => $this->getValue($this),
@@ -24,7 +26,8 @@ class ServiceDetailResource extends JsonResource
             'image' => env('IMAGES_BASE_URL') .$this->image,
             'video_url' => $this->getValue($this, 'video_url'),
             'video_bg' => env('IMAGES_BASE_URL') .$this->video_bg,
-            'advantages' => ServiceAdvantageResource::collection($this->advantages)
+            'advantages' => ServiceAdvantageResource::collection($this->advantages),
+            'seo' => SeoResource::collection($seo)
         ];
     }
 }

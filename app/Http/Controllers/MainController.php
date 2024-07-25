@@ -21,6 +21,7 @@ use App\Models\Faq;
 use App\Models\Partner;
 use App\Models\Plan;
 use App\Models\Result;
+use App\Models\Seo;
 use App\Models\Service;
 use App\Models\Setting;
 use App\Models\Social;
@@ -97,7 +98,6 @@ class MainController extends Controller
     public function serviceDetail($id): JsonResponse
     {
         $service = Service::find($id) ?? null;
-
         if (!$service) return $this->error('Service not found', 404);
 
         return $this->success(ServiceDetailResource::make($service));

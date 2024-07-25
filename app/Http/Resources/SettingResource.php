@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\App;
 
+/**
+ * @property mixed $type
+ */
 class SettingResource extends JsonResource
 {
     /**
@@ -19,7 +22,7 @@ class SettingResource extends JsonResource
 
         // Assuming $this->resource is a collection of Setting models
         $settings = $this->resource->mapWithKeys(function ($setting) use ($language) {
-            $is_file = str_starts_with($setting->value, 'uploads/');
+            $is_file = $this->type == 'image';
 
             $value = match ($language) {
                 'uz' => $setting->value,
