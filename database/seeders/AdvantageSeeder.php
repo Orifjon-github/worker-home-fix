@@ -16,22 +16,22 @@ class AdvantageSeeder extends Seeder
         Advantage::create([
             'title' => "Professional employee",
             'description' => 'We strictly adhere to international food safety standards, ensuring you have products you can trust.',
-            'icon' => 'uploads/experience.png'
+            'icon' => 'uploads/advantage1.jpg'
         ]);
         Advantage::create([
             'title' => "Commitment",
             'description' => 'We strictly adhere to international food safety standards, ensuring you have products you can trust.',
-            'icon' => 'uploads/fast-delivery.png'
+            'icon' => 'uploads/advantage2.jpg'
         ]);
         Advantage::create([
             'title' => 'Verified',
             'description' => 'We strictly adhere to international food safety standards, ensuring you have products you can trust.',
-            'icon' => 'uploads/natural.png'
+            'icon' => 'uploads/advantage3.jpg'
         ]);
         Advantage::create([
             'title' => '24/7 support',
             'description' => 'We strictly adhere to international food safety standards, ensuring you have products you can trust.',
-            'icon' => 'uploads/natural.png'
+            'icon' => 'uploads/advantage4.jpg'
         ]);
     }
 }
