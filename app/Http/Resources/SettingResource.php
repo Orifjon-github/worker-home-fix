@@ -22,7 +22,7 @@ class SettingResource extends JsonResource
 
         // Assuming $this->resource is a collection of Setting models
         $settings = $this->resource->mapWithKeys(function ($setting) use ($language) {
-            $is_file = $this->type == 'image';
+            $is_file = $setting->type == 'image';
 
             $value = match ($language) {
                 'uz' => $setting->value,
