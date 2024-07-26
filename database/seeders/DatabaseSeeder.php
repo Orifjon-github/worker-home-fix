@@ -18,7 +18,8 @@ class DatabaseSeeder extends Seeder
             ServiceAdvantageSeeder::class,
             TestimonialSeeder::class,
             FaqSeeder::class,
-            PartnerSeeder::class
+            PartnerSeeder::class,
+            SocialSeeder::class
         ]);
     }
 }

@@ -15,13 +15,18 @@ class SocialSeeder extends Seeder
     {
         Social::create([
             'name' => 'Instagram',
-            'link' => 'https://instagram.com',
-            'icon' => 'uploads/instagram.png'
+            'link' => 'https://t.me/orifjon_oripov',
+            'icon' => 'uploads/66a227d2a43d1.png'
         ]);
         Social::create([
-            'name' => 'Telegram',
-            'link' => 'https://t.me',
-            'icon' => 'uploads/telegram.png'
+            'name' => 'Facebook',
+            'link' => 'https://t.me/orifjon_oripov',
+            'icon' => 'uploads/66a227c49abaf.png'
+        ]);
+        Social::create([
+            'name' => 'Youtube',
+            'link' => 'https://t.me/orifjon_oripov',
+            'icon' => 'uploads/66a227d2a43d1.png'
         ]);
     }
 }
