@@ -28,6 +28,7 @@ Route::controller(MainController::class)->group(function () {
     Route::get('testimonials','testimonial');
     Route::get('plans','plan');
     Route::get('seo','seo');
+    Route::post('application','application');
 });
 
 Route::prefix('/user')

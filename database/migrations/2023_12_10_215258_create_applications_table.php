@@ -15,10 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('phone');
-            $table->string('email')->nullable();
-            $table->text('description')->nullable();
-//            $table->text('address')->nullable();
-            $table->enum('type', ['consultation', 'partner', 'contact', 'fast-contact'])->default('consultation');
+            $table->text('message')->nullable();
+            $table->enum('type', ['career', 'contact'])->default('contact');
+            $table->string('resume')->nullable();
             $table->timestamps();
         });
     }

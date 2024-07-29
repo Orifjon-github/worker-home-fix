@@ -16,6 +16,7 @@ use App\Http\Resources\SocialResource;
 use App\Http\Resources\TestimonialResource;
 use App\Http\Resources\WorkResource;
 use App\Models\Advantage;
+use App\Models\Application;
 use App\Models\Banner;
 use App\Models\Faq;
 use App\Models\Partner;
@@ -28,6 +29,8 @@ use App\Models\Social;
 use App\Models\Testimonial;
 use App\Models\Work;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class MainController extends Controller
 {
@@ -115,5 +118,19 @@ class MainController extends Controller
         $corporates = Plan::where('enable', '1')->where('type', 'corporate')->get();
 
         return $this->success(['individual' => PlanResource::collection($individuals), 'corporate' => PlanResource::collection($corporates)]);
+    }
+
+    public function application(Request $request): JsonResponse
+    {
+        $create = $request->all();
+        if ($request->hasFile('resume')) {
+            $path = Storage::putFile('public/resumes', $request->file('resume'));
+            $path = str_replace('public/', '/storage/', $path);
+            $create['resume'] = $path;
+        }
+
+        Application::create($create);
+
+        return $this->success(['message' => 'Application created successfully']);
     }
 }
