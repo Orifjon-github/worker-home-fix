@@ -24,7 +24,7 @@ class PlanResource extends JsonResource
             'id' => $this->id,
             'duration' => $this->duration,
             'amount' => $this->amount,
-            'advantages' => PlanAdvantageResource::collection($this->advantages)
+            'services' => PlanAdvantageResource::collection($this->advantages)
         ];
     }
 }

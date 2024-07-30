@@ -17,6 +17,7 @@ return new class extends Migration
             $table->text('title');
             $table->text('title_ru')->nullable();
             $table->text('title_en')->nullable();
+            $table->integer('price')->default(0);
             $table->timestamps();
         });
     }
