@@ -8,6 +8,7 @@ use App\Http\Resources\BannerResource;
 use App\Http\Resources\FaqResource;
 use App\Http\Resources\PartnerResource;
 use App\Http\Resources\PlanResource;
+use App\Http\Resources\QuestionAnswerResource;
 use App\Http\Resources\ResultResource;
 use App\Http\Resources\ServiceDetailResource;
 use App\Http\Resources\ServiceResource;
@@ -21,8 +22,8 @@ use App\Models\Banner;
 use App\Models\Faq;
 use App\Models\Partner;
 use App\Models\Plan;
+use App\Models\QuestionAnswer;
 use App\Models\Result;
-use App\Models\Seo;
 use App\Models\Service;
 use App\Models\Setting;
 use App\Models\Social;
@@ -75,6 +76,13 @@ class MainController extends Controller
         $faqs = Faq::where('enable', '1')->get();
 
         return $this->success(FaqResource::collection($faqs));
+    }
+
+    public function questionAnswer(): JsonResponse
+    {
+        $faqs = QuestionAnswer::where('enable', '1')->get();
+
+        return $this->success(QuestionAnswerResource::collection($faqs));
     }
 
     public function service(): JsonResponse

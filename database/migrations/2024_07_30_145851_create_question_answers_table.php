@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('faqs', function (Blueprint $table) {
+        Schema::create('question_answers', function (Blueprint $table) {
             $table->id();
             $table->text('question');
             $table->text('question_ru')->nullable();
@@ -19,6 +19,10 @@ return new class extends Migration
             $table->text('answer');
             $table->text('answer_ru')->nullable();
             $table->text('answer_en')->nullable();
+            $table->text('button_text');
+            $table->text('button_text_ru')->nullable();
+            $table->text('button_text_en')->nullable();
+            $table->text('button_url');
             $table->enum('enable', [1, 0])->default(1);
             $table->timestamps();
         });
@@ -29,6 +33,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('faqs');
+        Schema::dropIfExists('question_answers');
     }
 };

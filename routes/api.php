@@ -22,6 +22,7 @@ Route::controller(MainController::class)->group(function () {
     Route::get('works', 'work');
     Route::get('advantages', 'advantage');
     Route::get('faqs', 'faq');
+    Route::get('question-answer', 'questionAnswer');
     Route::get('partners', 'partner');
     Route::get('services', 'service');
     Route::get('services/{id}', 'serviceDetail');
