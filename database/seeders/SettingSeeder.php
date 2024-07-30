@@ -20,12 +20,12 @@ class SettingSeeder extends Seeder
         Setting::create([
             'type' => 'image',
             'key' => 'logo',
-            'value' => 'uploads/logo.png'
+            'value' => 'uploads/66a38cdbb5ac3.svg'
         ]);
         Setting::create([
             'type' => 'image',
             'key' => 'favicon',
-            'value' => 'uploads/logo.png'
+            'value' => 'uploads/66a38cdbb5ac3.svg'
         ]);
         Setting::create([
             'key' => 'main_phone',
