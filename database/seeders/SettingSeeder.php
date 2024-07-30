@@ -87,6 +87,10 @@ class SettingSeeder extends Seeder
             'key' => 'about_video_url',
             'value' => 'about_video_url'
         ]);
+        Setting::create([
+            'key' => 'location',
+            'value' => 'https://yandex.com/map-widget/v1/?um=constructor%3Ab2ac1ad9d8883a4b904248b72cd0e4bc088f6b9d78c1c9e455df3904a8b40be1&amp;source=constructor'
+        ]);
         $pages = ['home', 'membership', 'reviews', 'faqs', 'career', 'contact', 'services', 'about'];
         foreach ($pages as $page) {
             foreach (['title', 'description', 'keyword'] as $attribute) {
