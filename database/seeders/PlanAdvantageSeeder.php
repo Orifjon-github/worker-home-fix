@@ -18,6 +18,7 @@ class PlanAdvantageSeeder extends Seeder
         foreach ($plans as $plan) {
             for ($i = 0; $i < 10; $i++)
             PlanAdvantage::create([
+                'plan_id' => $plan->id,
                 'title' => $plan->type . ' Plan Service' . $i,
                 'price' => $plan->amount / 10
             ]);
