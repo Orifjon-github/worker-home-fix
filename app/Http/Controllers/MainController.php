@@ -20,6 +20,7 @@ use App\Models\Advantage;
 use App\Models\Application;
 use App\Models\Banner;
 use App\Models\Faq;
+use App\Models\Order;
 use App\Models\Partner;
 use App\Models\Plan;
 use App\Models\QuestionAnswer;
@@ -140,5 +141,14 @@ class MainController extends Controller
         Application::create($create);
 
         return $this->success(['message' => 'Application created successfully']);
+    }
+
+    public function order(Request $request): JsonResponse
+    {
+        $create = $request->all();
+
+        Order::create($create);
+
+        return $this->success(['message' => 'Order created successfully']);
     }
 }
