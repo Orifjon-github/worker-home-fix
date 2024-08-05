@@ -126,7 +126,7 @@ class MainController extends Controller
         $corporates = Plan::where('enable', '1')->where('type', 'corporate')->get();
         $services = Service::where('enable', '1')->get();
 
-        return $this->success(['individual' => PlanResource::collection($individuals)->additional(['services' => $services]), 'corporate' => PlanResource::collection($corporates)]);
+        return $this->success(['individual' => PlanResource::collection($individuals)->additional(['services' => $services]), 'corporate' => PlanResource::collection($corporates)->additional(['services' => $services])]);
     }
 
     public function application(Request $request): JsonResponse
