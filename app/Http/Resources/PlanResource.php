@@ -22,11 +22,12 @@ class PlanResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        $services = $this->additional['services'];
         return [
             'id' => $this->id,
             'duration' => $this->duration,
             'amount' => $this->amount,
-            'services' => ServiceDetailResource::collection($this->services)
+            'services' => ServiceDetailResource::collection($services)
         ];
     }
 }
