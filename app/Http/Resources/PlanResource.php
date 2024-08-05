@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Service;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -10,6 +11,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
  * @property mixed $duration
  * @property mixed $amount
  * @property mixed $advantages
+ * @property mixed $services
  */
 class PlanResource extends JsonResource
 {
@@ -24,7 +26,7 @@ class PlanResource extends JsonResource
             'id' => $this->id,
             'duration' => $this->duration,
             'amount' => $this->amount,
-            'services' => PlanAdvantageResource::collection($this->advantages)
+            'services' => ServiceDetailResource::collection($this->services)
         ];
     }
 }

@@ -8,6 +8,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
  * @property mixed $id
+ * @property mixed $price
  */
 class ServiceAdvantageResource extends JsonResource
 {
@@ -16,7 +17,8 @@ class ServiceAdvantageResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'title' => $this->getValue($this)
+            'title' => $this->getValue($this),
+            'price' => $this->price
         ];
     }
 }
