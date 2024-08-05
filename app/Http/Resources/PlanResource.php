@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Helpers\Helpers;
 use App\Models\Service;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -12,6 +13,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
  * @property mixed $amount
  * @property mixed $advantages
  * @property mixed $services
+ * @property mixed $type
  */
 class PlanResource extends JsonResource
 {
@@ -22,12 +24,16 @@ class PlanResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        $services = $this->additional['services'];
-        return [
+        $arr = [
             'id' => $this->id,
             'duration' => $this->duration,
             'amount' => $this->amount,
-            'services' => ServiceDetailResource::collection($services)
         ];
+
+        if ($this->type == 'corporate') {
+            $arr = array_merge($arr, ['services' => PlanAdvantageResource::collection($this->advantages)]);
+        }
+
+        return $arr;
     }
 }

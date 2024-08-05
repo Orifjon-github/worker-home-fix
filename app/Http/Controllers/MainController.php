@@ -89,7 +89,7 @@ class MainController extends Controller
     {
         $services = Service::where('enable', '1')->get();
 
-        return $this->success(ServiceResource::collection($services));
+        return $this->success(ServiceDetailResource::collection($services));
     }
 
     public function work(): JsonResponse
@@ -124,9 +124,8 @@ class MainController extends Controller
     {
         $individuals = Plan::where('enable', '1')->where('type', 'individual')->get();
         $corporates = Plan::where('enable', '1')->where('type', 'corporate')->get();
-        $services = Service::where('enable', '1')->get();
 
-        return $this->success(['individual' => PlanResource::collection($individuals)->additional(['services' => $services]), 'corporate' => PlanResource::collection($corporates)->additional(['services' => $services])]);
+        return $this->success(['individual' => PlanResource::collection($individuals), 'corporate' => PlanResource::collection($corporates)]);
     }
 
     public function application(Request $request): JsonResponse
