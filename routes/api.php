@@ -38,9 +38,12 @@ Route::prefix('/user')
         Route::post('/register', [AuthController::class, 'register']);
         Route::post('/login', [AuthController::class, 'login']);
         Route::middleware(['auth:sanctum'])->group(function () {
+
             Route::post('/logout', [AuthController::class, 'logout']);
             Route::post('/delete', [AuthController::class, 'delete']);
             Route::prefix('/profile')->group(function () {
+                Route::post('add/equipment',[ProfileController::class, 'addEquipment']);
+                Route::get('equipments',[ProfileController::class, 'equipment']);
                 Route::get('/info', [ProfileController::class, 'profileInfo']);
                 Route::post('/update', [ProfileController::class, 'profileUpdate']);
                 Route::post('/change-password', [ProfileController::class, 'changePassword']);

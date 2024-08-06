@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Helpers\Response;
 use App\Http\Requests\ChangePasswordRequest;
+use App\Http\Resources\EquipmentResource;
 use App\Http\Resources\UserResource;
+use App\Models\UserEquipment;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -47,5 +49,25 @@ class ProfileController extends Controller
         } else {
             return $this->error('Old password is incorrect');
         }
+    }
+
+    public function addEquipment(Request $request): JsonResponse
+    {
+        $user = $request->user();
+        $create = $request->all();
+
+        $equipment = $user->equipments()->create($create);
+        if (!$equipment) return $this->error('Equipment create error');
+
+        $equipments = UserEquipment::where('enable', '1')->where('place', $create['place'])->get();
+        return $this->success(EquipmentResource::make($equipments));
+    }
+
+    public function equipment(Request $request): JsonResponse
+    {
+        $user = $request->user();
+        $place = $request->input('place');
+        $equipments = $user->equipments()->where('enable', '1')->where('place', $place)->get();
+        return $this->success(EquipmentResource::make($equipments));
     }
 }
