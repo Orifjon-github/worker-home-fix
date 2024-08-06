@@ -42,7 +42,8 @@ Route::prefix('/user')
             Route::post('/logout', [AuthController::class, 'logout']);
             Route::post('/delete', [AuthController::class, 'delete']);
             Route::prefix('/profile')->group(function () {
-                Route::post('add/equipment',[ProfileController::class, 'addEquipment']);
+                Route::post('equipment/add',[ProfileController::class, 'addEquipment']);
+                Route::post('equipment/delete/{id}',[ProfileController::class, 'deleteEquipment']);
                 Route::get('equipments',[ProfileController::class, 'equipment']);
                 Route::get('/info', [ProfileController::class, 'profileInfo']);
                 Route::post('/update', [ProfileController::class, 'profileUpdate']);

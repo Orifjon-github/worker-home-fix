@@ -59,8 +59,22 @@ class ProfileController extends Controller
         $equipment = $user->equipments()->create($create);
         if (!$equipment) return $this->error('Equipment create error');
 
-        $equipments = UserEquipment::where('enable', '1')->where('place', $create['place'])->get();
-        return $this->success(EquipmentResource::make($equipments));
+        $equipments = $user->equipments()->where('enable', '1')->where('place', $create['place'])->get();
+        return $this->success(EquipmentResource::collection($equipments));
+    }
+
+    public function deleteEquipment(Request $request, $id): JsonResponse
+    {
+        $user = $request->user();
+
+        $equipment = UserEquipment::find($id);
+        if (!$equipment) return $this->error('Equipment not found', 404);
+
+        $place = $equipment->place;
+        $equipment->delete();
+
+        $equipments = $user->equipments()->where('enable', '1')->where('place', $place)->get();
+        return $this->success(EquipmentResource::collection($equipments));
     }
 
     public function equipment(Request $request): JsonResponse
@@ -68,6 +82,6 @@ class ProfileController extends Controller
         $user = $request->user();
         $place = $request->input('place');
         $equipments = $user->equipments()->where('enable', '1')->where('place', $place)->get();
-        return $this->success(EquipmentResource::make($equipments));
+        return $this->success(EquipmentResource::collection($equipments));
     }
 }
