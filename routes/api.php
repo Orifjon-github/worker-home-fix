@@ -3,7 +3,9 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -38,9 +40,9 @@ Route::prefix('/user')
         Route::post('/register', [AuthController::class, 'register']);
         Route::post('/login', [AuthController::class, 'login']);
         Route::middleware(['auth:sanctum'])->group(function () {
-
             Route::post('/logout', [AuthController::class, 'logout']);
             Route::post('/delete', [AuthController::class, 'delete']);
+            Route::post('/send/question', [UserController::class, 'sendQuestion']);
             Route::prefix('/profile')->group(function () {
                 Route::post('equipment/add',[ProfileController::class, 'addEquipment']);
                 Route::post('equipment/delete/{id}',[ProfileController::class, 'deleteEquipment']);
@@ -54,6 +56,12 @@ Route::prefix('/user')
                     Route::get('/', [NotificationController::class, 'index']);
                     Route::get('/{id}', [NotificationController::class, 'detail']);
                 });
+            Route::prefix('/orders')
+                ->group(function () {
+                    Route::get('/get', [OrderController::class, 'index']);
+                    Route::get('/get/{id}', [OrderController::class, 'detail']);
+                    Route::post('/create', [OrderController::class, 'detail']);
+                });
         });
     });
 
@@ -65,3 +73,6 @@ Route::prefix('/user')
 //Route::get('faqs', [\App\Http\Controllers\FaqController::class, 'index']);
 //Route::get('testimonials', [\App\Http\Controllers\TestimonialController::class, 'index']);
 //Route::get('advertising', [\App\Http\Controllers\AdvertisingController::class, 'index']);
+
+
+
