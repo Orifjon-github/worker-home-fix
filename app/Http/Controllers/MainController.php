@@ -8,6 +8,8 @@ use App\Http\Resources\BannerResource;
 use App\Http\Resources\FaqResource;
 use App\Http\Resources\PartnerResource;
 use App\Http\Resources\PlanResource;
+use App\Http\Resources\ProcessResource;
+use App\Http\Resources\ProductResource;
 use App\Http\Resources\QuestionAnswerResource;
 use App\Http\Resources\ResultResource;
 use App\Http\Resources\ServiceDetailResource;
@@ -23,6 +25,7 @@ use App\Models\Faq;
 use App\Models\Order;
 use App\Models\Partner;
 use App\Models\Plan;
+use App\Models\Process;
 use App\Models\QuestionAnswer;
 use App\Models\Result;
 use App\Models\Service;
@@ -113,6 +116,12 @@ class MainController extends Controller
         if (!$service) return $this->error('Service not found', 404);
 
         return $this->success(ServiceDetailResource::make($service));
+    }
+
+    public function process(): JsonResponse
+    {
+        $processes = Process::where('enable', '1')->get();
+        return $this->success(ProcessResource::collection($processes));
     }
 
     public function seo(): JsonResponse

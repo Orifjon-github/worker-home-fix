@@ -28,6 +28,7 @@ Route::controller(MainController::class)->group(function () {
     Route::get('partners', 'partner');
     Route::get('services', 'service');
     Route::get('services/{id}', 'serviceDetail');
+    Route::get('process', 'process');
     Route::get('testimonials','testimonial');
     Route::get('plans','plan');
     Route::get('seo','seo');
