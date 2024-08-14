@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('user_plans', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->string('name');
             $table->date('date');
             $table->enum('is_complete', [1, 0])->default(0);
