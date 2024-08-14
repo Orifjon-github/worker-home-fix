@@ -14,26 +14,19 @@ use Illuminate\Http\Resources\Json\JsonResource;
  * @property mixed $advantages
  * @property mixed $services
  * @property mixed $type
+ * @property mixed $name
+ * @property mixed $date
+ * @property mixed $is_complete
  */
 class PlanResource extends JsonResource
 {
-    /**
-     * Transform the resource into an array.
-     *
-     * @return array<string, mixed>
-     */
     public function toArray(Request $request): array
     {
-        $arr = [
+        return [
             'id' => $this->id,
-            'duration' => $this->duration,
-            'amount' => $this->amount,
+            'name' => $this->name,
+            'date' => date('d-m-Y', strtotime($this->date)),
+            'is_complete' => $this->is_complete
         ];
-
-        if ($this->type == 'corporate') {
-            $arr = array_merge($arr, ['services' => PlanAdvantageResource::collection($this->advantages)]);
-        }
-
-        return $arr;
     }
 }

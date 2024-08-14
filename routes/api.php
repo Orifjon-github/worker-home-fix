@@ -63,6 +63,12 @@ Route::prefix('/user')
                     Route::get('/get/{id}', [OrderController::class, 'detail']);
                     Route::post('/create', [OrderController::class, 'detail']);
                 });
+            Route::prefix('/plans')
+                ->group(function () {
+                    Route::get('/get', [UserController::class, 'plan']);
+                    Route::get('/complete/{id}', [UserController::class, 'planComplete']);
+                    Route::post('/create', [UserController::class, 'planCreate']);
+                });
         });
     });
 
