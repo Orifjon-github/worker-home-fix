@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('user_plans', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->date('date')->default(date('d-m-Y'));
+            $table->date('date');
             $table->enum('is_complete', [1, 0])->default(0);
             $table->timestamps();
         });
