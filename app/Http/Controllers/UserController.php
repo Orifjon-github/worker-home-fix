@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Helpers\Response;
 use App\Http\Resources\PlanResource;
+use App\Http\Resources\UserPlanResource;
 use App\Models\UserPlan;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -24,7 +25,7 @@ class UserController extends Controller
     {
         $user = $request->user();
 
-        return $this->success(PlanResource::collection($user->plans));
+        return $this->success(UserPlanResource::collection($user->plans));
     }
 
     public function planComplete($id, Request $request): JsonResponse
@@ -36,7 +37,7 @@ class UserController extends Controller
         $plan->save();
 
         $user = $request->user();
-        return $this->success(PlanResource::collection($user->plans));
+        return $this->success(UserPlanResource::collection($user->plans));
     }
 
     public function planCreate(Request $request): JsonResponse
@@ -45,6 +46,6 @@ class UserController extends Controller
 
         $user->plans()->create($request->all());
 
-        return $this->success(PlanResource::collection($user->plans));
+        return $this->success(UserPlanResource::collection($user->plans));
     }
 }
