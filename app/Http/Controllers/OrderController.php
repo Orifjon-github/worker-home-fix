@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 class OrderController extends Controller
 {
     use Response;
-    public function order(Request $request): JsonResponse
+    public function create(Request $request): JsonResponse
     {
         $user = $request->user();
 
