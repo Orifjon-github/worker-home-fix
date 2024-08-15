@@ -68,6 +68,7 @@ Route::prefix('/user')
                     Route::get('/get', [UserController::class, 'plan']);
                     Route::get('/complete/{id}', [UserController::class, 'planComplete']);
                     Route::post('/create', [UserController::class, 'planCreate']);
+                    Route::post('/today', [UserController::class, 'planToday']);
                 });
         });
     });

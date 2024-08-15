@@ -6,6 +6,7 @@ use App\Helpers\Response;
 use App\Http\Resources\PlanResource;
 use App\Http\Resources\UserPlanResource;
 use App\Models\UserPlan;
+use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -47,5 +48,14 @@ class UserController extends Controller
         $user->plans()->create($request->all());
 
         return $this->success(UserPlanResource::collection($user->plans));
+    }
+
+    public function planToday(Request $request): JsonResponse
+    {
+        $user = $request->user();
+
+        $plans = $user->plans()->whereDate('date', Carbon::today())->get();
+
+        return $this->success(UserPlanResource::collection($plans));
     }
 }
