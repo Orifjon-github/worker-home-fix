@@ -37,7 +37,7 @@ class UserController extends Controller
         $plan = UserPlan::find($plan_id);
         if (!$plan) return $this->error('Plan not found', 404);
 
-        $plan->is_complete = (bool)$is_complete;
+        $plan->is_complete = $is_complete;
         $plan->save();
 
         $user = $request->user();
