@@ -61,7 +61,7 @@ Route::prefix('/user')
                 ->group(function () {
                     Route::get('/get', [OrderController::class, 'index']);
                     Route::get('/get/{id}', [OrderController::class, 'detail']);
-                    Route::post('/create', [OrderController::class, 'detail']);
+                    Route::post('/create', [OrderController::class, 'create']);
                 });
             Route::prefix('/plans')
                 ->group(function () {
