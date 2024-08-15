@@ -22,7 +22,7 @@ class ProcessResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'image' => $this->getValue($this, 'image'),
+            'image' => env('IMAGES_BASE_URL') . $this->getValue($this, 'image'),
             'link' => $this->link
         ];
     }
