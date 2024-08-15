@@ -66,7 +66,7 @@ Route::prefix('/user')
             Route::prefix('/plans')
                 ->group(function () {
                     Route::get('/get', [UserController::class, 'plan']);
-                    Route::get('/complete/{id}', [UserController::class, 'planComplete']);
+                    Route::post('/complete', [UserController::class, 'planComplete']);
                     Route::post('/create', [UserController::class, 'planCreate']);
                     Route::get('/today', [UserController::class, 'planToday']);
                 });

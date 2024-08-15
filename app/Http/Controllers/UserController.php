@@ -29,12 +29,15 @@ class UserController extends Controller
         return $this->success(UserPlanResource::collection($user->plans));
     }
 
-    public function planComplete($id, Request $request): JsonResponse
+    public function planComplete(Request $request): JsonResponse
     {
-        $plan = UserPlan::find($id);
+        $plan_id = $request->input('plan_id');
+        $is_complete = $request->input('is_complete');
+
+        $plan = UserPlan::find($plan_id);
         if (!$plan) return $this->error('Plan not found', 404);
 
-        $plan->is_complete = 1;
+        $plan->is_complete = (bool)$is_complete;
         $plan->save();
 
         $user = $request->user();
