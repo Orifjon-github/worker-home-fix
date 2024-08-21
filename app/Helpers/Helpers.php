@@ -22,7 +22,7 @@ trait Helpers
         }
     }
 
-    public static function generateWalletId()
+    public function generateWalletId()
     {
         do {
             $datePrefix = date('ymd');
@@ -36,5 +36,14 @@ trait Helpers
         } while ($exists); // ID mavjud bo'lsa, qayta yaratiladi
 
         return $uniqueId;
+    }
+
+    public function checkPhone($phone): bool|string
+    {
+        $phone = str_replace([' ', '-', '+', '(', ')'], '', $phone);
+        if (strlen($phone) == 9 || strlen($phone) == 12) {
+            return strlen($phone) == 9 ? '998' . $phone : $phone;
+        }
+        return false;
     }
 }

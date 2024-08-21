@@ -2,14 +2,14 @@
 
 namespace App\Http\Requests;
 
+use App\Helpers\Helpers;
 use App\Helpers\Response;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\ValidationException;
 
 class RegisterRequest extends FormRequest
 {
-    use Response;
+    use Response, Helpers;
     protected $stopOnFirstFailure = true;
     public function authorize(): bool
     {
@@ -17,20 +17,26 @@ class RegisterRequest extends FormRequest
     }
     public function rules(): array
     {
-        return [
-            'phone' => 'required|numeric|unique:users,phone',
-            'email' => 'required|email|unique:users,email',
+        $username = $this->input('username');
+
+        if (filter_var($username, FILTER_VALIDATE_EMAIL)) {
+            $rules = ['username' => 'required|email|unique:users,username'];
+        } elseif ($this->checkPhone($username)) {
+            $rules = ['username' => 'required'];
+        } else {
+            return ['username' => 'required|invalid_format'];
+        }
+        return array_merge($rules, [
             'name' => 'required|max:255',
             'password' => 'required'
-        ];
+        ]);
     }
 
     protected function failedValidation(Validator $validator)
     {
         foreach ($validator->errors()->messages() as $message){
-            $response = $this->error($message[0], 422);
-            throw new ValidationException($validator, $response);
+            return $this->error($message[0], 422);
         }
-
+        return $this->error(':)');
     }
 }
