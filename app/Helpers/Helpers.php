@@ -2,6 +2,7 @@
 
 namespace App\Helpers;
 
+use App\Models\UserWallet;
 use Illuminate\Support\Facades\App;
 
 trait Helpers
@@ -19,5 +20,21 @@ trait Helpers
             default:
                 return $model->$attribute;
         }
+    }
+
+    public static function generateWalletId()
+    {
+        do {
+            $datePrefix = date('ymd');
+
+            $randomNumber = mt_rand(1000, 9999);
+
+            $uniqueId = '1' . $datePrefix . $randomNumber;
+
+            $exists = UserWallet::where('wallet_id', $uniqueId)->exists();
+
+        } while ($exists); // ID mavjud bo'lsa, qayta yaratiladi
+
+        return $uniqueId;
     }
 }

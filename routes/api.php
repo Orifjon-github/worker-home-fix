@@ -40,6 +40,10 @@ Route::prefix('/user')
     ->group(function () {
         Route::post('/register', [AuthController::class, 'register']);
         Route::post('/login', [AuthController::class, 'login']);
+        Route::prefix('auth')->group(function () {
+            Route::get('/{provider}/redirect', [AuthController::class, 'redirectToProvider']);
+            Route::get('/{provider}/callback', [AuthController::class, 'handleProviderCallback']);
+        });
         Route::middleware(['auth:sanctum'])->group(function () {
             Route::post('/logout', [AuthController::class, 'logout']);
             Route::post('/delete', [AuthController::class, 'delete']);

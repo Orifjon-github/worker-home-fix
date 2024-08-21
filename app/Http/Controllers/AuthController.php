@@ -10,6 +10,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Hash;
+use Laravel\Socialite\Facades\Socialite;
 
 class AuthController extends Controller
 {
@@ -18,6 +19,8 @@ class AuthController extends Controller
     {
         $user = User::create($request->all());
         if (!$user) return $this->error('Create User Error. Try Again');
+
+
 
         $user->token = $user->createToken('auth_token')->plainTextToken;
 
@@ -55,6 +58,32 @@ class AuthController extends Controller
         $request->user()->delete();
 
         return $this->success(['message' => 'Account deleted successfully']);
+    }
+
+    public function redirectToProvider($provider)
+    {
+        return Socialite::driver($provider)->stateless()->redirect();
+    }
+
+    public function handleProviderCallback($provider): JsonResponse
+    {
+        $socialUser = Socialite::driver($provider)->stateless()->user();
+
+        // You can create or update the user here
+        $user = User::updateOrCreate([
+            'provider_id' => $socialUser->getId(),
+            'provider' => $provider,
+        ], [
+            'username' => $socialUser->getEmail(),
+            'name' => $socialUser->getName(),
+            'avatar' => $socialUser->getAvatar(),
+        ]);
+
+        // Generate token
+        $token = $user->createToken('authToken')->accessToken;
+
+        // Return the token and user data to the frontend
+        return response()->json(['token' => $token, 'user' => $user], 200);
     }
 }
 
