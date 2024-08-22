@@ -32,6 +32,7 @@ use App\Models\Service;
 use App\Models\Setting;
 use App\Models\Social;
 use App\Models\Testimonial;
+use App\Models\UserQuestion;
 use App\Models\Work;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -159,5 +160,12 @@ class MainController extends Controller
         Order::create($create);
 
         return $this->success(['message' => 'Order created successfully']);
+    }
+
+    public function sendQuestion(Request $request): JsonResponse
+    {
+        UserQuestion::create(['question' => $request->input('question'), 'user_id' => $request->input('phone')]);
+
+        return $this->success(['message' => 'Savolingiz qabul qilindi! Tez orada mutaxasislarimiz siz bilan bog\'lanishadi']);
     }
 }

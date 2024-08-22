@@ -34,6 +34,7 @@ Route::controller(MainController::class)->group(function () {
     Route::get('seo','seo');
     Route::post('application','application');
     Route::post('order','order');
+    Route::post('send/question', 'sendQuestion');
 });
 
 Route::prefix('/user')
