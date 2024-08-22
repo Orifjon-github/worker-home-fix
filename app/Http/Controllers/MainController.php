@@ -164,7 +164,7 @@ class MainController extends Controller
 
     public function sendQuestion(Request $request): JsonResponse
     {
-        UserQuestion::create(['question' => $request->input('question'), 'user_id' => $request->input('phone')]);
+        UserQuestion::create(['question' => $request->input('question'), 'phone' => $request->input('phone')]);
 
         return $this->success(['message' => 'Savolingiz qabul qilindi! Tez orada mutaxasislarimiz siz bilan bog\'lanishadi']);
     }
