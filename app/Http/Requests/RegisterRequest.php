@@ -24,7 +24,7 @@ class RegisterRequest extends FormRequest
         } elseif ($this->checkPhone($username)) {
             $rules = ['username' => 'required'];
         } else {
-            return ['username' => 'required|invalid_format'];
+            $rules = ['username' => 'invalid_format'];
         }
         return array_merge($rules, [
             'name' => 'required|max:255',
