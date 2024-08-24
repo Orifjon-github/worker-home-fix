@@ -6,6 +6,7 @@ use App\Helpers\Helpers;
 use App\Helpers\Response;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
+use App\Rules\InvalidUsernameFormat
 
 class RegisterRequest extends FormRequest
 {
@@ -24,7 +25,7 @@ class RegisterRequest extends FormRequest
         } elseif ($this->checkPhone($username)) {
             $rules = ['username' => 'required'];
         } else {
-            return $this->error('Username Invalid Format');
+            $rules['username'] = ['required', new InvalidUsernameFormat];
         }
         return array_merge($rules, [
             'name' => 'required|max:255',
