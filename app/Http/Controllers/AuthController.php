@@ -23,6 +23,8 @@ class AuthController extends Controller
         if (filter_var($username, FILTER_VALIDATE_EMAIL)) {
             return $this->error('Technical process');
         } elseif ($phone = $this->checkPhone($username)) {
+            $user = User::where('username', $phone)->get();
+            if ($user) return $this->error('This Phone Number Already registered');
             $create['username'] = $phone;
         }else{
             return $this->error('Invalid Username Format');
