@@ -6,7 +6,7 @@ use App\Helpers\Helpers;
 use App\Helpers\Response;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
-use App\Rules\InvalidUsernameFormat
+use App\Rules\InvalidUsernameFormat;
 
 class RegisterRequest extends FormRequest
 {
