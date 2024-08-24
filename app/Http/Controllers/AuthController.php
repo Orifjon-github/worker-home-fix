@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\Response;
+use App\Helpers\Helpers;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
 use App\Models\User;
@@ -14,13 +15,21 @@ use Laravel\Socialite\Facades\Socialite;
 
 class AuthController extends Controller
 {
-    use Response;
+    use Response, Helpers;
     public function register(RegisterRequest $request): JsonResponse
     {
-        $user = User::create($request->all());
+        $create = $request->all();
+        $username = $request->input('username');
+        if (filter_var($username, FILTER_VALIDATE_EMAIL)) {
+            return $this->error('Technical process');
+        } elseif ($phone = $this->checkPhone($username)) {
+            $create['username'] = $phone;
+        }else{
+            return $this->error('Invalid Username Format');
+        }
+        
+        $user = User::create($create);
         if (!$user) return $this->error('Create User Error. Try Again');
-
-
 
         $user->token = $user->createToken('auth_token')->plainTextToken;
 
