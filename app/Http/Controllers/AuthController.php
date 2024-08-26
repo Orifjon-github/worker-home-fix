@@ -25,13 +25,13 @@ class AuthController extends Controller
             $user = User::updateOrCreate(['username' => $username], $create);
             if (!$user) return $this->error('Create User Error. Try Again');
             $code = '111111';
-            $user->sms_code()->create(['code' => $code]);
+            $user->sms_code()->updateOrCreate(['user_id' => $user->id], ['code' => $code]);
         } elseif ($phone = $this->checkPhone($username)) {
             $create['username'] = $phone;
             $user = User::updateOrCreate(['username' => $phone], $create);
             if (!$user) return $this->error('Create User Error. Try Again');
             $code = '777777';
-            $user->sms_code()->create(['code' => $code]);
+            $user->sms_code()->updateOrCreate(['user_id' => $user->id], ['code' => $code]);
         } else {
             return $this->error('Invalid Username Format');
         }
