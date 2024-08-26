@@ -66,8 +66,7 @@ class AuthController extends Controller
         $username = $request->username;
         $password = $request->password;
 
-        $type = is_numeric($username) ? 'phone' : 'email';
-        $user = User::where($type, $username)->first();
+        $user = User::where('username', $username)->first();
 
         if (!$user) return $this->error('You have not account, Please register', 404);
 
