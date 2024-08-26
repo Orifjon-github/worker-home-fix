@@ -69,14 +69,16 @@ class AuthController extends Controller
         $type = is_numeric($username) ? 'phone' : 'email';
         $user = User::where($type, $username)->first();
 
-        if (!$user) return $this->error('User Not Found', 404);
+        if (!$user) return $this->error('You have not account, Please register', 404);
 
         if (!Hash::check($password, $user->password)) {
             return $this->error('Invalid Password', 403);
         }
 
         if ($user->status == 'pending') {
-            return $this->error('Sizning so’rovingiz yuborildi, tasdiqlanishini kutyapmiz...');
+            return $this->success(['message' => 'Sizning so’rovingiz yuborildi, tasdiqlanishini kutyapmiz...']);
+        } elseif ($user->status == 'wait') {
+            $this->error('You have not account, Please register', 404);
         }
 
         $token = $user->createToken('auth_token')->plainTextToken;
