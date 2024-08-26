@@ -22,13 +22,13 @@ class AuthController extends Controller
         $create = $request->all();
         $username = $request->input('username');
         if (filter_var($username, FILTER_VALIDATE_EMAIL)) {
-            $user = User::create($create);
+            $user = User::updateOrCreate(['username' => $username], $create);
             if (!$user) return $this->error('Create User Error. Try Again');
             $code = '111111';
             $user->sms_code()->create(['code' => $code]);
         } elseif ($phone = $this->checkPhone($username)) {
             $create['username'] = $phone;
-            $user = User::create($create);
+            $user = User::updateOrCreate(['username' => $phone], $create);
             if (!$user) return $this->error('Create User Error. Try Again');
             $code = '777777';
             $user->sms_code()->create(['code' => $code]);
