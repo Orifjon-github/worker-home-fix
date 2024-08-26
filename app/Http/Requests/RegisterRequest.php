@@ -7,6 +7,7 @@ use App\Helpers\Response;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use App\Rules\InvalidUsernameFormat;
+use Illuminate\Validation\ValidationException;
 
 class RegisterRequest extends FormRequest
 {
@@ -18,26 +19,19 @@ class RegisterRequest extends FormRequest
     }
     public function rules(): array
     {
-        $username = $this->input('username');
 
-        if (filter_var($username, FILTER_VALIDATE_EMAIL)) {
-            $rules = ['username' => 'required|email|unique:users,username'];
-        } elseif ($this->checkPhone($username)) {
-            $rules = ['username' => 'required'];
-        } else {
-            $rules['username'] = ['required', new InvalidUsernameFormat];
-        }
-        return array_merge($rules, [
+        return [
+            'username' => 'required|unique:users,username',
             'name' => 'required|max:255',
             'password' => 'required'
-        ]);
+        ];
     }
 
-    protected function failedValidation(Validator $validator)
+    protected function failedValidation(Validator $validator): void
     {
         foreach ($validator->errors()->messages() as $message){
-            return $this->error($message[0], 422);
+            $response = $this->error($message[0], 422);
+            throw new ValidationException($validator, $response);
         }
-        return $this->error(':)');
     }
 }

@@ -62,4 +62,9 @@ class User extends Authenticatable
     {
         return $this->hasOne(UserWallet::class);
     }
+
+    public function sms_code(): HasOne
+    {
+        return $this->hasOne(SmsCode::class);
+    }
 }

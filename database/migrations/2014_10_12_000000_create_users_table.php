@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('provider')->nullable(); // New column for OAuth provider name
             $table->string('provider_id')->nullable(); // New column for OAuth provider user ID
             $table->string('avatar')->nullable(); // Optional column for user's avatar
+            $table->string('status')->default('wait');
             $table->rememberToken();
             $table->timestamps();
         });

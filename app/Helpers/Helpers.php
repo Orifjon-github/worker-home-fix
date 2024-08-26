@@ -2,7 +2,10 @@
 
 namespace App\Helpers;
 
+use App\Models\SmsCode;
 use App\Models\UserWallet;
+use Carbon\Carbon;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\App;
 
 trait Helpers
@@ -45,5 +48,17 @@ trait Helpers
             return strlen($phone) == 9 ? '998' . $phone : $phone;
         }
         return false;
+    }
+
+    public function checkCode($user, $code): bool|JsonResponse
+    {
+        $record = $user->sms_code()->where('code', $code)->first() ?? null;
+        if ($record && $record->exists()) {
+            if ($record->updated_at > Carbon::now()->subMinute(2)) {
+                return true;
+            }
+            return $this->error('Sms code expired');
+        }
+        return $this->error('Invalid Sms Code');
     }
 }

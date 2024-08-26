@@ -40,6 +40,7 @@ Route::controller(MainController::class)->group(function () {
 Route::prefix('/user')
     ->group(function () {
         Route::post('/register', [AuthController::class, 'register']);
+        Route::post('/register/confirm', [AuthController::class, 'registerConfirm']);
         Route::post('/login', [AuthController::class, 'login']);
         Route::prefix('auth')->group(function () {
             Route::get('/{provider}/redirect', [AuthController::class, 'redirectToProvider']);

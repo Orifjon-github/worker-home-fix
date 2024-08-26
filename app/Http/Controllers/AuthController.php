@@ -16,22 +16,45 @@ use Laravel\Socialite\Facades\Socialite;
 class AuthController extends Controller
 {
     use Response, Helpers;
+
     public function register(RegisterRequest $request): JsonResponse
     {
         $create = $request->all();
         $username = $request->input('username');
         if (filter_var($username, FILTER_VALIDATE_EMAIL)) {
-            return $this->error('Technical process');
+            $user = User::create($create);
+            if (!$user) return $this->error('Create User Error. Try Again');
+            $code = '111111';
+            $user->sms_code()->create(['code' => $code]);
         } elseif ($phone = $this->checkPhone($username)) {
-            $user = User::where('username', $phone)->get();
-            if ($user) return $this->error('This Phone Number Already registered');
             $create['username'] = $phone;
-        }else{
+            $user = User::create($create);
+            if (!$user) return $this->error('Create User Error. Try Again');
+            $code = '777777';
+            $user->sms_code()->create(['code' => $code]);
+        } else {
             return $this->error('Invalid Username Format');
         }
-        
-        $user = User::create($create);
-        if (!$user) return $this->error('Create User Error. Try Again');
+
+        return $this->success(['message' => "Sms code sent to $username"]);
+    }
+
+    public function registerConfirm(Request $request): JsonResponse
+    {
+        $username = $request->input('username');
+        $code = $request->input('code');
+
+        $user = User::where('username', $username)->first();
+        if ($user && $user->status == 'wait') {
+            $check = self::checkCode($username, $code);
+        } else {
+            return $this->error('Service error, connect with developers');
+        }
+
+        if ($check instanceof JsonResponse) return $check;
+
+        $user->status = 'active';
+        $user->save(false);
 
         $user->token = $user->createToken('auth_token')->plainTextToken;
 
@@ -48,7 +71,7 @@ class AuthController extends Controller
 
         if (!$user) return $this->error('User Not Found', 404);
 
-        if(!Hash::check($password, $user->password) ){
+        if (!Hash::check($password, $user->password)) {
             return $this->error('Invalid Password', 403);
         }
 
