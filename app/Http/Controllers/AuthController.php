@@ -46,7 +46,7 @@ class AuthController extends Controller
 
         $user = User::where('username', $username)->first();
         if ($user && $user->status == 'wait') {
-            $check = self::checkCode($username, $code);
+            $check = self::checkCode($user, $code);
         } else {
             return $this->error('Service error, connect with developers');
         }
