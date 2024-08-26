@@ -7,6 +7,7 @@ use App\Helpers\Response;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use App\Rules\InvalidUsernameFormat;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
 
 class RegisterRequest extends FormRequest
@@ -23,7 +24,16 @@ class RegisterRequest extends FormRequest
         return [
             'username' => [
                 'required',
-                'unique:users,username,NULL,id,status,!=,wait',
+                function ($attribute, $value, $fail) {
+                    $exists = DB::table('users')
+                        ->where('username', $value)
+                        ->where('status', '!=', 'wait')
+                        ->exists();
+
+                    if ($exists) {
+                        $fail('The '.$attribute.' has already been taken.');
+                    }
+                },
             ],
             'name' => 'required|max:255',
             'password' => 'required'
