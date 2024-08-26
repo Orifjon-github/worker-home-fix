@@ -54,7 +54,7 @@ class AuthController extends Controller
         if ($check instanceof JsonResponse) return $check;
 
         $user->status = 'active';
-        $user->save(false);
+        $user->save();
 
         $user->token = $user->createToken('auth_token')->plainTextToken;
 
