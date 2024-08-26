@@ -53,7 +53,7 @@ class AuthController extends Controller
 
         if ($check instanceof JsonResponse) return $check;
 
-        $user->status = 'active';
+        $user->status = 'pending';
         $user->save();
 
         $user->token = $user->createToken('auth_token')->plainTextToken;
@@ -73,6 +73,10 @@ class AuthController extends Controller
 
         if (!Hash::check($password, $user->password)) {
             return $this->error('Invalid Password', 403);
+        }
+
+        if ($user->status == 'pending') {
+            return $this->error('Sizning so’rovingiz yuborildi, tasdiqlanishini kutyapmiz...');
         }
 
         $token = $user->createToken('auth_token')->plainTextToken;
