@@ -168,6 +168,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        \App\Payme\PaymeServiceProvider::pa
     ])->toArray(),
 
     /*
@@ -182,6 +183,7 @@ return [
     */
 
     'aliases' => Facade::defaultAliases()->merge([
+        'Payme' => \App\Payme\Facades\Payme::class,
         // 'Example' => App\Facades\Example::class,
     ])->toArray(),
 

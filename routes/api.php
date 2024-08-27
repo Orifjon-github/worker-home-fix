@@ -6,6 +6,9 @@ use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
+use App\Payme\Facades\Payme;
+use App\Payme\Http\Middleware\PaymeCheck;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -79,14 +82,9 @@ Route::prefix('/user')
         });
     });
 
-
-//Route::get('consultation', [\App\Http\Controllers\MainController::class, 'consultation']);
-//Route::get('products', [\App\Http\Controllers\ProductController::class, 'index']);
-//Route::get('products/detail/{id}', [\App\Http\Controllers\ProductController::class, 'detail']);
-//Route::post('products/comment/create', [\App\Http\Controllers\ProductController::class, 'createComment']);
-//Route::get('faqs', [\App\Http\Controllers\FaqController::class, 'index']);
-//Route::get('testimonials', [\App\Http\Controllers\TestimonialController::class, 'index']);
-//Route::get('advertising', [\App\Http\Controllers\AdvertisingController::class, 'index']);
+Route::any('/payme', function (Request $request) {
+    return Payme::handle($request);
+})->middleware(PaymeCheck::class);
 
 
 
