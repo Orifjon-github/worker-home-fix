@@ -1,5 +1,6 @@
 <?php
 
+use App\Payme\PaymeServiceProvider;
 use Illuminate\Support\Facades\Facade;
 use Illuminate\Support\ServiceProvider;
 
@@ -168,7 +169,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        \App\Payme\PaymeServiceProvider::pa
+        PaymeServiceProvider::class
     ])->toArray(),
 
     /*
