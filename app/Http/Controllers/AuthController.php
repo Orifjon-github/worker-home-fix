@@ -6,11 +6,13 @@ use App\Helpers\Response;
 use App\Helpers\Helpers;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
+use App\Mail\VerificationCodeMail;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Laravel\Socialite\Facades\Socialite;
 
 class AuthController extends Controller
@@ -25,6 +27,7 @@ class AuthController extends Controller
             $user = User::updateOrCreate(['username' => $username], $create);
             if (!$user) return $this->error('Create User Error. Try Again');
             $code = '111111';
+            Mail::to($user->email)->send(new VerificationCodeMail($code));
             $user->sms_code()->updateOrCreate(['user_id' => $user->id], ['code' => $code]);
         } elseif ($phone = $this->checkPhone($username)) {
             $create['username'] = $phone;
