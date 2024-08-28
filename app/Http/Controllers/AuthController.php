@@ -53,7 +53,7 @@ class AuthController extends Controller
 
         if ($check instanceof JsonResponse) return $check;
 
-        $user->status = 'pending';
+        $user->status = 'active';
         $user->save();
 
         $user->token = $user->createToken('auth_token')->plainTextToken;
@@ -74,11 +74,7 @@ class AuthController extends Controller
             return $this->error('Invalid Password', 403);
         }
 
-        if ($user->status == 'pending') {
-            return $this->success(['message' => 'Sizning so’rovingiz yuborildi, tasdiqlanishini kutyapmiz...']);
-        } elseif ($user->status == 'wait') {
-            $this->error('You have not account, Please register', 404);
-        }
+        if ($user->status == 'wait') $this->error('You have not account, Please register', 404);
 
         $token = $user->createToken('auth_token')->plainTextToken;
 
