@@ -32,7 +32,7 @@ class LoginRequest extends FormRequest
         }
 
         return array_merge($rules, [
-            'password' => 'required|min:6'
+            'password' => 'required'
         ]);
 
     }
