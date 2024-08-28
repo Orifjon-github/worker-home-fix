@@ -21,19 +21,10 @@ class LoginRequest extends FormRequest
     }
     public function rules(): array
     {
-        $username = $this->input('username');
-
-        if (filter_var($username, FILTER_VALIDATE_EMAIL)) {
-            $rules = ['username' => 'required|email'];
-        } elseif (is_numeric($username)) {
-            $rules = ['username' => 'required|numeric'];
-        } else {
-            return ['username' => 'required|invalid_format'];
-        }
-
-        return array_merge($rules, [
+        return [
+            'username' => 'required',
             'password' => 'required'
-        ]);
+        ];
 
     }
 
