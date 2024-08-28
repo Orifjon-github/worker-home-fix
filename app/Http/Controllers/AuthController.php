@@ -23,10 +23,10 @@ class AuthController extends Controller
     {
         $create = $request->all();
         $username = $request->input('username');
+        $code = mt_rand(100000, 999999);
         if (filter_var($username, FILTER_VALIDATE_EMAIL)) {
             $user = User::updateOrCreate(['username' => $username], $create);
             if (!$user) return $this->error('Create User Error. Try Again');
-            $code = '111111';
             Mail::to($username)->send(new VerificationCodeMail($code));
             $user->sms_code()->updateOrCreate(['user_id' => $user->id], ['code' => $code]);
         } elseif ($phone = $this->checkPhone($username)) {
