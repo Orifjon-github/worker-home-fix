@@ -54,7 +54,8 @@ trait Helpers
     {
         $record = $user->sms_code()->where('code', $code)->first() ?? null;
         if ($record && $record->exists()) {
-            if ($record->updated_at > Carbon::now()->subMinute(2)) {
+            $recordUpdatedAt = Carbon::parse($record->updated_at)->timezone(config('app.timezone'));
+            if ($recordUpdatedAt > Carbon::now()->subMinute(2)) {
                 return true;
             }
             return $this->error('Sms code expired');
