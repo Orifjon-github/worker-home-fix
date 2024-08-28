@@ -27,7 +27,7 @@ class AuthController extends Controller
             $user = User::updateOrCreate(['username' => $username], $create);
             if (!$user) return $this->error('Create User Error. Try Again');
             $code = '111111';
-            Mail::to($user->email)->send(new VerificationCodeMail($code));
+            Mail::to($username)->send(new VerificationCodeMail($code));
             $user->sms_code()->updateOrCreate(['user_id' => $user->id], ['code' => $code]);
         } elseif ($phone = $this->checkPhone($username)) {
             $create['username'] = $phone;
