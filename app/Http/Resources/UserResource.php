@@ -11,6 +11,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
  * @property mixed $email
  * @property mixed $phone
  * @property mixed $name
+ * @property mixed $username
  */
 class UserResource extends JsonResource
 {
@@ -24,8 +25,7 @@ class UserResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'phone' => $this->phone,
-            'email' => $this->email,
+            'username' => $this->username,
             'image' => env('APP_URL') . $this->image,
         ];
     }
