@@ -79,11 +79,10 @@
 
         <div>
             <span id="verificationCode" class="verification-code">{{ $verificationCode }}</span>
-            <button class="copy-button" onclick="copyToClipboard()">Copy</button>
         </div>
 
         <p>If you didn't request this, please ignore this email.</p>
-        <p>Best regards,<br>Your Company Name</p>
+        <p>Best regards,<br>HomeFix</p>
     </div>
 
     <div class="footer">
