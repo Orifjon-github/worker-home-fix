@@ -82,11 +82,11 @@
         </div>
 
         <p>If you didn't request this, please ignore this email.</p>
-        <p>Best regards,<br>HomeFix</p>
+        <p>Best regards,<br><a href="https://homefixuz.com">HomeFix</a></p>
     </div>
 
     <div class="footer">
-        &copy; 2024 Your Company Name. All rights reserved.
+        &copy; 2024 HomeFix. All rights reserved.
     </div>
 </div>
 
