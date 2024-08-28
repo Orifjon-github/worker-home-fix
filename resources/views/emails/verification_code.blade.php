@@ -78,7 +78,7 @@
         <p>Thank you for registering! Please use the following verification code to verify your email address:</p>
 
         <div>
-            <span id="verificationCode" class="verification-code">{{ verificationCode }}</span>
+            <span id="verificationCode" class="verification-code">{{ $verificationCode }}</span>
             <button class="copy-button" onclick="copyToClipboard()">Copy</button>
         </div>
 
