@@ -7,6 +7,7 @@ use App\Models\UserWallet;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Log;
 
 trait Helpers
 {
@@ -55,6 +56,8 @@ trait Helpers
         $record = $user->sms_code()->where('code', $code)->first() ?? null;
         if ($record && $record->exists()) {
             $recordUpdatedAt = Carbon::parse($record->updated_at)->timezone(config('app.timezone'));
+            Log::error($recordUpdatedAt);
+            Log::error(Carbon::now()->subMinute(2));
             if ($recordUpdatedAt > Carbon::now()->subMinute(2)) {
                 return true;
             }
