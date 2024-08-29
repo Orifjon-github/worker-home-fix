@@ -26,26 +26,30 @@ class UserHomeController extends Controller
     {
         $user = $request->user();
         $user->home()->create($request->all());
-
-        $homes = $user->home()->all();
+        $type = $request->input('type') ?? 'home';
+        $homes = $user->home()->where('type', $type)->get();
         return $this->success(UserHomeResource::collection($homes));
     }
 
     public function update($id, Request $request): JsonResponse
     {
+        $user = $request->user();
         $home = UserHome::find($id);
         $home->update($request->all());
+        $type = $request->input('type') ?? 'home';
+        $homes = $user->home()->where('type', $type)->get();
 
-        $homes = UserHome::all();
         return $this->success(UserHomeResource::collection($homes));
     }
 
-    public function delete($id): JsonResponse
+    public function delete($id, Request $request): JsonResponse
     {
+        $user = $request->user();
         $home = UserHome::find($id);
+        $type = $home->type;
         $home->delete();
 
-        $homes = UserHome::all();
+        $homes = $user->home()->where('type', $type)->get();
         return $this->success(UserHomeResource::collection($homes));
     }
 
