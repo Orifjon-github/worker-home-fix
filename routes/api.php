@@ -83,8 +83,8 @@ Route::prefix('/user')
                     Route::prefix('/equipments')->group(function () {
                         Route::get('/', 'equipment');
                         Route::post('/create', 'equipmentCreate');
-                        Route::post('/update', 'equipmentUpdate');
-                        Route::delete('/delete', 'equipmentDelete');
+                        Route::post('/update/{id}', 'equipmentUpdate');
+                        Route::delete('/delete/{id}', 'equipmentDelete');
                     });
 
                 });
