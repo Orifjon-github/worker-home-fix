@@ -79,6 +79,11 @@ class PaymeService
         $amount = $this->params['amount'];
         $account = $this->params['account'];
 
+        if(!$this->isValidAmount($amount))
+        {
+            throw new PaymeException(PaymeException::WRONG_AMOUNT);
+        }
+
         if(!array_key_exists($this->identity, $account))
         {
             throw new PaymeException(PaymeException::USER_NOT_FOUND);
@@ -91,11 +96,6 @@ class PaymeService
         if(!$user)
         {
             throw new PaymeException(PaymeException::USER_NOT_FOUND);
-        }
-
-        if(!$this->isValidAmount($amount))
-        {
-            throw new PaymeException(PaymeException::WRONG_AMOUNT);
         }
 
         $transaction = PaymeTransaction::where('transaction', $id)->first();
