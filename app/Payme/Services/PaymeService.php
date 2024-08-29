@@ -57,7 +57,7 @@ class PaymeService
 
         $account = $account[$this->identity];
 
-        $user = UserWallet::where('wallet_id', $account)->first();
+        $user = UserWallet::where($this->identity, $account)->first();
 
         if(!$user)
         {
@@ -70,7 +70,8 @@ class PaymeService
     /**
      * @throws PaymeException
      */
-    public function CreateTransaction(){
+    public function CreateTransaction(): JsonResponse
+    {
         if(!$this->hasParam(['id', 'time', 'amount', 'account']))
         {
             throw new PaymeException(PaymeException::JSON_RPC_ERROR);
@@ -92,7 +93,7 @@ class PaymeService
 
         $account = $account[$this->identity];
 
-        $user = UserWallet::where('wallet_id', $account)->first();
+        $user = UserWallet::where($this->identity, $account)->first();
 
         if(!$user)
         {

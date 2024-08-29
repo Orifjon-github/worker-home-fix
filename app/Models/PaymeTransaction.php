@@ -9,6 +9,10 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use App\Models\User;
 
+/**
+ * @method static where(string $string, mixed $id)
+ * @method static create(array $array)
+ */
 class PaymeTransaction extends Model
 {
     use HasFactory;
