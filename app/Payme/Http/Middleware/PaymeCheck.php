@@ -3,20 +3,23 @@
 namespace App\Payme\Http\Middleware;
 
 use App\Payme\Exceptions\PaymeException;
+use App\Services\LogService;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Closure;
 
 class PaymeCheck
 {
-    /**
-     * Handle an incoming request.
-     *
-     * @param Closure(Request): (Response) $next
-     * @throws PaymeException
-     */
+    protected LogService $logService;
+
+    public function __construct(LogService $logService)
+    {
+        $this->logService = $logService;
+    }
     public function handle(Request $request, Closure $next): Response
     {
+        $logID = uniqid();
+        $this->logService->request('payme', $logID, $request->getRequestUri(), $request->getContent());
         $authorization = $request->header('Authorization');
         if(!$authorization ||
             !preg_match('/^\s*Basic\s+(\S+)\s*$/i', $authorization, $matches) ||
@@ -32,6 +35,8 @@ class PaymeCheck
             throw new PaymeException(PaymeException::AUTH_ERROR);
         }
 
-        return $next($request);
+        $response = $next($request);
+        $this->logService->response('payme', $logID, $response->getStatusCode(), $response->getContent());
+        return $response;
     }
 }
