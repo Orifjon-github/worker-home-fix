@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('user_homes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->enum('type', ['home', 'office']);
             $table->string('name')->nullable();
             $table->string('long');
