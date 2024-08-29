@@ -13,9 +13,11 @@ use Illuminate\Support\Facades\Request;
 class UserHomeController extends Controller
 {
     use Response;
-    public function index(): JsonResponse
+    public function index(Request $request): JsonResponse
     {
-        $homes = UserHome::all();
+        $user = $request->user();
+        $type = $request->get('type') ?? 'home';
+        $homes = $user->homes()->where('type', $type)->get();
 
         return $this->success(UserHomeResource::collection($homes));
     }
