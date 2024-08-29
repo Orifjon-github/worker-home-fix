@@ -56,6 +56,8 @@ class AuthController extends Controller
 
         if ($check instanceof JsonResponse) return $check;
 
+        $user->wallet()->create(['wallet_id' => self::generateWalletId()]);
+
         $user->status = 'active';
         $user->save();
 

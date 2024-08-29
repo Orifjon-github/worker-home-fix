@@ -26,7 +26,7 @@ trait Helpers
         }
     }
 
-    public function generateWalletId()
+    public static function generateWalletId(): string
     {
         do {
             $datePrefix = date('ymd');
@@ -37,7 +37,7 @@ trait Helpers
 
             $exists = UserWallet::where('wallet_id', $uniqueId)->exists();
 
-        } while ($exists); // ID mavjud bo'lsa, qayta yaratiladi
+        } while ($exists);
 
         return $uniqueId;
     }
