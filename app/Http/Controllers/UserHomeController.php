@@ -8,7 +8,7 @@ use App\Http\Resources\UserHomeResource;
 use App\Models\HomeEquipment;
 use App\Models\UserHome;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\Request;
+use Illuminate\Http\Request;
 
 class UserHomeController extends Controller
 {
