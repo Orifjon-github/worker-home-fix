@@ -6,6 +6,7 @@ use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\UserHomeController;
 use App\Payme\Facades\Payme;
 use App\Payme\Http\Middleware\PaymeCheck;
 use Illuminate\Http\Request;
@@ -71,6 +72,21 @@ Route::prefix('/user')
                     Route::get('/get', [OrderController::class, 'index']);
                     Route::get('/get/{id}', [OrderController::class, 'detail']);
                     Route::post('/create', [OrderController::class, 'create']);
+                });
+
+            Route::prefix('/home')->controller(UserHomeController::class)
+                ->group(function () {
+                    Route::get('/', 'index');
+                    Route::post('/create/', 'create');
+                    Route::post('/update/{id}', 'update');
+                    Route::delete('/delete/{id}', 'delete');
+                    Route::prefix('/equipments')->group(function () {
+                        Route::get('/', 'equipment');
+                        Route::post('/create', 'equipmentCreate');
+                        Route::post('/update', 'equipmentUpdate');
+                        Route::delete('/delete', 'equipmentDelete');
+                    });
+
                 });
             Route::prefix('/plans')
                 ->group(function () {
