@@ -17,7 +17,7 @@ class UserHomeController extends Controller
     {
         $user = $request->user();
         $type = $request->get('type') ?? 'home';
-        $homes = $user->homes()->where('type', $type)->get();
+        $homes = $user->home()->where('type', $type)->get();
 
         return $this->success(UserHomeResource::collection($homes));
     }
