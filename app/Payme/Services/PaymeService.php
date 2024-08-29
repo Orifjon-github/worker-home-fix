@@ -2,6 +2,7 @@
 
 namespace App\Payme\Services;
 
+use App\Models\UserWallet;
 use App\Payme\Enums\PaymeState;
 use App\Payme\Exceptions\PaymeException;
 use App\Payme\Models\PaymeTransaction;
@@ -56,7 +57,7 @@ class PaymeService
 
         $account = $account[$this->identity];
 
-        $user = User::where($this->identity, $account)->first();
+        $user = UserWallet::where('wallet_id', $account)->first();
 
         if(!$user)
         {
@@ -91,7 +92,7 @@ class PaymeService
 
         $account = $account[$this->identity];
 
-        $user = User::where($this->identity, $account)->first();
+        $user = UserWallet::where('wallet_id', $account)->first();
 
         if(!$user)
         {
