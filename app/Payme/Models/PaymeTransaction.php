@@ -29,6 +29,6 @@ class PaymeTransaction extends Model
 
     public function wallet(): BelongsTo
     {
-        return $this->belongsTo(UserWallet::class, 'wallet_id');
+        return $this->belongsTo(UserWallet::class, 'wallet_id', 'id');
     }
 }

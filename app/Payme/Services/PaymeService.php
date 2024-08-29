@@ -135,7 +135,7 @@ class PaymeService
             'amount' => $amount,
             'state' => PaymeState::Pending,
             'create_time' => $this->microtime(),
-            'wallet_id' => $account,
+            'wallet_id' => $user->id,
         ]);
 
         return $this->successCreateTransaction(
