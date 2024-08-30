@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('lat');
             $table->string('title');
             $table->string('entrance')->nullable();
-            $table->integer('floor')->nullable();
+            $table->string('floor')->nullable();
             $table->string('number')->nullable();
             $table->string('description')->nullable();
             $table->timestamps();
