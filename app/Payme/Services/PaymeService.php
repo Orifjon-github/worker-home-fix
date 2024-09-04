@@ -288,14 +288,14 @@ class PaymeService
         foreach ($transactions as $transaction) {
             $result[] = [
                 'id' => $transaction->transaction,
-                'time' => $transaction->payme_time ?? 0,
+                'time' => $transaction->payme_time,
                 'amount' => $transaction->amount,
                 'account' => [
                     'wallet_id' => $transaction->wallet->wallet_id
                 ],
-                'create_time' => $transaction->create_time ?? 0,
-                'perform_time' => $transaction->perform_time ?? 0,
-                'cancel_time' => $transaction->cancel_time ?? 0,
+                'create_time' => $transaction->create_time,
+                'perform_time' => $transaction->perform_time,
+                'cancel_time' => $transaction->cancel_time,
                 'transaction' => $transaction->wallet->wallet_id,
                 'state' => $transaction->state,
                 'reason' => $transaction->reason,

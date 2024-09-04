@@ -19,10 +19,10 @@ return new class extends Migration
             $table->string('wallet_id')->nullable();
             $table->bigInteger('amount')->nullable();
             $table->string('reason')->nullable();
-            $table->string('payme_time')->nullable();
-            $table->string('cancel_time')->nullable();
-            $table->string('create_time')->nullable();
-            $table->string('perform_time')->nullable();
+            $table->string('payme_time')->default(0);
+            $table->string('cancel_time')->default(0);
+            $table->string('create_time')->default(0);
+            $table->string('perform_time')->default(0);
             $table->timestamps();
         });
     }
