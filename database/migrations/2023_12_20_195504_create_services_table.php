@@ -24,6 +24,7 @@ return new class extends Migration
             $table->text('video_url_en')->nullable();
             $table->text('video_bg')->nullable();
             $table->text('image')->nullable();
+            $table->text('icon')->nullable();
             $table->enum('enable', [1, 0])->default(1);
             $table->timestamps();
         });
