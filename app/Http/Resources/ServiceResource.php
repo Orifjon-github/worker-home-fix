@@ -10,6 +10,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
  * @property mixed $id
  * @property mixed $advantages
  * @property mixed $image
+ * @property mixed $icon
  */
 class ServiceResource extends JsonResource
 {
@@ -20,6 +21,7 @@ class ServiceResource extends JsonResource
             'id' => $this->id,
             'title' => $this->getValue($this),
             'image' => env('IMAGES_BASE_URL') .$this->image,
+            'icon' => env('IMAGES_BASE_URL') .$this->icon,
         ];
     }
 }
