@@ -6,7 +6,6 @@ use App\Models\UserWallet;
 use App\Payme\Enums\PaymeState;
 use App\Payme\Exceptions\PaymeException;
 use App\Payme\Models\PaymeTransaction;
-use App\Models\User;
 use App\Payme\Traits\JsonRPC;
 use App\Payme\Traits\PaymeHelper;
 use Illuminate\Http\JsonResponse;
@@ -270,8 +269,40 @@ class PaymeService
         }
     }
 
+    /**
+     * @throws PaymeException
+     */
     public function GetStatement(){
-        // pass
+        if(!$this->hasParam(['from', 'to']))
+        {
+            throw new PaymeException(PaymeException::JSON_RPC_ERROR);
+        }
+
+        $from = $this->params['from'];
+        $to = $this->params['to'];
+
+        $transactions = PaymeTransaction::whereBetween('created_at', [date('Y-m-d H:i:s', $from), date('Y-m-d H:i:s', $to)])->get();
+        $result = [];
+
+        foreach ($transactions as $transaction) {
+            $result[] = [
+                'id' => $transaction->transaction,
+                'time' => $transaction->payme_time,
+                'amount' => $transaction->amount,
+                'account' => [
+                    'wallet_id' => $transaction->wallet->wallet_id
+                ],
+                'create_time' => $transaction->create_time,
+                'perform_time' => $transaction->perform_time,
+                'cancel_time' => $transaction->cancel_time,
+                'transaction' => $transaction->wallet->wallet_id,
+                'state' => $transaction->state,
+                'reason' => $transaction->reason,
+                'receivers' => []
+            ];
+        }
+
+        return $this->successGetStatement($result);
     }
 
     public function SetFiscalData(){

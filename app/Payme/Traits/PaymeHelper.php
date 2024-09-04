@@ -2,6 +2,8 @@
 
 namespace App\Payme\Traits;
 
+use Illuminate\Http\JsonResponse;
+
 trait PaymeHelper
 {
     protected function microtime(): int
@@ -51,7 +53,7 @@ trait PaymeHelper
         ]);
     }
 
-    public function successCheckTransaction($createTime, $performTime, $cancelTime, $transaction, $state, $reason)
+    public function successCheckTransaction($createTime, $performTime, $cancelTime, $transaction, $state, $reason): JsonResponse
     {
         return $this->success([
             "create_time" => $createTime ?? 0,
@@ -63,13 +65,18 @@ trait PaymeHelper
         ]);
     }
 
-    public function successCancelTransaction($state, $cancelTime, $transaction)
+    public function successCancelTransaction($state, $cancelTime, $transaction): JsonResponse
     {
         return $this->success([
             "state" => $state,
             "cancel_time" => $cancelTime,
             "transaction" => strval($transaction)
         ]);
+    }
+
+    public function successGetStatement($transactions): JsonResponse
+    {
+        return $this->success(['transactions' => $transactions]);
     }
 
     public function fillUpBalance($user, $amount): void

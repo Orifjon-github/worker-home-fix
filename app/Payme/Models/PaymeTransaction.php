@@ -12,6 +12,7 @@ use App\Models\User;
 /**
  * @method static where(string $string, mixed $id)
  * @method static create(array $array)
+ * @method static whereBetween(string $string, array $array)
  */
 class PaymeTransaction extends Model
 {
