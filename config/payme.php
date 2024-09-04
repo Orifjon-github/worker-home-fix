@@ -1,15 +1,12 @@
 <?php
 
-use App\Models\Client;
-
-$payme = Client::where('name', 'payme')->first();
 return [
-    'min_amount' => $payme->min_amount,
-    'max_amount' => $payme->max_amount,
-    'identity' => $payme->identity,
-    'login' => $payme->login,
-    'key' => $payme->password,
-    'merchant_id' => $payme->merchant_id,
+    'min_amount' => env('PAYME_MIN_AMOUNT', 1_000_00),
+    'max_amount' => env('PAYME_MAX_AMOUNT', 100_000_000_00),
+    'identity' => env('PAYME_IDENTITY', 'id'),
+    'login' => env('PAYME_LOGIN', 'TestUser'),
+    'key' => env('PAYME_KEY', 'TestKey'),
+    'merchant_id' => env('PAYME_MERCHANT_ID', '123456789'),
     'allowed_ips' => [
         '185.234.113.1',
         '185.234.113.2',
