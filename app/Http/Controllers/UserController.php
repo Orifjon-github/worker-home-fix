@@ -61,4 +61,21 @@ class UserController extends Controller
 
         return $this->success(UserPlanResource::collection($plans));
     }
+
+    public function paymeUrl(Request $request): JsonResponse
+    {
+        $user = $request->user();
+        if (!$user && empty($user->wallet)) return $this->error('Error while getting User Account');
+        $amount = $request->input('amount');
+        $merchant = config('payme.merchant_id');
+        $params = "m={$merchant};ac.wallet_id={$user->wallet->wallet_id};a={$amount}";
+
+        $encodedParams = base64_encode($params);
+
+        $checkoutUrl = "https://checkout.paycom.uz/{$encodedParams}";
+
+        return $this->success([
+            'checkout_url' => $checkoutUrl
+        ]);
+    }
 }
