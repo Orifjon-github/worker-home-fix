@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('clients', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('min_amount')->default(100000);
-            $table->string('max_amount')->default(10000000000);
+            $table->bigInteger('min_amount')->default(100000);
+            $table->bigInteger('max_amount')->default(10000000000);
             $table->string('identity')->default('wallet_id');
             $table->string('login')->nullable();
             $table->text('password')->nullable();
