@@ -272,7 +272,8 @@ class PaymeService
     /**
      * @throws PaymeException
      */
-    public function GetStatement(){
+    public function GetStatement()
+    {
         if(!$this->hasParam(['from', 'to']))
         {
             throw new PaymeException(PaymeException::JSON_RPC_ERROR);
@@ -281,7 +282,7 @@ class PaymeService
         $from = $this->params['from'];
         $to = $this->params['to'];
 
-        $transactions = PaymeTransaction::whereBetween('created_at', [date('Y-m-d H:i:s', $from), date('Y-m-d H:i:s', $to)])->get();
+        $transactions = PaymeTransaction::whereBetween('create_time', [$from, $to])->get();
         $result = [];
 
         foreach ($transactions as $transaction) {
