@@ -93,6 +93,49 @@ class AuthController extends Controller
         return $this->success(['message' => 'Logged out successfully']);
     }
 
+    public function forgotPassword(Request $request): JsonResponse
+    {
+        $username = $request->input('username');
+        $user = User::where('username', $username)->first();
+        if (!$user && $user->status == 'wait') return $this->error('You have not account, Please register', 404);
+
+        $code = mt_rand(100000, 999999);
+        if (filter_var($username, FILTER_VALIDATE_EMAIL)) {
+            Mail::to($username)->send(new VerificationCodeMail($code));
+            $user->sms_code()->updateOrCreate(['user_id' => $user->id], ['code' => $code]);
+        } elseif ($phone = $this->checkPhone($username)) {
+            $code = '777777';
+            $user->sms_code()->updateOrCreate(['user_id' => $user->id], ['code' => $code]);
+        } else {
+            return $this->error('Invalid Username Format');
+        }
+
+        return $this->success(['message' => "Sms code sent to $username"]);
+    }
+
+    public function forgotPasswordConfirm(Request $request): JsonResponse
+    {
+        $username = $request->input('username');
+        $code = $request->input('code');
+        $user = User::where('username', $username)->first();
+
+        $check = self::checkCode($user, $code);
+        if ($check instanceof JsonResponse) return $check;
+
+        return $this->success(['message' => 'Sms code confirm, You can change password']);
+    }
+
+    public function forgotPasswordNewPassword(Request $request): JsonResponse
+    {
+        $password = $request->input('password');
+        $username = $request->input('username');
+        $user = User::where('username', $username)->first();
+        if (!$user) return $this->error('You have not account, Please register', 404);
+
+        $user->update(['password' => Hash::make($password)]);
+        return $this->success(['message' => 'Password reset successfully']);
+    }
+
     public function delete(Request $request): JsonResponse
     {
         $request->user()->delete();

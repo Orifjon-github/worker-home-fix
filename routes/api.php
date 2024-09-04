@@ -46,6 +46,9 @@ Route::prefix('/user')
         Route::post('/register', [AuthController::class, 'register']);
         Route::post('/register/confirm', [AuthController::class, 'registerConfirm']);
         Route::post('/login', [AuthController::class, 'login']);
+        Route::post('/forgot-password', [AuthController::class, 'forgotPassword']);
+        Route::post('/forgot-password/confirm', [AuthController::class, 'forgotPasswordConfirm']);
+        Route::post('/forgot-password/new-password', [AuthController::class, 'forgotPasswordNewPassword']);
         Route::prefix('auth')->group(function () {
             Route::get('/{provider}/redirect', [AuthController::class, 'redirectToProvider']);
             Route::get('/{provider}/callback', [AuthController::class, 'handleProviderCallback']);
