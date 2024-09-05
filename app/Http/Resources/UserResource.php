@@ -29,7 +29,7 @@ class UserResource extends JsonResource
             'username' => $this->username,
             'image' => env('APP_URL') . $this->image,
             'wallet_id' => $this->wallet->wallet_id,
-            'balance' => $this->wallet->balance,
+            'balance' => $this->wallet->balance / 100,
         ];
     }
 }
