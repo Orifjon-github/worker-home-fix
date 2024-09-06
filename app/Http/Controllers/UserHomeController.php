@@ -9,6 +9,7 @@ use App\Models\HomeEquipment;
 use App\Models\UserHome;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class UserHomeController extends Controller
 {
@@ -60,14 +61,27 @@ class UserHomeController extends Controller
 
     public function equipmentCreate(Request $request): JsonResponse
     {
-        HomeEquipment::create($request->all());
+        $create = $request->all();
+        if ($request->hasFile('image')) {
+            $path = Storage::putFile('public/equipments', $request->file('image'));
+            $path = str_replace('public/', '/storage/', $path);
+            $create['image'] = $path;
+        }
+
+        HomeEquipment::create($create);
         return $this->render($request->input('home_id'));
     }
 
     public function equipmentUpdate($id, Request $request): JsonResponse
     {
         $equipment = HomeEquipment::find($id);
-        $equipment->update($request->all());
+        $update = $request->all();
+        if ($request->hasFile('image')) {
+            $path = Storage::putFile('public/equipments', $request->file('image'));
+            $path = str_replace('public/', '/storage/', $path);
+            $update['image'] = $path;
+        }
+        $equipment->update($update);
         return $this->render($request->input('home_id'));
     }
 

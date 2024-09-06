@@ -17,7 +17,8 @@ return new class extends Migration
             $table->string('name');
             $table->string('brand')->nullable();
             $table->string('model')->nullable();
-            $table->string('made_date')->nullable();
+            $table->text('description')->nullable();
+            $table->text('image')->nullable();
             $table->string('fix_date')->nullable();
             $table->timestamps();
         });
