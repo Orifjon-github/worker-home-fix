@@ -8,6 +8,7 @@ use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
 use App\Mail\VerificationCodeMail;
 use App\Models\User;
+use App\Services\SmsService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -18,6 +19,13 @@ use Laravel\Socialite\Facades\Socialite;
 class AuthController extends Controller
 {
     use Response, Helpers;
+
+    private SmsService $smsService;
+
+    public function __construct(SmsService $smsService)
+    {
+        $this->smsService = $smsService;
+    }
 
     public function register(RegisterRequest $request): JsonResponse
     {
@@ -33,8 +41,12 @@ class AuthController extends Controller
             $create['username'] = $phone;
             $user = User::updateOrCreate(['username' => $phone], $create);
             if (!$user) return $this->error('Create User Error. Try Again');
-            $code = '777777';
-            $user->sms_code()->updateOrCreate(['user_id' => $user->id], ['code' => $code]);
+            $sms = $this->smsService->sms($username, $code);
+            if ($sms) {
+                $user->sms_code()->updateOrCreate(['user_id' => $user->id], ['code' => $code]);
+            } else {
+                return $this->error('Send Sms Error');
+            }
         } else {
             return $this->error('Invalid Username Format');
         }

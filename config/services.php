@@ -43,5 +43,9 @@ return [
         'redirect' => env('FACEBOOK_REDIRECT_URI'),
     ],
 
-
+    'eskiz' => [
+        'host' => env('ESKIZ_HOST'),
+        'email' => env('ESKIZ_EMAIL'),
+        'password' => env('ESKIZ_PASSWORD')
+    ]
 ];

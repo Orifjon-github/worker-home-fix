@@ -30,6 +30,13 @@ return [
             'level' => 'debug',
             'days' => 365
         ],
+
+        'eskiz' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/eskiz/eskiz.log'),
+            'level' => 'debug',
+            'days' => 365,
+        ],
     ],
 
 ];
