@@ -41,7 +41,7 @@ class AuthController extends Controller
             $create['username'] = $phone;
             $user = User::updateOrCreate(['username' => $phone], $create);
             if (!$user) return $this->error('Create User Error. Try Again');
-            $sms = $this->smsService->sms($username, $code);
+            $sms = $this->smsService->sms($phone, $code);
             if ($sms) {
                 $user->sms_code()->updateOrCreate(['user_id' => $user->id], ['code' => $code]);
             } else {
@@ -116,7 +116,12 @@ class AuthController extends Controller
             Mail::to($username)->send(new VerificationCodeMail($code));
             $user->sms_code()->updateOrCreate(['user_id' => $user->id], ['code' => $code]);
         } elseif ($phone = $this->checkPhone($username)) {
-            $code = '777777';
+            $sms = $this->smsService->sms($phone, $code);
+            if ($sms) {
+                $user->sms_code()->updateOrCreate(['user_id' => $user->id], ['code' => $code]);
+            } else {
+                return $this->error('Send Sms Error');
+            }
             $user->sms_code()->updateOrCreate(['user_id' => $user->id], ['code' => $code]);
         } else {
             return $this->error('Invalid Username Format');
