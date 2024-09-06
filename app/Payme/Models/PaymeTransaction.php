@@ -32,4 +32,15 @@ class PaymeTransaction extends Model
     {
         return $this->belongsTo(UserWallet::class, 'wallet_id', 'id');
     }
+
+    public static function state($code): string
+    {
+        $states = [
+            '1' => 'Kutilmoqda',
+            '2' => 'Tasdiqlangan',
+            '-1' => 'Bekor qilingan',
+            '-2' => 'Bekor qilingan'
+        ];
+        return $states[$code];
+    }
 }

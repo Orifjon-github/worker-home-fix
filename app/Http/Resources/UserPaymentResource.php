@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Payme\Models\PaymeTransaction;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -26,10 +27,10 @@ class UserPaymentResource extends JsonResource
         return [
             'id' => $this->id,
             'external_id' => $this->transaction,
-            'create_time' => $this->create_time ? date('Y-m-d H:i', $this->create_time) : null,
-            'perform_time' => $this->perform_time ? date('Y-m-d H:i', $this->perform_time) : null,
-            'cancel_time' => $this->cancel_time ? date('Y-m-d H:i', $this->cancel_time) : null,
-            'state' => $this->state,
+            'create_time' => $this->create_time ? date('Y-m-d H:i', $this->create_time / 1000) : null,
+            'perform_time' => $this->perform_time ? date('Y-m-d H:i', $this->perform_time / 1000) : null,
+            'cancel_time' => $this->cancel_time ? date('Y-m-d H:i', $this->cancel_time / 1000) : null,
+            'state' => PaymeTransaction::state($this->state),
             'amount' => $this->amount / 100,
             'type' => 'payme'
         ];
