@@ -21,7 +21,6 @@ class PaymeTransaction extends Model
     protected $guarded = [];
 
     protected $casts = [
-        'state' => PaymeState::class,
         'create_time' => 'integer',
         'perform_time' => 'integer',
         'cancel_time' => 'integer',
@@ -39,7 +38,7 @@ class PaymeTransaction extends Model
             '1' => 'Kutilmoqda',
             '2' => 'Tasdiqlangan',
             '-1' => 'Bekor qilingan',
-            '-2' => 'Bekor qilingan'
+            '-2' => 'Tasdiqlangandan keyin Bekor qilingan'
         ];
         return $states[$code];
     }
