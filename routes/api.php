@@ -99,6 +99,7 @@ Route::prefix('/user')
                     Route::get('/today', [UserController::class, 'planToday']);
                 });
             Route::get('generate/payme/url', [UserController::class, 'paymeUrl']);
+            Route::post('payment/history', [UserController::class, 'paymentHistory']);
         });
     });
 

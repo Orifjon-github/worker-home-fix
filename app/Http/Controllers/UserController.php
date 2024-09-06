@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Helpers\Response;
 use App\Http\Resources\PlanResource;
+use App\Http\Resources\UserPaymentResource;
 use App\Http\Resources\UserPlanResource;
 use App\Models\UserPlan;
 use Carbon\Carbon;
@@ -77,5 +78,13 @@ class UserController extends Controller
         return $this->success([
             'checkout_url' => $checkoutUrl
         ]);
+    }
+
+    public function paymentHistory(Request $request): JsonResponse
+    {
+        $user = $request->user();
+        if (!$user && empty($user->wallet)) return $this->error('Error while getting User Account');
+
+        return $this->success(UserPaymentResource::collection($user->wallet->transactions));
     }
 }
