@@ -7,6 +7,7 @@ use App\Http\Resources\PlanResource;
 use App\Http\Resources\UserPaymentResource;
 use App\Http\Resources\UserPlanResource;
 use App\Models\UserPlan;
+use App\Payme\Models\PaymeTransaction;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -85,6 +86,7 @@ class UserController extends Controller
         $user = $request->user();
         if (!$user && empty($user->wallet)) return $this->error('Error while getting User Account');
 
-        return $this->success(UserPaymentResource::collection($user->wallet->transactions));
+        $payme = PaymeTransaction::where('wallet_id', $user->wallet->id)->get();
+        return $this->success(UserPaymentResource::collection($payme));
     }
 }
