@@ -20,7 +20,7 @@ class NotificationController extends Controller
         $personals = $user->notifications()->where('enable', '1')->get();
         return $this->success([
             'global' => NotificationResource::collection($globals),
-            'personal' => NotificationDetailResource::collection($personals),
+            'personal' => NotificationResource::collection($personals),
         ]);
     }
 
