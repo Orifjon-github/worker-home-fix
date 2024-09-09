@@ -29,17 +29,12 @@ trait Helpers
     public static function generateWalletId(): string
     {
         do {
-            $datePrefix = date('ymd');
-
-            $randomNumber = mt_rand(1000, 9999);
-
-            $uniqueId = '1' . $datePrefix . $randomNumber;
-
-            $exists = UserWallet::where('wallet_id', $uniqueId)->exists();
+            $randomNumber = mt_rand(10000, 99999);
+            $exists = UserWallet::where('wallet_id', $randomNumber)->exists();
 
         } while ($exists);
 
-        return $uniqueId;
+        return $randomNumber;
     }
 
     public function checkPhone($phone): bool|string
