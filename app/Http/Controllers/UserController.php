@@ -59,7 +59,7 @@ class UserController extends Controller
     {
         $user = $request->user();
 
-        $plans = $user->plans()->whereDate('date', Carbon::today())->get();
+        $plans = $user->plans()->whereDate('date', Carbon::today())->where('is_complete', '0')->get();
 
         return $this->success(UserPlanResource::collection($plans));
     }
