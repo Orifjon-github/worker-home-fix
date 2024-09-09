@@ -6,6 +6,7 @@ use App\Helpers\Response;
 use App\Http\Resources\OrderDetailResource;
 use App\Http\Resources\OrderResource;
 use App\Models\Order;
+use App\Models\OrderComment;
 use App\Models\Plan;
 use App\Models\Service;
 use App\Models\ServiceAdvantage;
@@ -72,5 +73,18 @@ class OrderController extends Controller
     {
         $order = Order::find($id);
         return $this->success(OrderDetailResource::make($order));
+    }
+
+    public function comment(Request $request): JsonResponse
+    {
+        $comment = $request->input('comment');
+        $order = $request->input('order_id');
+
+        OrderComment::create([
+            'comment' => $comment,
+            'order_id' => $order,
+        ]);
+
+        return $this->success(['message' => 'Sharh qoldirganingiz uchun Rahmat!']);
     }
 }
