@@ -68,4 +68,9 @@ class User extends Authenticatable
     {
         return $this->hasOne(SmsCode::class);
     }
+
+    public function fcm_tokens(): HasMany
+    {
+        return $this->hasMany(UserFcmToken::class);
+    }
 }

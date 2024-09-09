@@ -10,6 +10,7 @@ use Illuminate\Validation\ValidationException;
 /**
  * @property mixed $username
  * @property mixed $password
+ * @property mixed $fcm_token
  */
 class LoginRequest extends FormRequest
 {

@@ -8,6 +8,7 @@ use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
 use App\Mail\VerificationCodeMail;
 use App\Models\User;
+use App\Models\UserFcmToken;
 use App\Services\SmsService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -82,6 +83,7 @@ class AuthController extends Controller
     {
         $username = $request->username;
         $password = $request->password;
+        $fcm_token = $request->fcm_token;
 
         $user = User::where('username', $username)->first();
 
@@ -95,12 +97,18 @@ class AuthController extends Controller
 
         $token = $user->createToken('auth_token')->plainTextToken;
 
+        if ($fcm_token) {
+            $user->fcm_tokens()->create(['token' => $fcm_token]);
+        }
+
         return $this->success(['token' => $token]);
     }
 
     public function logout(Request $request): JsonResponse
     {
+        $fcm_token = $request->input('fcm_token');
         $request->user()->tokens()->delete();
+        UserFcmToken::where('token', $fcm_token)->delete();
 
         return $this->success(['message' => 'Logged out successfully']);
     }
