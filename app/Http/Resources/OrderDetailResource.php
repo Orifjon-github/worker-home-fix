@@ -38,7 +38,7 @@ class OrderDetailResource extends JsonResource
             'id' => $this->id,
             'title' => $title,
             'type' => $plan->type,
-            'services' => ServiceAdvantage::services($this->services),
+            'services' => ServiceAdvantageResource::collection(ServiceAdvantage::services($this->services)),
             'created_at' => date('Y-m-d H:i', strtotime($this->created_at))
         ];
     }
