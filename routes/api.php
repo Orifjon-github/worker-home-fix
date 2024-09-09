@@ -77,7 +77,7 @@ Route::prefix('/user')
                     Route::post('/create', [OrderController::class, 'create']);
                     Route::post('/leave/comment', [OrderController::class, 'comment']);
                     Route::post('/set-date/{id}', [OrderController::class, 'setDate']);
-                    Route::post('/get-dates/{id}', [OrderController::class, 'getDate']);
+                    Route::get('/get-dates/{id}', [OrderController::class, 'getDate']);
                 });
 
             Route::prefix('/home')->controller(UserHomeController::class)
