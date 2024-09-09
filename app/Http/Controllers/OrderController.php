@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\Response;
+use App\Http\Resources\OrderResource;
 use App\Models\Order;
 use App\Models\Plan;
 use App\Models\Service;
@@ -55,5 +56,14 @@ class OrderController extends Controller
         $payment->save();
 
         return $this->success(['message' => 'Order created successfully']);
+    }
+
+    public function index(Request $request): JsonResponse
+    {
+        $user = $request->user();
+
+        $orders = $user->orders();
+
+        return $this->success(OrderResource::collection($orders));
     }
 }
