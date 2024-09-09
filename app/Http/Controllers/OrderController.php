@@ -31,7 +31,7 @@ class OrderController extends Controller
             }
         }
 
-        if ($user->wallet->balance / 100 < $amount) {
+        if (($user->wallet->balance / 100) < $amount) {
             return $this->error('Not enough balance');
         }
         $payment = $user->payments()->create([
