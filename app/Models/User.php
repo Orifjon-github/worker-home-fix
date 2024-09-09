@@ -49,6 +49,11 @@ class User extends Authenticatable
         return $this->hasMany(UserQuestion::class);
     }
 
+    public function notifications(): HasMany
+    {
+        return $this->hasMany(Notification::class);
+    }
+
     public function plans(): HasMany
     {
         return $this->hasMany(UserPlan::class);

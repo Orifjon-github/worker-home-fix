@@ -16,14 +16,12 @@ class NotificationController extends Controller
     {
         $user = $request->user();
         if (!$user) return $this->error('User not found', 401);
-        $notifications = Notification::where('enable', 1)
-            ->where(function($query) use ($user) {
-                $query->where('user_id', $user->id)
-                    ->orWhere('type', 'global');
-            })
-            ->get();
-
-        return $this->success(NotificationResource::collection($notifications));
+        $globals = Notification::where('enable', '1')->where('type', 'global')->get();
+        $personals = $user->notifications()->where('enable', '1')->get();
+        return $this->success([
+            'global' => NotificationResource::collection($globals),
+            'personal' => NotificationDetailResource::collection($personals),
+        ]);
     }
 
     public function detail($id, Request $request): JsonResponse

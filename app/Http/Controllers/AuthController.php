@@ -108,7 +108,9 @@ class AuthController extends Controller
     {
         $fcm_token = $request->input('fcm_token');
         $request->user()->tokens()->delete();
-        UserFcmToken::where('token', $fcm_token)->delete();
+        if ($fcm_token) {
+            UserFcmToken::where('token', $fcm_token)->delete();
+        }
 
         return $this->success(['message' => 'Logged out successfully']);
     }
