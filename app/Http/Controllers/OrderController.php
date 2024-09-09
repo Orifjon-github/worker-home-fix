@@ -16,7 +16,7 @@ class OrderController extends Controller
         $user = $request->user();
         $type = $request->input('type');
         $plan  = $request->input('plan');
-        $services = $request->input('service') ?? null;
+        $services = $request->input('services') ?? null;
 
         $plan = Plan::where('duration', $plan)->where('type', $type)->first();
         if (!$plan) return $this->error('Plan not found');
