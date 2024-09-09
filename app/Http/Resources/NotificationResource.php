@@ -12,6 +12,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
  * @property mixed $image
  * @property mixed $is_view
  * @property mixed $type
+ * @property mixed $created_at
  */
 class NotificationResource extends JsonResource
 {
@@ -24,7 +25,8 @@ class NotificationResource extends JsonResource
             'short_description' => $this->getValue($this, 'short_description'),
             'image' => env('IMAGES_BASE_URL') . $this->getValue($this, 'image'),
             'type' => $this->type,
-            'is_view' => $this->type == 'global' || $this->is_view
+            'is_view' => $this->type == 'global' || $this->is_view,
+            'date' => date('Y-m-d H:i', strtotime($this->created_at))
         ];
     }
 }
