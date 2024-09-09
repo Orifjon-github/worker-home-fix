@@ -62,7 +62,7 @@ class OrderController extends Controller
     {
         $user = $request->user();
 
-        $orders = $user->orders();
+        $orders = $user->orders;
 
         return $this->success(OrderResource::collection($orders));
     }
