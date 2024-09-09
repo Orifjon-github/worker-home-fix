@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\Response;
+use App\Http\Resources\OrderDatesResource;
 use App\Http\Resources\OrderDetailResource;
 use App\Http\Resources\OrderResource;
 use App\Models\Order;
@@ -86,5 +87,24 @@ class OrderController extends Controller
         ]);
 
         return $this->success(['message' => 'Sharh qoldirganingiz uchun Rahmat!']);
+    }
+
+    public function setDate($id, Request $request): JsonResponse
+    {
+        $order = Order::find($id);
+        $home = $request->input('home_id');
+        $date = $request->input('date');
+        $order->dates()->create([
+            'home_id' => $home,
+            'date' => $date,
+        ]);
+
+        return $this->success(OrderDatesResource::collection($order->dates));
+    }
+
+    public function getDate($id): JsonResponse
+    {
+        $order = Order::find($id);
+        return $this->success(OrderDatesResource::collection($order->dates));
     }
 }
