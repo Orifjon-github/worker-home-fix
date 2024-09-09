@@ -14,15 +14,11 @@ class OrderController extends Controller
     public function create(Request $request): JsonResponse
     {
         $user = $request->user();
-        $type = $request->input('type');
-        $plan  = $request->input('plan');
+        $plan_id  = $request->input('plan_id');
         $services = $request->input('services') ?? null;
 
-        $plan = Plan::where('duration', $plan)->where('type', $type)->first();
-        if (!$plan) return $this->error('Plan not found');
-
         $user->orders()->create([
-            'plan_id' => $plan->id,
+            'plan_id' => $plan_id,
             'services' => $services,
         ]);
 
