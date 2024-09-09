@@ -19,12 +19,12 @@ class OrderController extends Controller
     {
         $user = $request->user();
         $plan_id  = $request->input('plan_id');
-        $services = $request->input('services') ?? null;
+        $servicesString = $request->input('services') ?? null;
 
         $plan = Plan::find($plan_id);
         $amount = $plan->amount;
-        if ($services) {
-            $services = explode(',', $services);
+        if ($servicesString) {
+            $services = explode(',', $servicesString);
             foreach ($services as $service_id) {
                 $service = ServiceAdvantage::find($service_id);
                 $amount += $service->price;
@@ -36,7 +36,7 @@ class OrderController extends Controller
         }
         $payment = $user->payments()->create([
             'plan_id' => $plan_id,
-            'services' => $services,
+            'services' => $servicesString,
             'type' => 'debit',
             'amount' => $amount
         ]);
