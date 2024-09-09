@@ -41,7 +41,7 @@ class OrderController extends Controller
             'amount' => $amount
         ]);
         try {
-            $this->withdrawBalance($user->wallet, $amount);
+            $this->withdrawBalance($user->wallet, ($amount * 100));
 
             $user->orders()->create([
                 'plan_id' => $plan_id,
