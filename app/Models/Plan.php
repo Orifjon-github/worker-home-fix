@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * @method static where(string $string, string $string1)
+ * @method static find(mixed $plan_id)
  */
 class Plan extends Model
 {
