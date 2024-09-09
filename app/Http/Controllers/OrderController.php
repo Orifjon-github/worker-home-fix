@@ -45,7 +45,7 @@ class OrderController extends Controller
 
             $user->orders()->create([
                 'plan_id' => $plan_id,
-                'services' => $services,
+                'services' => $servicesString,
             ]);
         } catch (Exception $e) {
             return $this->error($e->getMessage());
