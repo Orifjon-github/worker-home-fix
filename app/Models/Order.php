@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * @method static create(array $create)
+ * @method static find($id)
  */
 class Order extends Model
 {

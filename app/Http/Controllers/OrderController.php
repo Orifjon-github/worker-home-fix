@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\Response;
+use App\Http\Resources\OrderDetailResource;
 use App\Http\Resources\OrderResource;
 use App\Models\Order;
 use App\Models\Plan;
@@ -65,5 +66,11 @@ class OrderController extends Controller
         $orders = $user->orders;
 
         return $this->success(OrderResource::collection($orders));
+    }
+
+    public function detail($id): JsonResponse
+    {
+        $order = Order::find($id);
+        return $this->success(OrderDetailResource::make($order));
     }
 }
