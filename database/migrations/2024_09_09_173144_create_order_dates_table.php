@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('order_dates', function (Blueprint $table) {
             $table->id();
+            $table->string('order_id');
             $table->string('home_id');
             $table->string('date');
             $table->timestamps();
