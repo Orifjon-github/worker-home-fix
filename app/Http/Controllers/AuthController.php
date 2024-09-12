@@ -265,6 +265,7 @@ class AuthController extends Controller
     {
         $fcm_token = $request->input('fcm_token');
         $username = $request->input('username');
+        if (!filter_var($username, FILTER_VALIDATE_EMAIL)) $username = $this->checkPhone($username);
         $user = User::where('username', $username)->first();
         if (!$user) return $this->error('You have not account, Please register', 404);
         if ($user->provider == 'facebook') {
