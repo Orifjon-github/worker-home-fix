@@ -195,5 +195,39 @@ class AuthController extends Controller
         // Return the token and user data to the frontend
         return response()->json(['token' => $token, 'user' => $user], 200);
     }
+
+    public function googleRegister(Request $request): JsonResponse
+    {
+        $create = $request->all();
+        $create['password'] = Hash::make('secret');
+        $create['provider'] = 'google';
+        $user = User::create($create);
+
+        $user->wallet()->create(['wallet_id' => self::generateWalletId()]);
+
+        $user->status = 'active';
+        $user->save();
+
+        $user->token = $user->createToken('auth_token')->plainTextToken;
+
+        return $this->success($user);
+    }
+
+    public function googleLogin(Request $request): JsonResponse
+    {
+        $fcm_token = $request->input('fcm_token');
+        $username = $request->input('username');
+        $user = User::where('username', $username)->first();
+        if (!$user) return $this->error('You have not account, Please register', 404);
+        if ($user->provider == 'google') {
+            $token = $user->createToken('auth_token')->plainTextToken;
+            if ($fcm_token) {
+                $user->fcm_tokens()->create(['token' => $fcm_token]);
+            }
+            return $this->success(['token' => $token]);
+        }
+
+        return $this->error("Siz Google orqali ro'yhatdan o'tmagansiz. Shuning uchun Google orqali login qila olmaysiz");
+    }
 }
 

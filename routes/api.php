@@ -44,8 +44,12 @@ Route::controller(MainController::class)->group(function () {
 Route::prefix('/user')
     ->group(function () {
         Route::post('/register', [AuthController::class, 'register']);
+        Route::post('/google/register', [AuthController::class, 'googleRegister']);
+        Route::post('/facebook/register', [AuthController::class, 'facebookRegister']);
         Route::post('/register/confirm', [AuthController::class, 'registerConfirm']);
         Route::post('/login', [AuthController::class, 'login']);
+        Route::post('/facebook/login', [AuthController::class, 'facebookRegister']);
+        Route::post('/google/login', [AuthController::class, 'googleLogin']);
         Route::post('/forgot-password', [AuthController::class, 'forgotPassword']);
         Route::post('/forgot-password/confirm', [AuthController::class, 'forgotPasswordConfirm']);
         Route::post('/forgot-password/new-password', [AuthController::class, 'forgotPasswordNewPassword']);
