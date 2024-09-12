@@ -198,6 +198,9 @@ class AuthController extends Controller
 
     public function googleRegister(Request $request): JsonResponse
     {
+        $username = $request->input('username');
+        $user = User::where('username', $username)->first();
+        if ($user) return $this->error('Username already exists');
         $create = $request->all();
         $create['password'] = Hash::make('secret');
         $create['provider'] = 'google';
