@@ -232,5 +232,50 @@ class AuthController extends Controller
 
         return $this->error("Siz Google orqali ro'yhatdan o'tmagansiz. Shuning uchun Google orqali login qila olmaysiz");
     }
+
+    public function facebookRegister(Request $request): JsonResponse
+    {
+        $username = $request->input('username');
+        $create = $request->all();
+        if (filter_var($username, FILTER_VALIDATE_EMAIL)) {
+            $user = User::where('username', $username)->first();
+        } elseif ($phone = $this->checkPhone($username)) {
+            $user = User::where('username', $phone)->first();
+            $create['username'] = $phone;
+        } else {
+            return $this->error('Invalid Username Format');
+        }
+
+        if ($user) return $this->error('Username already exists');
+        $create['password'] = Hash::make('secret');
+        $create['provider'] = 'facebook';
+        $user = User::create($create);
+
+        $user->wallet()->create(['wallet_id' => self::generateWalletId()]);
+
+        $user->status = 'active';
+        $user->save();
+
+        $user->token = $user->createToken('auth_token')->plainTextToken;
+
+        return $this->success($user);
+    }
+
+    public function facebookLogin(Request $request): JsonResponse
+    {
+        $fcm_token = $request->input('fcm_token');
+        $username = $request->input('username');
+        $user = User::where('username', $username)->first();
+        if (!$user) return $this->error('You have not account, Please register', 404);
+        if ($user->provider == 'facebook') {
+            $token = $user->createToken('auth_token')->plainTextToken;
+            if ($fcm_token) {
+                $user->fcm_tokens()->create(['token' => $fcm_token]);
+            }
+            return $this->success(['token' => $token]);
+        }
+
+        return $this->error("Siz Facebook orqali ro'yhatdan o'tmagansiz. Shuning uchun Facebook orqali login qila olmaysiz");
+    }
 }
 
