@@ -46,7 +46,7 @@ class AuthController extends Controller
         $code = mt_rand(100000, 999999);
         $create['status'] = 'wait';
 
-        if ($fcm_token) unset($create['fct_token']);
+        if ($fcm_token) unset($create['fcm_token']);
 
         $user = User::updateOrCreate(['username' => $username], $create);
         if (!$user) return $this->error('Create User Error. Try Again');
@@ -206,6 +206,7 @@ class AuthController extends Controller
     public function googleRegister(Request $request): JsonResponse
     {
         $username = $request->input('username');
+        $fcm_token = $request->input('fcm_token');
         $user = User::where('username', $username)->first();
         if ($user) return $this->error('Username already exists');
         $create = $request->all();
@@ -214,7 +215,7 @@ class AuthController extends Controller
         $user = User::create($create);
 
         $user->wallet()->create(['wallet_id' => self::generateWalletId()]);
-
+        if ($fcm_token) $user->fcm_tokens()->create(['token' => $fcm_token]);
         $user->status = 'active';
         $user->save();
 
@@ -243,6 +244,7 @@ class AuthController extends Controller
     public function facebookRegister(Request $request): JsonResponse
     {
         $username = $request->input('username');
+        $fcm_token = $request->input('fcm_token');
         $create = $request->all();
         if (filter_var($username, FILTER_VALIDATE_EMAIL)) {
             $user = User::where('username', $username)->first();
@@ -259,7 +261,7 @@ class AuthController extends Controller
         $user = User::create($create);
 
         $user->wallet()->create(['wallet_id' => self::generateWalletId()]);
-
+        if ($fcm_token) $user->fcm_tokens()->create(['token' => $fcm_token]);
         $user->status = 'active';
         $user->save();
 
