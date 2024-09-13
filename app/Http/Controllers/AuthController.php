@@ -40,7 +40,7 @@ class AuthController extends Controller
         }
         if (!$username) return $this->error('Invalid Format Username');
 
-        $user = User::where('username', $username)->first();
+        $user = User::where('username', $username)->where('status', 'active')->first();
         if ($user && $user->status == 'active') return $this->error($username . ' already registered');
 
         $code = mt_rand(100000, 999999);
