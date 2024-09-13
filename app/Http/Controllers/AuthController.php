@@ -32,26 +32,31 @@ class AuthController extends Controller
     {
         $create = $request->all();
         $username = $request->input('username');
-        $code = mt_rand(100000, 999999);
-        if (filter_var($username, FILTER_VALIDATE_EMAIL)) {
-            $user = User::updateOrCreate(['username' => $username], $create);
-            if (!$user) return $this->error('Create User Error. Try Again');
-            Mail::to($username)->send(new VerificationCodeMail($code));
-            $user->sms_code()->updateOrCreate(['user_id' => $user->id], ['code' => $code]);
-        } elseif ($phone = $this->checkPhone($username)) {
-            $create['username'] = $phone;
-            $user = User::updateOrCreate(['username' => $phone], $create);
-            if (!$user) return $this->error('Create User Error. Try Again');
-            $sms = $this->smsService->sms($phone, $code);
-            if ($sms) {
-                $user->sms_code()->updateOrCreate(['user_id' => $user->id], ['code' => $code]);
-            } else {
-                return $this->error('Send Sms Error');
-            }
-        } else {
-            return $this->error('Invalid Username Format');
+        $fcm_token = $request->input('fcm_token');
+        $is_email = filter_var($username, FILTER_VALIDATE_EMAIL);
+        if (!$is_email) {
+            $username = $this->checkPhone($username);
+            $create['username'] = $username;
         }
+        if (!$username) return $this->error('Invalid Format Username');
 
+        $user = User::where('username', $username)->first();
+        if ($user && $user->status == 'active') return $this->error($username . ' already registered');
+
+        $code = mt_rand(100000, 999999);
+        $create['status'] = 'wait';
+
+        if ($fcm_token) unset($create['fct_token']);
+
+        $user = User::updateOrCreate(['username' => $username], $create);
+        if (!$user) return $this->error('Create User Error. Try Again');
+
+        if ($fcm_token) $user->fcm_tokens()->create(['token' => $fcm_token]);
+
+        $sms = $is_email ? Mail::to($username)->send(new VerificationCodeMail($code)) : $this->smsService->sms($username, $code);
+        if (!$sms) return $this->error('Send Sms Error');
+
+        $user->sms_code()->updateOrCreate(['user_id' => $user->id], ['code' => $code]);
         return $this->success(['message' => "Sms code sent to $username"]);
     }
 
@@ -165,7 +170,9 @@ class AuthController extends Controller
 
     public function delete(Request $request): JsonResponse
     {
-        $request->user()->delete();
+        $user = $request->user();
+        $user->status = 'deleted';
+        $user->save();
 
         return $this->success(['message' => 'Account deleted successfully']);
     }
