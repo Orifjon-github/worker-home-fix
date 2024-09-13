@@ -12,6 +12,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
  * @property mixed $services
  * @property mixed $id
  * @property mixed $created_at
+ * @property mixed $plan
  */
 class OrderDetailResource extends JsonResource
 {
@@ -38,7 +39,7 @@ class OrderDetailResource extends JsonResource
             'id' => $this->id,
             'title' => $title,
             'type' => $plan->type,
-            'services' => ServiceAdvantageResource::collection(ServiceAdvantage::services($this->services)),
+            'services' => $plan->type == 'individual' ? ServiceAdvantageResource::collection(ServiceAdvantage::services($this->services)) : PlanAdvantageResource::collection($this->plan->advantages),
             'created_at' => date('Y-m-d H:i', strtotime($this->created_at))
         ];
     }
