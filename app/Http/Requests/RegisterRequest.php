@@ -22,19 +22,7 @@ class RegisterRequest extends FormRequest
     {
 
         return [
-            'username' => [
-                'required',
-                function ($attribute, $value, $fail) {
-                    $exists = DB::table('users')
-                        ->where('username', $value)
-                        ->where('status', '!=', 'wait')
-                        ->exists();
-
-                    if ($exists) {
-                        $fail('The '.$attribute.' has already been taken.');
-                    }
-                },
-            ],
+            'username' => 'required',
             'name' => 'required|max:255',
             'password' => 'required'
         ];
