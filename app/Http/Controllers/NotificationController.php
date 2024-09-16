@@ -27,7 +27,7 @@ class NotificationController extends Controller
     public function detail($id, Request $request): JsonResponse
     {
         $user = $request->user();
-        if (!$user) return $this->error('User not found', 401);
+        if (!$user) return $this->error('User not found', 404);
 
         $notification = Notification::find($id);
         if (!$notification) return $this->error('Notification Not found', 404);
@@ -36,5 +36,19 @@ class NotificationController extends Controller
         $notification->save();
 
         return $this->success(NotificationDetailResource::make($notification));
+    }
+
+    public function readAll(Request $request): JsonResponse
+    {
+        $user = $request->user();
+        if (!$user) return $this->error('User not found', 404);
+
+        $personals = $user->notifications()->where('enable', '1')->get();
+        foreach ($personals as $personal) {
+            $personal->is_view = 1;
+            $personal->save();
+        }
+
+        return $this->success(NotificationResource::collection($personals));
     }
 }

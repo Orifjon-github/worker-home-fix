@@ -73,6 +73,7 @@ Route::prefix('/user')
                 ->group(function () {
                     Route::get('/', [NotificationController::class, 'index']);
                     Route::get('/{id}', [NotificationController::class, 'detail']);
+                    Route::get('/read/all', [NotificationController::class, 'readAll']);
                 });
             Route::prefix('/orders')
                 ->group(function () {
