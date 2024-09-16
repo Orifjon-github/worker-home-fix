@@ -92,13 +92,11 @@ class AuthController extends Controller
 
         $user = User::where('username', $username)->first();
 
-        if (!$user) return $this->error('You have not account, Please register', 404);
+        if (!$user || $user->status == 'deleted' || $user->status == 'wait') return $this->error('You have not account, Please register', 404);
 
         if (!Hash::check($password, $user->password)) {
             return $this->error('Invalid Password', 403);
         }
-
-        if ($user->status == 'wait') $this->error('You have not account, Please register', 404);
 
         $token = $user->createToken('auth_token')->plainTextToken;
 
@@ -229,7 +227,7 @@ class AuthController extends Controller
         $fcm_token = $request->input('fcm_token');
         $username = $request->input('username');
         $user = User::where('username', $username)->first();
-        if (!$user) return $this->error('You have not account, Please register', 404);
+        if (!$user || $user->status = 'deleted') return $this->error('You have not account, Please register', 404);
         if ($user->provider == 'google') {
             $token = $user->createToken('auth_token')->plainTextToken;
             if ($fcm_token) {
@@ -276,7 +274,7 @@ class AuthController extends Controller
         $username = $request->input('username');
         if (!filter_var($username, FILTER_VALIDATE_EMAIL)) $username = $this->checkPhone($username);
         $user = User::where('username', $username)->first();
-        if (!$user) return $this->error('You have not account, Please register', 404);
+        if (!$user || $user->status = 'deleted') return $this->error('You have not account, Please register', 404);
         if ($user->provider == 'facebook') {
             $token = $user->createToken('auth_token')->plainTextToken;
             if ($fcm_token) {
