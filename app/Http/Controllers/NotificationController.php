@@ -32,7 +32,7 @@ class NotificationController extends Controller
         $notification = Notification::find($id);
         if (!$notification) return $this->error('Notification Not found', 404);
 
-        $notification->is_view = 1;
+        $notification->is_view = '1';
         $notification->save();
 
         return $this->success(NotificationDetailResource::make($notification));
@@ -45,7 +45,7 @@ class NotificationController extends Controller
 
         $personals = $user->notifications()->where('enable', '1')->get();
         foreach ($personals as $personal) {
-            $personal->is_view = 1;
+            $personal->is_view = '1';
             $personal->save();
         }
 
