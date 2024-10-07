@@ -1,6 +1,5 @@
 <?php
 
-use App\Payme\PaymeServiceProvider;
 use Illuminate\Support\Facades\Facade;
 use Illuminate\Support\ServiceProvider;
 
@@ -169,7 +168,6 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        PaymeServiceProvider::class
     ])->toArray(),
 
     /*
@@ -184,7 +182,6 @@ return [
     */
 
     'aliases' => Facade::defaultAliases()->merge([
-        'Payme' => \App\Payme\Facades\Payme::class,
         // 'Example' => App\Facades\Example::class,
     ])->toArray(),
 
