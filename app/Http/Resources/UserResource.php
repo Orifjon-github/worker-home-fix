@@ -28,10 +28,7 @@ class UserResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'username' => $this->username,
-            'image' => env('APP_URL') . $this->image,
-            'wallet_id' => $this->wallet->wallet_id,
-            'balance' => $this->wallet->balance / 100,
-            'social_login' => (bool)$this->provider
+            'image' => env('APP_URL') . $this->image
         ];
     }
 }
