@@ -35,8 +35,9 @@ Route::prefix('/user')
                     Route::get('/{id}', [NotificationController::class, 'detail']);
                     Route::get('/read/all', [NotificationController::class, 'readAll']);
                 });
+            Route::prefix('/tasks')->group(function () {
+                Route::get("/me"  , [\App\Http\Controllers\TaskController::class , 'me']);
+                Route::get('/status' , [\App\Http\Controllers\TaskController::class , 'index']);
+            });
         });
     });
-
-
-

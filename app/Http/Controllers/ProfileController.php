@@ -17,6 +17,7 @@ class ProfileController extends Controller
     public function profileInfo(Request $request): JsonResponse
     {
         $user = $request->user();
+
         return $this->success(UserResource::make($user));
     }
 
@@ -36,13 +37,13 @@ class ProfileController extends Controller
         return $this->success(UserResource::make($user));
     }
 
-
     public function changePassword(ChangePasswordRequest $request): JsonResponse
     {
         $user = $request->user();
 
         if (Hash::check($request->old_password, $user->password)) {
             $user->update(['password' => Hash::make($request->password)]);
+
             return $this->success(['message' => 'Password updated successfully']);
         } else {
             return $this->error('Old password is incorrect');

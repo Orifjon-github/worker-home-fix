@@ -2,12 +2,16 @@
 
 namespace App\Models;
 
+use Illuminate\Console\View\Components\Task;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\DB;
 use Laravel\Sanctum\HasApiTokens;
+use PhpParser\ErrorHandler\Collecting;
+use Ramsey\Collection\Collection;
 
 /**
  * @method static create($all)
@@ -38,7 +42,12 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+    public function getTasks(): \Illuminate\Support\Collection
+    {
+        $tasks =  s_db()->table('task_worker_user' )->where('worker_user_id' , $this->id)->pluck('id');
 
+        return s_db()->table('tasks')->whereIn('id' , $tasks)->get();
+    }
     public function home(): HasMany
     {
         return $this->hasMany(UserHome::class);

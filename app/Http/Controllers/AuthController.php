@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Helpers\Response;
 use App\Helpers\Helpers;
+use App\Helpers\Response;
 use App\Http\Requests\LoginRequest;
 use App\Mail\VerificationCodeMail;
 use App\Models\User;
@@ -17,7 +17,8 @@ use Illuminate\Support\Facades\Mail;
 
 class AuthController extends Controller
 {
-    use Response, Helpers;
+    use Response;
+    use Helpers;
 
     private SmsService $smsService;
 
@@ -34,7 +35,9 @@ class AuthController extends Controller
 
         $user = User::where('username', $username)->first();
 
-        if (!$user) return $this->error('You have not account, Please register', 404);
+        if (!$user) {
+            return $this->error('You have not account, Please register', 404);
+        }
 
         if (!Hash::check($password, $user->password)) {
             return $this->error('Invalid Password', 403);
@@ -64,7 +67,9 @@ class AuthController extends Controller
     {
         $username = $request->input('username');
         $user = User::where('username', $username)->first();
-        if (!$user) return $this->error('You have not account, Please register', 404);
+        if (!$user) {
+            return $this->error('You have not account, Please register', 404);
+        }
 
         $code = mt_rand(100000, 999999);
         if (filter_var($username, FILTER_VALIDATE_EMAIL)) {
@@ -92,7 +97,9 @@ class AuthController extends Controller
         $user = User::where('username', $username)->first();
 
         $check = self::checkCode($user, $code);
-        if ($check instanceof JsonResponse) return $check;
+        if ($check instanceof JsonResponse) {
+            return $check;
+        }
 
         return $this->success(['message' => 'Sms code confirm, You can change password']);
     }
@@ -102,10 +109,12 @@ class AuthController extends Controller
         $password = $request->input('password');
         $username = $request->input('username');
         $user = User::where('username', $username)->first();
-        if (!$user) return $this->error('You have not account, Please register', 404);
+        if (!$user) {
+            return $this->error('You have not account, Please register', 404);
+        }
 
         $user->update(['password' => Hash::make($password)]);
+
         return $this->success(['message' => 'Password reset successfully']);
     }
 }
-
