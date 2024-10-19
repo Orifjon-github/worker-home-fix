@@ -36,11 +36,12 @@ Route::prefix('/user')
                     Route::get('/read/all', [NotificationController::class, 'readAll']);
                 });
             Route::prefix('/tasks')->group(function () {
-                Route::get("/me"  , [\App\Http\Controllers\TaskController::class , 'me']);
-                Route::get('/status' , [\App\Http\Controllers\TaskController::class , 'index']);
+                Route::get('/me', [App\Http\Controllers\TaskController::class, 'me']);
+                Route::get('/status', [App\Http\Controllers\TaskController::class, 'index']);
+                Route::get('/show/{id}', [App\Http\Controllers\TaskController::class, 'show']);
             });
             Route::prefix('/rating')->group(function () {
-                Route::post('/set-worker-rating', [\App\Http\Controllers\WorkerRatingController::class , 'store']);
+                Route::post('/set-worker-rating', [App\Http\Controllers\WorkerRatingController::class, 'store']);
             });
         });
     });
