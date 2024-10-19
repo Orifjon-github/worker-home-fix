@@ -19,6 +19,7 @@ class TaskDetailResource extends JsonResource
             'materials'=>$this->materials ,
             'images'=>$this->images,
             'works'=>$this->works,
+            'equipments'=>$this->equipments,
         ];
     }
 }

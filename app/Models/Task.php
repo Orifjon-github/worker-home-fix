@@ -33,5 +33,9 @@ class Task extends Model
     public function works(){
         return $this->hasMany(TaskWorks::class , 'task_id');
     }
+    public function equipments()
+    {
+        return $this->belongsToMany(Equipment::class, 'task_equipment', 'task_id', 'equipment_id');
+    }
 
 }
