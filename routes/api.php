@@ -3,8 +3,10 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TaskController;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\WorkerRatingController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -36,12 +38,14 @@ Route::prefix('/user')
                     Route::get('/read/all', [NotificationController::class, 'readAll']);
                 });
             Route::prefix('/tasks')->group(function () {
-                Route::get('/me', [App\Http\Controllers\TaskController::class, 'me']);
-                Route::get('/status', [App\Http\Controllers\TaskController::class, 'index']);
-                Route::get('/show/{id}', [App\Http\Controllers\TaskController::class, 'show']);
+                Route::get('/me', [TaskController::class, 'me']);
+                Route::get('/status', [TaskController::class, 'index']);
+                Route::get('/show/{id}', [TaskController::class, 'show']);
+                Route::post('/get-equipments', [TaskController::class, 'getEquipment']);
+                Route::post('/date-update', [TaskController::class, 'updateDate']);
             });
             Route::prefix('/rating')->group(function () {
-                Route::post('/set-worker-rating', [App\Http\Controllers\WorkerRatingController::class, 'store']);
+                Route::post('/set-worker-rating', [WorkerRatingController::class, 'store']);
             });
         });
     });

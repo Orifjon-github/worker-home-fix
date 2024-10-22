@@ -20,7 +20,8 @@ class Task extends Model
         'start_time',
         'end_time',
         'status',
-        'duration'
+        'duration',
+        'is_equipment'
     ];
     public function materials()
     {
