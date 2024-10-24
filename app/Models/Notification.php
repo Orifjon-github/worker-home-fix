@@ -12,4 +12,24 @@ use Illuminate\Database\Eloquent\Model;
 class Notification extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'user_id',
+        'title',
+        'title_ru',
+        'title_en',
+        'short_description',
+        'short_description_ru',
+        'short_description_en',
+        'description',
+        'description_ru',
+        'description_en',
+        'image',
+        'image_ru',
+        'image_en',
+        'type'  ,
+        'is_view',
+        'enable'
+    ];
+
+
 }
