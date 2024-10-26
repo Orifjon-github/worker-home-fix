@@ -16,7 +16,7 @@ class FireBaseController extends Controller
     public function detail($id, Request $request)
     {
 
-        $response = $this->firebaseMessagingService->sendNotification('Salom', 'Main', $id);
+//        $response = $this->firebaseMessagingService->sendNotification('Salom', 'Main', $id);
 
     }
 

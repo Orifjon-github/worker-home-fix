@@ -2,7 +2,6 @@
 
 namespace App\Services;
 
-use Kreait\Firebase\Contract\Messaging;
 use Kreait\Firebase\Messaging\CloudMessage;
 use Kreait\Firebase\Messaging\Notification;
 use Kreait\Firebase\Exception\MessagingException;
@@ -21,7 +20,6 @@ class FirebaseMessagingServiceMain
 
     public function sendNotification(string $title, string $body, string $deviceTokens): array
     {
-        // Create a CloudMessage for multiple device tokens
         $message = CloudMessage::withTarget('token', $deviceTokens)
             ->withNotification(Notification::create($title, $body));
 
