@@ -2,15 +2,12 @@
 
 namespace App\Models;
 
-use App\Models\Task;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-
 use Laravel\Sanctum\HasApiTokens;
-
 
 /**
  * @method static create($all)
@@ -19,7 +16,9 @@ use Laravel\Sanctum\HasApiTokens;
  */
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens;
+    use HasFactory;
+    use Notifiable;
     protected $guarded = [];
 
     /**
@@ -41,15 +40,19 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
     public function getTasks(): \Illuminate\Support\Collection
     {
-        $tasks =  s_db()->table('task_worker_user' )->where('worker_user_id' , $this->id)->pluck('id');
-        return Task::whereIn('id' , $tasks)->get();
+        $tasks = s_db()->table('task_worker_user')->where('worker_user_id', $this->id)->pluck('task_id');
+
+        return Task::whereIn('id', $tasks)->get();
     }
+
     public function tokensFCM(): HasMany
     {
-        return $this->hasMany(UserFcmToken::class , 'user_id');
+        return $this->hasMany(UserFcmToken::class, 'user_id');
     }
+
     public function home(): HasMany
     {
         return $this->hasMany(UserHome::class);

@@ -26,10 +26,8 @@ class Notification extends Model
         'image',
         'image_ru',
         'image_en',
-        'type'  ,
+        'type',
         'is_view',
-        'enable'
+        'enable',
     ];
-
-
 }
