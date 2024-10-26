@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 class UserFcmToken extends Model
 {
     use HasFactory;
-    protected $table = 'user_fcm_token';
+    protected $table = 'user_fcm_tokens';
     protected $fillable = [
         'user_id',
         'token',

@@ -46,7 +46,10 @@ class AuthController extends Controller
         $token = $user->createToken('auth_token')->plainTextToken;
 
         if ($fcm_token) {
-            $user->fcm_tokens()->create(['token' => $fcm_token]);
+            $user->tokensFCM()->create([
+                'token' => $request->fcm_token,
+            ]);
+
         }
 
         return $this->success(['token' => $token]);
