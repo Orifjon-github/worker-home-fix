@@ -46,6 +46,10 @@ class User extends Authenticatable
         $tasks =  s_db()->table('task_worker_user' )->where('worker_user_id' , $this->id)->pluck('id');
         return Task::whereIn('id' , $tasks)->get();
     }
+    public function fcm_tokens(): HasMany
+    {
+        return $this->hasMany(UserFcmToken::class , 'user_id');
+    }
     public function home(): HasMany
     {
         return $this->hasMany(UserHome::class);
