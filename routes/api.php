@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\FireBaseController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TaskController;
@@ -34,7 +35,7 @@ Route::prefix('/user')
             Route::prefix('/notifications')
                 ->group(function () {
                     Route::get('/', [NotificationController::class, 'index']);
-                    Route::get('/{id}', [NotificationController::class, 'detail']);
+                    Route::get('/{id}', [FireBaseController::class, 'detail']);
                     Route::get('/read/all', [NotificationController::class, 'readAll']);
                 });
             Route::prefix('/tasks')->group(function () {
