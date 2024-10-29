@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Helpers\Response;
 use App\Http\Resources\Task\TaskDetailResource;
 use App\Models\Task;
+use App\Models\TaskMaterials;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -47,5 +48,11 @@ class TaskController extends Controller
         }
 
         return $this->success($task);
+    }
+    public function  updateMaterials(Request $request)
+    {
+        $material = TaskMaterials::find($request->material_id);
+        $material->update(['status' => $material->status == 0 ? 1 : 0]);
+        return $this->success($material);
     }
 }
