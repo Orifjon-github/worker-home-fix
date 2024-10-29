@@ -16,6 +16,7 @@ class TaskMaterials extends Model
         'description',
         'price',
         'quantity',
-        'quantity_type'
+        'quantity_type',
+        'type'
     ];
 }
