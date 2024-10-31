@@ -21,7 +21,8 @@ class Task extends Model
         'end_time',
         'status',
         'duration',
-        'is_equipment'
+        'is_equipment',
+        'step'
     ];
     public function materials()
     {

@@ -20,4 +20,7 @@ class TaskMaterials extends Model
         'type',
         'status'
     ];
+    public function task(){
+        return $this->belongsTo(Task::class, 'task_id');
+    }
 }

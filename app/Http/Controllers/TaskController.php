@@ -32,8 +32,7 @@ class TaskController extends Controller
     public function getEquipment(Request $request)
     {
         $task = Task::find($request->task_id);
-        $task->update(['is_equipment' => $task->is_equipment == 1 ? 0 : 1]);
-
+        $task->update(['is_equipment' => $task->is_equipment == 1 ? 0 : 1 , 'status'=>'new' , 'step'=>1]);
         return $this->success($task);
     }
 
@@ -42,7 +41,7 @@ class TaskController extends Controller
         $task = Task::find($request->task_id);
         $dateTime = Carbon::now()->format('d-m.Y H:i'); // Outputs: '15-10.2024 19:00'
         if ($request->start_time) {
-            $task->update(['start_time' => $dateTime , 'status'=>'process']);
+            $task->update(['start_time' => $dateTime , 'status'=>'process' , 'step'=>2]);
         }
         if ($request->end_time) {
             $task->update(['end_time' => $dateTime]);
@@ -54,6 +53,9 @@ class TaskController extends Controller
     {
         $material = TaskMaterials::find($request->material_id);
         $material->update(['status' => $material->status == 0 ? 1 : 0]);
+        if($material->task->step != 3){
+            $material->task()->update(['step' => 3]);
+        }
         return $this->success($material);
     }
     public function upload(Request $request)
@@ -72,7 +74,11 @@ class TaskController extends Controller
             $imageUrl = '/storage/images/' . $imageName;
             // Store the URL in the database
             TaskImages::create(['image' => $imageUrl , 'state'=>'after' , 'task_id'=>$request->task_id]);
-            return $this->success(TaskImages::where('task_id' , $request->task_id)->get());
+            $task = Task::where('id' , $request->task_id)->first();
+            if($task->step != 4){
+                $task->task()->update(['step' => 4]);
+            }
+            return $this->success(new TaskDetailResource($task));
 
         } catch (\Exception $e) {
             // Handle any errors that occur
@@ -86,11 +92,12 @@ class TaskController extends Controller
         $request->validate([
             'task_id'=>'required'
         ]);
+
         $task = Task::find($request->task_id);
+        if($task->step != 5){
+            $task->task()->update(['step' => 5]);
+        }
         $task->update(['status' => 'checking']);
         return $this->success($task);
     }
-
-
-
 }
