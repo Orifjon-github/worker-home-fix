@@ -45,6 +45,8 @@ Route::prefix('/user')
                 Route::post('/get-equipments', [TaskController::class, 'getEquipment']);
                 Route::post('/date-update', [TaskController::class, 'updateDate']);
                 Route::post('/update/materials' ,[TaskController::class, 'updateMaterials']);
+                Route::post('/uploadImage' , [TaskController::class, 'upload']);
+                Route::post('/done' , [TaskController::class, 'taskDone']);
             });
             Route::prefix('/rating')->group(function () {
                 Route::post('/set-worker-rating', [WorkerRatingController::class, 'store']);
