@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Task;
 
+use App\Http\Resources\ImageResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -17,7 +18,7 @@ class TaskDetailResource extends JsonResource
         return[
             'task'=> parent::toArray($request),
             'materials'=>$this->materials->where('type' , 1),
-            'images'=>$this->images,
+            'images'=>ImageResource::collection($this->images),
             'works'=>$this->works,
             'equipments'=>$this->materials->where('type' , 2),
         ];

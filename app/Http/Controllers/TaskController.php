@@ -69,7 +69,7 @@ class TaskController extends Controller
             // Move the image to the 'uploads/images' directory
             $image->move(public_path('storage/images'), $imageName);
             // Generate the full URL for the saved image
-            $imageUrl = 'storage/images/' . $imageName;
+            $imageUrl = '/storage/images/' . $imageName;
             // Store the URL in the database
             TaskImages::create(['image' => $imageUrl , 'state'=>'after' , 'task_id'=>$request->task_id]);
             return $this->success(TaskImages::where('task_id' , $request->task_id)->get());
