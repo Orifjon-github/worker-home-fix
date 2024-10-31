@@ -31,7 +31,7 @@ class TaskController extends Controller
 
     public function getEquipment(Request $request)
     {
-        $task = Task::find($request->task_id);
+        $task = Task::findOrFail($request->task_id);
         $task->update(['is_equipment' => $task->is_equipment == 1 ? 0 : 1 , 'status'=>'new' , 'step'=>1]);
         return $this->success($task);
     }
@@ -53,6 +53,7 @@ class TaskController extends Controller
     {
         $material = TaskMaterials::find($request->material_id);
         $material->update(['status' => $material->status == 0 ? 1 : 0]);
+
         if($material->task->step != 3){
             $material->task()->update(['step' => 3]);
         }
@@ -76,7 +77,7 @@ class TaskController extends Controller
             TaskImages::create(['image' => $imageUrl , 'state'=>'after' , 'task_id'=>$request->task_id]);
             $task = Task::where('id' , $request->task_id)->first();
             if($task->step != 4){
-                $task->task()->update(['step' => 4]);
+                $task->update(['step' => 4]);
             }
             return $this->success(new TaskDetailResource($task));
 
@@ -95,7 +96,7 @@ class TaskController extends Controller
 
         $task = Task::find($request->task_id);
         if($task->step != 5){
-            $task->task()->update(['step' => 5]);
+            $task->update(['step' => 5]);
         }
         $task->update(['status' => 'checking']);
         return $this->success($task);
