@@ -15,12 +15,12 @@ class TaskDetailResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return[
-            'task'=> parent::toArray($request),
-            'materials'=>$this->materials->where('type' , 1),
-            'images'=>ImageResource::collection($this->images),
-            'works'=>$this->works,
-            'equipments'=>$this->materials->where('type' , 2),
+        return [
+            'task' => parent::toArray($request),
+            'materials' => $this->materials->where('type', 1),
+            'images' => ImageResource::collection($this->images),
+            'works' => $this->works,
+            'equipments' => $this->materials->where('type', 2),
         ];
     }
 }
