@@ -53,7 +53,7 @@ class TaskController extends Controller
 
     public function updateMaterials(Request $request)
     {
-        $material = TaskMaterials::find($request->material_id);
+        $material = TaskMaterials::findOrFail($request->material_id);
         $material->update(['status' => $material->status == 0 ? 1 : 0]);
 
         if ($material->task->step != 3) {
