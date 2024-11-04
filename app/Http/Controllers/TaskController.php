@@ -45,7 +45,7 @@ class TaskController extends Controller
             $task->update(['start_time' => $dateTime, 'status' => 'process', 'step' => 2]);
         }
         if ($request->end_time) {
-            $task->update(['end_time' => $dateTime, 'step' => 3]);
+            $task->update(['end_time' => $dateTime]);
         }
 
         return $this->success($task);
@@ -56,8 +56,8 @@ class TaskController extends Controller
         $material = TaskMaterials::find($request->material_id);
         $material->update(['status' => $material->status == 0 ? 1 : 0]);
 
-        if ($material->task->step != 4) {
-            $material->task()->update(['step' => 4]);
+        if ($material->task->step != 3) {
+            $material->task()->update(['step' => 3]);
         }
 
         return $this->success($material);
@@ -80,8 +80,8 @@ class TaskController extends Controller
             // Store the URL in the database
             TaskImages::create(['image' => $imageUrl, 'state' => 'after', 'task_id' => $request->task_id]);
             $task = Task::where('id', $request->task_id)->first();
-            if ($task->step != 5) {
-                $task->update(['step' => 5]);
+            if ($task->step != 4) {
+                $task->update(['step' => 4]);
             }
 
             return $this->success(new TaskDetailResource($task));
@@ -101,8 +101,8 @@ class TaskController extends Controller
         ]);
 
         $task = Task::find($request->task_id);
-        if ($task->step != 6) {
-            $task->update(['step' => 6]);
+        if ($task->step != 5) {
+            $task->update(['step' => 5]);
         }
         $task->update(['status' => 'checking']);
 
