@@ -17,10 +17,10 @@ class TaskDetailResource extends JsonResource
     {
         return [
             'task' => parent::toArray($request),
-            'materials' => $this->materials->where('type', 1),
+            'materials' => $this->materials->where('type', 1)->values(),
             'images' => ImageResource::collection($this->images),
             'works' => $this->works,
-            'equipments' => $this->materials->where('type', 2),
+            'equipments' => $this->materials->where('type', 2)->values(),
         ];
     }
 }
