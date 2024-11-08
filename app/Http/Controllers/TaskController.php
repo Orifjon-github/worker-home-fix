@@ -47,6 +47,7 @@ class TaskController extends Controller
         if ($request->end_time) {
             $task->update(['end_time' => $dateTime]);
         }
+
         return $this->success($task);
     }
 
@@ -54,14 +55,13 @@ class TaskController extends Controller
     {
         TaskMaterials::whereIn('id', $request->material_id)->update(['status' => $request->status]);
         $material = TaskMaterials::whereIn('id', $request->material_id)->get();
-        $task =  $material->first()->task();
         if ($material->first()->task->step != 3) {
-            $task->update(['step' => 3]);
+            $material->first()->task()->update(['step' => 3]);
         }
         if(count($material)==0){
-            $task->update(['step' => 4]);
+            $material->first()->task()->update(['step' => 4]);
         }
-        return $this->success($task);
+        return $this->success($material);
     }
 
     public function upload(Request $request)
