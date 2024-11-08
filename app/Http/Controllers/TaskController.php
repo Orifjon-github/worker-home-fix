@@ -61,6 +61,7 @@ class TaskController extends Controller
         if($request->task_id && count($request->material_id)==0){
             $task = Task::find($request->task_id);
             $task->update(['step' => 4]);
+            return $this->success($task);
         }
         else{
             TaskMaterials::whereIn('id', $request->material_id)->update(['status' => $request->status]);
