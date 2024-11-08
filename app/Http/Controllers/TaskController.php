@@ -59,20 +59,17 @@ class TaskController extends Controller
     public function updateMaterials(Request $request)
     {
         $request->validate(['material_id'=>'required' ,'task_id']);
-        if($request->task_id && count($request->material_id)==0){
-            $task = Task::find($request->task_id);
-            $task->update(['step' => 4]);
-            return $this->success($task);
-        }
-        else{
+        $task = Task::find($request->task_id);
+        $task->update(['step' => 4]);
+        if(count($request->material_id)!=0){
             TaskMaterials::whereIn('id', $request->material_id)->update(['status' => $request->status]);
             $material = TaskMaterials::whereIn('id', $request->material_id)->get();
-
             if ($material->first()->task->step != 4) {
                 $material->first()->task()->update(['step' => 4]);
             }
             return $this->success($material);
         }
+        return $this->success($task);
     }
 
     public function upload(Request $request)
