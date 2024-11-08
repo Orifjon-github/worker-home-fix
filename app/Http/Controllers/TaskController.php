@@ -46,14 +46,7 @@ class TaskController extends Controller
     public function updateDate(Request $request)
     {
         $task = Task::find($request->task_id);
-        $dateTime = Carbon::now()->format('d-m.Y H:i'); // Outputs: '15-10.2024 19:00'
-        if ($request->start_time) {
-            $task->update(['start_time' => $dateTime, 'status' => 'process', 'step' => 2]);
-        }
-        if ($request->end_time) {
-            $task->update(['end_time' => $dateTime , 'step' => 3]);
-        }
-
+        $task->update([ 'status' => 'process', 'step' => 2]);
         return $this->success($task);
     }
 
@@ -61,11 +54,11 @@ class TaskController extends Controller
     {
         TaskMaterials::whereIn('id', $request->material_id)->update(['status' => $request->status]);
         $material = TaskMaterials::whereIn('id', $request->material_id)->get();
-        if ($material->first()->task->step != 4) {
-            $material->first()->task()->update(['step' => 4]);
+        if ($material->first()->task->step != 3) {
+            $material->first()->task()->update(['step' => 3]);
         }
         if(count($material)==0){
-            $material->first()->task()->update(['step' => 5]);
+            $material->first()->task()->update(['step' => 4]);
         }
         return $this->success($material);
     }
@@ -87,8 +80,8 @@ class TaskController extends Controller
             // Store the URL in the database
             TaskImages::create(['image' => $imageUrl, 'state' => 'after', 'task_id' => $request->task_id]);
             $task = Task::where('id', $request->task_id)->first();
-            if ($task->step != 5) {
-                $task->update(['step' => 5]);
+            if ($task->step != 4) {
+                $task->update(['step' => 4]);
             }
 
             return $this->success(new TaskDetailResource($task));
@@ -108,8 +101,8 @@ class TaskController extends Controller
         ]);
 
         $task = Task::find($request->task_id);
-        if ($task->step != 6) {
-            $task->update(['step' => 6]);
+        if ($task->step != 5) {
+            $task->update(['step' => 5]);
         }
         $task->update(['status' => 'checking']);
 
