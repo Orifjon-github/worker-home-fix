@@ -44,7 +44,6 @@ class User extends Authenticatable
     public function getTasks(): \Illuminate\Support\Collection
     {
         $tasks = s_db()->table('task_worker_user')->where('worker_user_id', $this->id)->pluck('task_id');
-
         return Task::whereIn('id', $tasks)->get();
     }
 
