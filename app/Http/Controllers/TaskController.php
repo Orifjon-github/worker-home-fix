@@ -122,8 +122,8 @@ class TaskController extends Controller
         }
 
         // Loop through each element to check if it's null or empty
-        foreach ($materialIds as $index => $id) {
-            if (is_null($id) || $id === "") {
+        foreach ($materialIds as $id) {
+            if (is_null($id)) {
                 return true;
             }
         }
