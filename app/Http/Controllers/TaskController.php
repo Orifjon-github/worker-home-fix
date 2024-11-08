@@ -61,7 +61,6 @@ class TaskController extends Controller
         $request->validate(['material_id'=>'required' ,'task_id']);
         $task = Task::findOrFail($request->task_id);
         $task->update(['step' => 4]);
-
         if(!$this->validateMaterialIds($request->material_id)){
             TaskMaterials::whereIn('id', $request->material_id)->update(['status' => $request->status]);
             $material = TaskMaterials::whereIn('id', $request->material_id)->get();
