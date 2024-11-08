@@ -26,7 +26,7 @@ class TaskController extends Controller
 
     public function show($id)
     {
-        return $this->success(new TaskDetailResource(Task::find($id)));
+        return $this->success(new TaskDetailResource(Task::with('materials')->find($id)));
     }
 
     public function getEquipment(Request $request)
