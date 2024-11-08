@@ -60,8 +60,8 @@ class TaskController extends Controller
     {
         TaskMaterials::whereIn('id', $request->material_id)->update(['status' => $request->status]);
         $material = TaskMaterials::whereIn('id', $request->material_id)->get();
-        if ($material->first()->task->step != 3) {
-            $material->first()->task()->update(['step' => 3]);
+        if ($material->first()->task->step != 4) {
+            $material->first()->task()->update(['step' => 4]);
         }
         if(count($material)==0){
             $material->first()->task()->update(['step' => 4]);
@@ -86,8 +86,8 @@ class TaskController extends Controller
             // Store the URL in the database
             TaskImages::create(['image' => $imageUrl, 'state' => 'after', 'task_id' => $request->task_id]);
             $task = Task::where('id', $request->task_id)->first();
-            if ($task->step != 4) {
-                $task->update(['step' => 4]);
+            if ($task->step != 5) {
+                $task->update(['step' => 5]);
             }
 
             return $this->success(new TaskDetailResource($task));
@@ -107,8 +107,8 @@ class TaskController extends Controller
         ]);
 
         $task = Task::find($request->task_id);
-        if ($task->step != 5) {
-            $task->update(['step' => 5]);
+        if ($task->step != 6) {
+            $task->update(['step' => 6]);
         }
         $task->update(['status' => 'checking']);
 
