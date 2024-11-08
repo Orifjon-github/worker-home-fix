@@ -45,7 +45,7 @@ class TaskController extends Controller
 
     public function updateDate(Request $request)
     {
-        $task = Task::find($request->task_id);
+        $task = Task::findOrFail($request->task_id);
         if($request->start_time){
             $task->update([ 'status' => 'process', 'step' => 2]);
         }
