@@ -59,7 +59,7 @@ class TaskController extends Controller
     public function updateMaterials(Request $request)
     {
         $request->validate(['material_id'=>'required' ,'task_id']);
-        if($request->task_id){
+        if($request->task_id && count($request->material_id)==0){
             $task = Task::find($request->task_id);
             $task->update(['step' => 4]);
             return $this->success($task);
