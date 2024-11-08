@@ -8,6 +8,7 @@ use App\Models\Task;
 use App\Models\TaskImages;
 use App\Models\TaskMaterials;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 
 class TaskController extends Controller
@@ -26,7 +27,12 @@ class TaskController extends Controller
 
     public function show($id)
     {
-        return $this->success(new TaskDetailResource(Task::findOrFail($id)));
+        try {
+            $task = Task::findOrFail($id);
+            return $this->success(new TaskDetailResource($task));
+        } catch (ModelNotFoundException $e) {
+            return response()->json(['error' => 'Task not found'], 404);
+        }
     }
 
     public function getEquipment(Request $request)
