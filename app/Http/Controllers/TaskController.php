@@ -28,7 +28,7 @@ class TaskController extends Controller
     public function show($id)
     {
         try {
-            $task = Task::findOrFail($id);
+            $task = Task::find($id);
             return $this->success(new TaskDetailResource($task));
         } catch (ModelNotFoundException $e) {
             return response()->json(['error' => 'Task not found'], 404);
