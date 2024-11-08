@@ -62,7 +62,7 @@ class TaskController extends Controller
         $task = Task::findOrFail($request->task_id);
         $task->update(['step' => 4]);
 
-        if($this->validateMaterialIds($request->material_id)){
+        if(!$this->validateMaterialIds($request->material_id)){
             TaskMaterials::whereIn('id', $request->material_id)->update(['status' => $request->status]);
             $material = TaskMaterials::whereIn('id', $request->material_id)->get();
             return $this->success("salom");
@@ -124,10 +124,10 @@ class TaskController extends Controller
         // Loop through each element to check if it's null or empty
         foreach ($materialIds as $index => $id) {
             if (is_null($id) || $id === "") {
-                return false;
+                return true;
             }
         }
 
-        return true;
+        return false;
     }
 }
