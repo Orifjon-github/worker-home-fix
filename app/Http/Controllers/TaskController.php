@@ -17,12 +17,12 @@ class TaskController extends Controller
 
     public function me()
     {
-        return $this->success(my()->getTasks());
+        return $this->success(auth()->user()->getTasks());
     }
 
     public function index(Request $request)
     {
-        return $this->success(my()->getTasks()->where('status', $request->status));
+        return $this->success(auth()->user()->getTasks()->where('status', $request->status));
     }
 
     public function show($id)
