@@ -77,7 +77,7 @@ class TaskController extends Controller
             'file' => 'required',
             'task_id' => 'required',
         ]);
-        return $request;
+
         try {
             $image = $request->file('file');
             $imageName = time().'_'.uniqid().'.'.$image->getClientOriginalExtension();
