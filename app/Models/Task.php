@@ -39,5 +39,9 @@ class Task extends Model
     {
         return $this->belongsToMany(Equipment::class, 'task_equipment', 'task_id', 'equipment_id');
     }
+    public function homequipment()
+    {
+        return $this->belongsTo(HomeEquipments::class, 'home_equipment_id');
+    }
 
 }
