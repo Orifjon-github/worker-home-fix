@@ -58,15 +58,21 @@ class TaskController extends Controller
 
     public function updateMaterials(Request $request)
     {
-        $request->validate(['material_id'=>'required' ,'task_id']);
-        $task = Task::findOrFail($request->task_id);
-        $task->update(['step' => 4]);
-        if($request->material_id){
-            TaskMaterials::whereIn('id', $request->material_id)->update(['status' => $request->status]);
-            $material = TaskMaterials::whereIn('id', $request->material_id)->get();
-            return $this->success($material);
+        $request->validate(['task_id'=>'required']);
+        try {
+            $task = Task::findOrFail($request->task_id);
+            $task->update(['step' => 4]);
+            if($request->material_id){
+                TaskMaterials::whereIn('id', $request->material_id)->update(['status' => $request->status]);
+                $material = TaskMaterials::whereIn('id', $request->material_id)->get();
+                return $this->success($material);
+            }
+            return $this->success($task);
         }
-        return $this->success($task);
+        catch (ModelNotFoundException $e) {
+            return response()->json(['error' => 'Task not found'], 404);
+        }
+
     }
 
     public function upload(Request $request)
