@@ -90,7 +90,7 @@ class TaskController extends Controller
             TaskImages::create(['image' => $imageUrl, 'state' => 'after', 'task_id' => $request->task_id]);
             $task = Task::where('id', $request->task_id)->first();
             if ($task->step != 5) {
-                $task->update(['step' => 5]);
+                $task->update(['step' => 5 , 'status'=>'checking']);
             }
 
             return $this->success(new TaskDetailResource($task));
@@ -120,7 +120,7 @@ class TaskController extends Controller
     protected function validateMaterialIds($materialIds) {
         // Check if the array is not empty
         if (empty($materialIds)) {
-            return "Material ID array is required.";
+            return false;
         }
 
         // Loop through each element to check if it's null or empty
