@@ -19,7 +19,7 @@ class TaskDetailResource extends JsonResource
         return [
             'task' => parent::toArray($request),
             'materials' => optional($this->materials)->where('type', 1)->values() ?? [],
-            'images' =>new ImageResource($this->homequipment->image),
+            'images' => $this->homequipment ? new ImageResource($this->homequipment) : null,
             'works' => $this->works,
             'equipments' => optional($this->materials)->where('type', 2)->values() ?? [],
             'customer'=>$this->homequipment->home->user,
