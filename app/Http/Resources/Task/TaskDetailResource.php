@@ -22,7 +22,7 @@ class TaskDetailResource extends JsonResource
             'images' => $this->homequipment ? new ImageResource($this->homequipment) : null,
             'works' => $this->works,
             'equipments' => optional($this->materials)->where('type', 2)->values() ?? [],
-            'customer'=>$this->homequipment->home->user,
+            'customer'=>new TaskCustomerResource($this->homequipment->home),
         ];
     }
 }
