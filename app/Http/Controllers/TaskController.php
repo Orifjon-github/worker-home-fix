@@ -62,7 +62,7 @@ class TaskController extends Controller
         try {
             $task = Task::findOrFail($request->task_id);
             $task->update(['step' => 4]);
-            if($request->material_id){
+            if($request->has('material_id')){
                 TaskMaterials::whereIn('id', $request->material_id)->update(['status' => $request->status]);
                 $material = TaskMaterials::whereIn('id', $request->material_id)->get();
                 return $this->success($material);
