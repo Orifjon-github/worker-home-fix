@@ -71,12 +71,13 @@ class TaskController extends Controller
 
     public function upload(Request $request)
     {
+        return $request;
+        // Validate the image
+        $request->validate([
+            'file' => 'required',
+            'task_id' => 'required',
+        ]);
         try {
-            // Validate the image
-            $request->validate([
-                'file' => 'required|file|mimes:jpeg,png,jpg,gif,svg,mp4,mov,avi,wmv|max:2048',
-                'task_id' => 'required',
-            ]);
             $image = $request->file('file');
             $imageName = time().'_'.uniqid().'.'.$image->getClientOriginalExtension();
             // Move the image to the 'uploads/images' directory
