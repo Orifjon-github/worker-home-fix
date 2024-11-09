@@ -120,7 +120,7 @@ class TaskController extends Controller
     protected function validateMaterialIds($materialIds) {
         // Check if the array is not empty
         if (empty($materialIds)) {
-            return false;
+            return true;
         }
 
         // Loop through each element to check if it's null or empty
