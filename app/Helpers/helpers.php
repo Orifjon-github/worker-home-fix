@@ -2,7 +2,6 @@
 namespace App\Helpers;
 
 use App\Models\SmsCode;
-use App\Models\UserWallet;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\App;
