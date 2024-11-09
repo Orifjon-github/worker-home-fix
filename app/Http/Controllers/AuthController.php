@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Mail;
 class AuthController extends Controller
 {
     use Response;
-    use Helpers;
+
 
     private SmsService $smsService;
 
