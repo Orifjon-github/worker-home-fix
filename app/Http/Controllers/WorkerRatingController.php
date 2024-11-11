@@ -12,7 +12,7 @@ class WorkerRatingController extends Controller
     use Response;
     public function store(Request $request)
     {
-        $tasks= my()->getTasks()
+        $tasks= auth()->getTasks()
             ->whereBetween('created_at',
             [
                 Carbon::now()->startOfMonth(),
