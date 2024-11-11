@@ -26,7 +26,9 @@ class TaskCustomerResource extends JsonResource
             'description'=>$this->description,
             'description_ru'=>$this->description_ru,
             'description_en'=>$this->description_en,
-            'address'=>$this->target
+            'address'=>$this->target,
+            'lat'=>$this->lat,
+            'lon'=>$this->long,
         ];
     }
 }
