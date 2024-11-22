@@ -51,5 +51,8 @@ Route::prefix('/user')
             Route::prefix('/rating')->group(function () {
                 Route::post('/set-worker-rating', [WorkerRatingController::class, 'store']);
             });
+            Route::prefix('/workers')->group(function () {
+                Route::get('/index', [\App\Http\Controllers\WorkersController::class, 'index']);
+            });
         });
     });
